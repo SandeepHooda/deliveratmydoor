@@ -1,5 +1,5 @@
-APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate',
-    function($scope,$ionicSideMenuDelegate ){
+APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate','$http','$rootScope','appData',
+    function($scope,$ionicSideMenuDelegate, $http, $rootScope,appData ){
 	//https://github.com/apache/cordova-plugin-geolocation
 	//cordova plugin add phonegap-nfc 
 	//cordova plugin add cordova-plugin-vibration
@@ -24,7 +24,26 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate',
 	$scope.showMenu = function () {
 	    $ionicSideMenuDelegate.toggleLeft();
 	  };
+	  $scope.emitSMSEvent = function(){
+		  $scope.$emit('sendSMS');
+	  }
+	  $rootScope.$on('sendSMS',function(){
+			alert('response received')
+		});
 	
-	  	
-	}
+	  $scope.callHttp = function(){
+		  $http.get(appData.getHost()+'/ws/poc/pocendpoint').then(function(response){
+				if (response.data.showButtonFlag){
+					$scope.name = response.data.showButtonFlag;
+					
+				}
+				$scope.emitSMSEvent();
+
+				},function(response){
+					alert('response received:: failure')
+				});
+		  	
+		}
+	  }
+	 
 ])
