@@ -19,7 +19,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate','$htt
 	//cordova plugin add cordova-plugin-contacts-phonenumbers
 	//cordova plugin add https://github.com/boltex/cordova-plugin-powermanagement
 	//cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications de.appplant.cordova.plugin.local-notification
-	
+	$scope.naomi = { name: 'Naomi', address: 'https://i.imgur.com/JZnDv3j.jpg' };
 	$scope.name ="Sandeep";
 	$scope.showMenu = function () {
 	    $ionicSideMenuDelegate.toggleLeft();
