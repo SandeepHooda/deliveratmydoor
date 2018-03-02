@@ -1,4 +1,4 @@
-package com.poc.Service;
+package com.product.Service;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

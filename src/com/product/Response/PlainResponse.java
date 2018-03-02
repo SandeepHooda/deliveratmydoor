@@ -1,4 +1,4 @@
-package com.poc.Response;
+package com.product.Response;
 
 /**
  * Any response that extends this bean will 

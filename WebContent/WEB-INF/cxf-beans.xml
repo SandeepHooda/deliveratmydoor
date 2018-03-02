@@ -26,8 +26,8 @@
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
     
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-    <bean id="customJsonProvider" class="com.poc.Response.TemplateJSONProvider"/> 
-    <bean id="jsonFormatter" class="com.poc.Response.JSONFormatter"/>
+    <bean id="customJsonProvider" class="com.product.Response.TemplateJSONProvider"/> 
+    <bean id="jsonFormatter" class="com.product.Response.JSONFormatter"/>
         
         
    
@@ -51,15 +51,15 @@
    		<property name="beanId" value="endpoint"/>
   </bean>
   
-   <bean id="endpoint" class="com.poc.EndPoint.PocEndpointImpl">
+   <bean id="endpoint" class="com.product.EndPoint.ProductEndpointImpl">
    		<property name="facade" ref="facade"/>
    </bean>
   
-   <bean id="facade" class="com.poc.Facade.PocFacade">
+   <bean id="facade" class="com.product.Facade.ProductFacade">
    		<property name="service" ref="service"/>
    </bean>
   
-   <bean id="service" class="com.poc.Service.PocServiceImpl">
+   <bean id="service" class="com.product.Service.ProductServiceImpl">
    </bean>
 
 </beans>

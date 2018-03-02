@@ -1,4 +1,4 @@
-package com.poc.Response;
+package com.product.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

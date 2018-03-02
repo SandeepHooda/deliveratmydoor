@@ -1,4 +1,4 @@
-package com.poc.Response;
+package com.product.Response;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

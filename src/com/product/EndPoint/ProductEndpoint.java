@@ -1,4 +1,4 @@
-package com.poc.EndPoint;
+package com.product.EndPoint;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/poc")
-public interface PocEndpoint {
+public interface ProductEndpoint {
 	
 	@GET
 	@Path("/pocendpoint")

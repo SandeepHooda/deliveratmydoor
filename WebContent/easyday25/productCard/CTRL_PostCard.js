@@ -9,8 +9,8 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    format: "WHOLE",  //Optional - "WHOLE" or "DECIMAL"
 		    unit: "",  //Optional - "m", "kg", "℃" or whatever you want
 		    titleLabel: 'Quantity',  //Optional
-		    setLabel: 'Set',  //Optional
-		    closeLabel: 'Close',  //Optional
+		    setLabel: 'Add',  //Optional
+		    closeLabel: 'Cancel',  //Optional
 		    setButtonType: 'button-positive',  //Optional
 		    closeButtonType: 'button-stable',  //Optional
 		    callback: function (val) {    //Mandatory

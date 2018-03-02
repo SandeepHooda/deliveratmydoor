@@ -1,4 +1,4 @@
-package com.poc.Response;
+package com.product.Response;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

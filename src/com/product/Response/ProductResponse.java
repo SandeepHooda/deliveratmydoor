@@ -1,12 +1,12 @@
-package com.poc.Response;
+package com.product.Response;
 
 
 
 
-public class PocResponse {
+public class ProductResponse {
 	private boolean showButtonFlag;
 	
-	public PocResponse(){};
+	public ProductResponse(){};
 
 
 	public boolean isShowButtonFlag() {
