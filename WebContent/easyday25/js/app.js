@@ -13,7 +13,7 @@ APP.DEPENDENCIES = ['allControllers',
                     'allDirective',
                     'allFact'
                     ];
-APP.OTHERDEPENDENCIES = ['ionic','ngCordova','nfcFilters'];
+APP.OTHERDEPENDENCIES = ['ionic','ngCordova','nfcFilters','ionic-numberpicker'];
 angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 .config(['$urlRouterProvider','$stateProvider','$ionicConfigProvider',
          function($urlRouterProvider,$stateProvider,$ionicConfigProvider){
