@@ -1,15 +1,17 @@
-<ion-view title="Home"  class="backhroundcolor " >
+<ion-view title="Home"  class="backhroundcolor " ng-init="getAllProducts()" >
 <ion-header-bar class="bar-positive">
-      <h1 class="title">Home</h1>
+      <h1 class="title">Easy Day</h1>
     </ion-header-bar>
+
  <ion-content class="padding">
- <span class="whitecolor">
-
-<post-card info="product"></post-card>
-<post-card info="product"></post-card>
-<post-card info="product"></post-card>
-<post-card info="product"></post-card>
-
-</span>
+	 <span class="whitecolor">
+	 
+	 <button ng-if="isPhone" ion-button round  class="button button-full button-positive round" ng-click="lauchBrowser()">
+  Refresh
+</button>
+		<span ng-repeat="product in allProducts">
+			<post-card info="product"></post-card>
+		</span>
+	</span>
  </ion-content>
 </ion-view>
