@@ -19,9 +19,11 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	//cordova plugin add cordova-plugin-contacts-phonenumbers
 	//cordova plugin add https://github.com/boltex/cordova-plugin-powermanagement
 	//cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications de.appplant.cordova.plugin.local-notification
+	
+	var theCtrl = this;
 	$scope.product = { desc: 'Britania brown bread', price: 35, image :'https://i.imgur.com/JZnDv3j.jpg' };
 	$scope.allProducts = [];
-	  
+	theCtrl.searchInput = "";
 	  $rootScope.$on('addToCart',function(event, product, qty){
 		  appData.addToCart(product, qty);
 		  $scope.$emit('itemAddedToCart');
@@ -31,12 +33,9 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	
 	  $scope.lauchBrowser = function(){
 		  window.open('https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home','_system');
-	 
-	  }
+	 }
 	  $scope.getAllProducts = function(){
-		  
-		 
-			  $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
+		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
 		  		.then(function(response){
 					$scope.allProducts = response.data.allproducts;
 				
@@ -47,11 +46,11 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 					
 				});
 		  
-			  
-		 
-		 
-		  	
 		}
+	  
+	  theCtrl.filterProduts = function(){
+		  console.log(theCtrl.searchInput)
+	  }
 	  
 	  }
 	 

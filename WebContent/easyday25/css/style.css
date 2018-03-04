@@ -175,6 +175,7 @@ input{
 	color:white;
 }
 
+div.fullwith {width: 99%;}
 div.inline { float:left; }
 div.productDesc { white-space: pre-wrap !important; }
 div.cartIcon { float:right; padding-bottom: 10px; }

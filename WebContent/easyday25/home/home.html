@@ -1,21 +1,22 @@
-<ion-view title="Easyday sec 25 panchkula"  class="backhroundcolor " ng-init="getAllProducts()" >
+<ion-view title="Easyday sec 25 panchkula"  class="backhroundcolor " ng-init="getAllProducts()" ng-controller="CTRL_HOME as $ctrl">
 
 <ion-header-bar class="bar-positive">
       <h1 class="title">Easy Day</h1>
-      <!--  <div>
-		   <div class="cartIcon">
-			   <button class="button ion-button clear" >
-			        	<i class="icon ion-android-cart"></i>
-			     </button>
-		    </div>
-	   </div>
-	   -->
+     
 </ion-header-bar>
 
  <ion-content class="padding">
+ 
 	 <span class="whitecolor">
 	   <ion-item>
 	    
+	    <!-- Search bar -->
+	    <div class="list list-inset fullwith">
+		  <label class="item item-input">
+		    <i class="icon ion-search placeholder-icon"></i>
+		    <input type="text" placeholder="Search" ng-change="$ctrl.filterProduts()" ng-model="$ctrl.searchInput">
+		  </label>
+		</div>
 	   <!--  Refresh button in case of data not loaded -->
   		<button ng-if="isPhone" ion-button round  class="button button-full button-positive round" ng-click="lauchBrowser()">
 	 		 Refresh
