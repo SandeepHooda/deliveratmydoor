@@ -14,12 +14,16 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    setButtonType: 'button-positive',  //Optional
 		    closeButtonType: 'button-stable',  //Optional
 		    callback: function (val) {    //Mandatory
-		    	$scope.timePickerCallback(val);
+		    	$scope.timePickerCallback(val, $scope);
 		  }
 		};
 	
-	$scope.timePickerCallback = function(val){
-		console.log(val)
+	$scope.timePickerCallback = function(val, $scope){
+		if (val && val > 0){
+			$scope.$emit('addToCart', $scope.productInfo, val);
+		}
+		
+		  
 	}
 
 	}

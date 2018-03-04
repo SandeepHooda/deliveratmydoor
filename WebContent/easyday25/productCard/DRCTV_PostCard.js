@@ -3,7 +3,8 @@ APP.DIRECTIVE.directive ('postCard',['$http',
 	return {
 	    restrict: 'E',
 	    scope: {
-	     productInfo: '=info'
+	     productInfo: '=info',
+	     landingPage: '=from'
 	    },
 	    templateUrl: 'productCard/productCard.html'
 	  };

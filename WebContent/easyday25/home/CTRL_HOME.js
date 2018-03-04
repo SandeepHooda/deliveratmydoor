@@ -1,5 +1,5 @@
-APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate','$http','$rootScope','appData','$window',
-    function($scope,$ionicSideMenuDelegate, $http, $rootScope,appData,$window ){
+APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData','$window',
+    function($scope, $http, $rootScope,appData,$window ){
 	//https://github.com/apache/cordova-plugin-geolocation
 	//cordova plugin add phonegap-nfc 
 	//cordova plugin add cordova-plugin-vibration
@@ -21,15 +21,12 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$ionicSideMenuDelegate','$htt
 	//cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications de.appplant.cordova.plugin.local-notification
 	$scope.product = { desc: 'Britania brown bread', price: 35, image :'https://i.imgur.com/JZnDv3j.jpg' };
 	$scope.allProducts = [];
-	$scope.name ="Sandeep";
-	$scope.showMenu = function () {
-	    $ionicSideMenuDelegate.toggleLeft();
-	  };
-	  $scope.emitSMSEvent = function(){
-		  $scope.$emit('sendSMS');
-	  }
-	  $rootScope.$on('sendSMS',function(){
-			alert('response received')
+	  
+	  $rootScope.$on('addToCart',function(event, product, qty){
+			//alert('cartObj '+cartObj.desc +" = "+qty)
+		  appData.countOfTotalCartItems +=qty;
+		  appData.addToCart(product, qty);
+		  $scope.$emit('itemAddedToCart');
 		});
 	
 	  $scope.lauchBrowser = function(){

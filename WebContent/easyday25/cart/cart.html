@@ -1,0 +1,15 @@
+<ion-view title="Cart"  class="backhroundcolor">
+<ion-header-bar class="bar-positive">
+      <h1 class="title">Cart</h1>
+    </ion-header-bar>
+ <ion-content class="padding">
+ 
+ <!--  List of all products -->
+		<div style="display: block;">
+			<span ng-repeat="cartItem in cartItems">
+			<post-card info="cartItem" from="'cart'"></post-card>
+			</span>
+		</div>
+
+ </ion-content>
+</ion-view>

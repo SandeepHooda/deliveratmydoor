@@ -53,6 +53,15 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
+				}).state('menu.tab.cart',{
+					url:'/cart',
+					views: {
+						 'tab-cart': {
+						 templateUrl: 'cart/cart.html',
+						 controller: 'CTRL_Cart'
+						 }
+					}	
+					
 				})
 				$urlRouterProvider.otherwise('/menu/tab/home');
 			}
