@@ -8,8 +8,14 @@
 		<div ng-switch="landingPage">
 			<!--  comming to see cart items show qty -->
 			<div ng-switch-when="cart">
-				
-				<ion-input type="text" value="productInfo.qty" ng-model="productInfo.qty"></ion-input>
+				<div class="cartButton" >
+					<span class="cartButton">Qty: {{productInfo.qty}} Update </span>
+			    	<ionic-numberpicker input-obj="numberPickerUpdateObject">
+			     		<button class="button button-positive order-button">
+			        	<i class="icon ion-edit"></i>
+			      		</button>
+			    	</ionic-numberpicker>&nbsp;
+			    </div>
 			</div>
 			
 			<!--  Show add to cart button -->

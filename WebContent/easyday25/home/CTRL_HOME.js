@@ -23,11 +23,11 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	$scope.allProducts = [];
 	  
 	  $rootScope.$on('addToCart',function(event, product, qty){
-			//alert('cartObj '+cartObj.desc +" = "+qty)
-		  appData.countOfTotalCartItems +=qty;
 		  appData.addToCart(product, qty);
 		  $scope.$emit('itemAddedToCart');
 		});
+	  
+	  
 	
 	  $scope.lauchBrowser = function(){
 		  window.open('https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home','_system');
