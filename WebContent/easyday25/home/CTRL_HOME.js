@@ -55,7 +55,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  //carousel 
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
-		  targetUrl = "https://www.stockplanconnect.com/";
+		  targetUrl = "https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home";
 		  var text = "Diwali special offer limted time only. Buy one get 1 Free!";
 		  for (let i=0;i<10;i++){
 			 
