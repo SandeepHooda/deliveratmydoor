@@ -30,8 +30,16 @@ $num-colors: 10;
  background: -o-linear-gradient(transparent, transparent);
  -webkit-background-clip: text;
 }
-.red {
+.SparkleAndroid {
 	color: red;
+	font-size:30px;
+	font-family:impact;
+	
+ -webkit-text-fill-color: transparent;
+ background: -webkit-linear-gradient(transparent, transparent),
+             url(/android_asset/www/img/red.gif) repeat;
+ background: -o-linear-gradient(transparent, transparent);
+ -webkit-background-clip: text;
 }
 
 .jcarousel {
@@ -81,6 +89,9 @@ $num-colors: 10;
 		line-height: 30px;
 	}
 	.Sparkle {
+		font-size:20px;
+	}
+	.SparkleAndroid {
 		font-size:20px;
 	}
 	.jcarouseText {
