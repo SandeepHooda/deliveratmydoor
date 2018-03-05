@@ -1,5 +1,5 @@
-APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData','$window',
-    function($scope, $http, $rootScope,appData,$window ){
+APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData','$window','$interval',
+    function($scope, $http, $rootScope,appData,$window,$interval ){
 	//https://github.com/apache/cordova-plugin-geolocation
 	//cordova plugin add phonegap-nfc 
 	//cordova plugin add cordova-plugin-vibration
@@ -52,6 +52,28 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  console.log(theCtrl.searchInput)
 	  }
 	  
+	  //carousel
+	  theCtrl.next = function() {
+          console.log('NEXT');
+          $scope.$broadcast('slideBox.nextSlide');
+        };
+        theCtrl.slideChanged = function(index) {
+          console.log('Slide changed', index);
+        };
+        
+        if (angular.isDefined($rootScope.stopInverval)) {
+            $interval.cancel($rootScope.stopInverval);
+            $rootScope.stopInverval = undefined;
+          }
+        $rootScope.stopInverval = $interval(function () {
+        	theCtrl.next();
+        }, 2000);
+        
+        
+      //carousel
+	  
 	  }
+		
+	
 	 
 ])

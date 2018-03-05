@@ -9,7 +9,51 @@
  
 	 <span class="whitecolor">
 	   <ion-item>
-	    
+	    <!-- carousel -->
+	    <ion-slide-box on-slide-changed="theCtrl.slideChanged(index)" does-continue="true">
+		     <ion-slide>
+	          <h3>Thank you for choosing the Awesome App!</h3>
+	          <div id="logo">
+	            <img src="app_icon.png">
+	          </div>
+	          <p>
+	            We've worked super hard to make you happy.
+	          </p>
+	          <p>
+	            But if you are angry, too bad.
+	          </p>
+	        </ion-slide>
+	        <ion-slide>
+	          <h3>Thank you for choosing the Awesome App!</h3>
+	          <div id="logo">
+	            <img src="app_icon.png">
+	          </div>
+	          <p>
+	            We've worked super hard to make you happy.
+	          </p>
+	          <p>
+	            But if you are angry, too bad.
+	          </p>
+	        </ion-slide>
+	        <ion-slide>
+	          <h3>Thank you for choosing the Awesome App!</h3>
+	          <div id="logo">
+	            <img src="app_icon.png">
+	          </div>
+	          <p>
+	            We've worked super hard to make you happy.
+	          </p>
+	          <p>
+	            But if you are angry, too bad.
+	          </p>
+	        </ion-slide>
+		  
+        
+        
+      </ion-slide-box>
+      <!-- carousel -->
+      
+      
 	    <!-- Search bar -->
 	    <div class="list list-inset fullwith">
 		  <label class="item item-input">
@@ -17,6 +61,8 @@
 		    <input type="text" placeholder="Search" ng-change="$ctrl.filterProduts()" ng-model="$ctrl.searchInput">
 		  </label>
 		</div>
+		
+		
 	   <!--  Refresh button in case of data not loaded -->
   		<button ng-if="isPhone" ion-button round  class="button button-full button-positive round" ng-click="lauchBrowser()">
 	 		 Refresh
