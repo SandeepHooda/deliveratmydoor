@@ -60,7 +60,12 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  for (let i=0;i<10;i++){
 			 
 			  $("#jcarouselItems").append('<li><a href="' + targetUrl + '" target="_blank"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');
-			  $("#jcarouselTextItems").append('<li><div  class="productDesc Sparkle">'+(i+1)+". "+text+' </div></li>');
+			  if ($window.location.host == ""){
+				  $("#jcarouselTextItems").append('<li><div  class="red">'+(i+1)+". "+text+' </div></li>');
+			  }else {
+				  $("#jcarouselTextItems").append('<li><div  class="productDesc Sparkle">'+(i+1)+". "+text+' </div></li>');
+			  }
+			  
 			
 		  }
 		  

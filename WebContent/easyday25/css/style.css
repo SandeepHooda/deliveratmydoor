@@ -30,6 +30,9 @@ $num-colors: 10;
  background: -o-linear-gradient(transparent, transparent);
  -webkit-background-clip: text;
 }
+.red {
+	color: red;
+}
 
 .jcarousel {
 	position: relative;
