@@ -1,32 +1,114 @@
-/*carousel*/
-.slider-slide {
-        padding-top: 80px;
-        color: #000;
-        background-color: #fff;
-        text-align: center;
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        font-weight: 300;
-      }
-      .slider-pager .slider-pager-page {
-        color: #000;
-      }
-      #logo {
-        margin: 30px 0px;
-      }
-      #list {
-        width: 170px;
-        margin: 30px auto;
-        font-size: 20px;
-      }
-      #list ol {
-        margin-top: 30px;
-      }
-      #list ol li {
-        text-align: left;
-        list-style: decimal;
-        margin: 10px 0px;
-      }
-/*carousel End*/
+.box{
+  height: 100%;
+}
+ion-slides{
+  height: 100vh !important;
+}
+
+$base-color: #c24;
+$num-colors: 10;
+
+@for $i from 0 to $num-colors {
+    .bgColor_#{$i} {
+      background-color: adjust-hue($base-color, 360deg / $num-colors * $i);
+    }
+}
+
+
+/*
+    Description: JCarousel style start
+  
+*/
+.Sparkle {
+	
+	font-size:30px;
+	font-family:impact;
+	
+ -webkit-text-fill-color: transparent;
+ background: -webkit-linear-gradient(transparent, transparent),
+             url(http://www.myspacehippo.com/files/glitterbacks/bg345.gif) repeat;
+ background: -o-linear-gradient(transparent, transparent);
+ -webkit-background-clip: text;
+}
+
+.jcarousel {
+	position: relative;
+	overflow: hidden;
+	width: 150px;
+	height: 150px;
+}
+
+.jcarousel ul {
+	width: 20000em;
+	position: relative;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jcarousel li {
+	float: left;
+}
+
+.jcarouseText {
+	position: relative;
+	overflow: hidden;
+	width: 750px;
+	height: 420px;
+	line-height: 160px;
+}
+
+.jcarouseText ul {
+	width: 20000em;
+	position: relative;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jcarouseText li {
+	float: left;
+	width: 750px;
+	height: 420px;
+}
+
+
+.jcarousel-pagination {
+   
+}
+
+.jcarousel-pagination a {
+    text-decoration: none;
+    display: inline-block;
+    
+    font-size: 11px;
+    line-height: 14px;
+    min-width: 14px;
+    
+    background: #fff;
+    color: #4E443C;
+    border-radius: 14px;
+    padding: 3px;
+    text-align: center;
+    
+    margin-right: 2px;
+    
+    opacity: .75;
+}
+
+.jcarousel-pagination a.active {
+    background: #4E443C;
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+}
+@media (max-width: 730px) {
+}
+
+/*
+    Description: JCarousel style end
+  
+*/
       
 .imageSize {
 	width: 150px;
@@ -212,7 +294,7 @@ div.fullwith {width: 99%;}
 div.inline { float:left; }
 div.productDesc { white-space: pre-wrap !important; }
 div.cartIcon { float:right; padding-bottom: 10px; }
-div.productContainer { width: 33%;float:left;padding-left: 0px;}
+div.productContainer {  width: 33%;float:left;padding-left: 0px;}
 div.cartButton { padding-top: 30px;}
 span.cartButton { padding-right: 25px;}
 @media (max-width: 730px) {

@@ -38,7 +38,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
 		  		.then(function(response){
 					$scope.allProducts = response.data.allproducts;
-				
+					$scope.carouselSetup($scope.allProducts);
 				},
 				function(response){
 					$scope.isPhone=true;
@@ -52,25 +52,93 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  console.log(theCtrl.searchInput)
 	  }
 	  
-	  //carousel
-	  theCtrl.next = function() {
-          console.log('NEXT');
-          $scope.$broadcast('slideBox.nextSlide');
-        };
-        theCtrl.slideChanged = function(index) {
-          console.log('Slide changed', index);
-        };
-        
-        if (angular.isDefined($rootScope.stopInverval)) {
-            $interval.cancel($rootScope.stopInverval);
-            $rootScope.stopInverval = undefined;
-          }
-        $rootScope.stopInverval = $interval(function () {
-        	theCtrl.next();
-        }, 2000);
-        
-        
-      //carousel
+	  //carousel 
+	  $scope.carouselSetup = function (allProducts){
+		  var carouselEleFocus=false;
+		  targetUrl = "https://www.stockplanconnect.com/";
+		  var text = "Diwali special offer limted time only.     ";
+		  for (let i=0;i<10;i++){
+			 
+			  $("#jcarouselItems").append('<li><a href="' + targetUrl + '" target="_blank"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');
+			  $("#jcarouselTextItems").append('<li><div  class="productDesc Sparkle">'+(i+1)+". "+text+' </div></li>');
+			
+		  }
+		  
+		  
+		  $('.jcarousel')
+		    .jcarousel({
+		   	 	wrap: 'circular',
+		   	 	animation: {
+			        duration: 200,
+			        easing:   'linear',
+			        complete: function() {
+			    	}
+			    }
+		    })
+		    .jcarouselAutoscroll({
+		        target: '+=1',
+		        interval: 7000
+		    });
+			 
+		  $('.jcarouseText')
+		    .jcarousel({
+		   	 	wrap: 'circular',
+		   	 	animation: {
+			        duration: 200,
+			        easing:   'linear',
+			        complete: function() {
+			    	}
+			    }
+		    })
+		    .jcarouselAutoscroll({
+		        target: '+=1',
+		        interval: 7000
+		    });
+		  
+			 $('.jcarousel-pagination')
+	            .on('jcarouselpagination:active', 'a', function() {
+	                $(this).addClass('active');
+	            })
+	            .on('jcarouselpagination:inactive', 'a', function() {
+	                $(this).removeClass('active');
+	            })
+	            .jcarouselPagination();
+	            
+	            $('.jcarousel-control-prev')
+				.on('jcarouselcontrol:active', function() {
+					$(this).removeClass('inactive');
+				})
+				.on('jcarouselcontrol:inactive', function() {
+					$(this).addClass('inactive');
+				})
+				.jcarouselControl({
+					target: '-=1'
+				});
+				
+				 $('.jcarousel-control-next')
+				.on('jcarouselcontrol:active', function() {
+					$(this).removeClass('inactive');
+				})
+				.on('jcarouselcontrol:inactive', function() {
+					$(this).addClass('inactive');
+				})
+				.jcarouselControl({
+					target: '+=1'
+				});
+				
+	            
+	            $('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) {
+					if(carouselEleFocus)
+				{
+				$('.jcarousel').jcarousel('fullyvisible').children('a').focus();
+				carouselEleFocus=false;
+					
+				}
+				});
+	            
+		 
+	  	}//carousel
+	  
 	  
 	  }
 		
