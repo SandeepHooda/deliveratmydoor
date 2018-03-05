@@ -56,7 +56,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
 		  targetUrl = "https://www.stockplanconnect.com/";
-		  var text = "Diwali special offer limted time only.     ";
+		  var text = "Diwali special offer limted time only. Buy one get 1 Free!";
 		  for (let i=0;i<10;i++){
 			 
 			  $("#jcarouselItems").append('<li><a href="' + targetUrl + '" target="_blank"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');

@@ -54,8 +54,8 @@ $num-colors: 10;
 	position: relative;
 	overflow: hidden;
 	width: 750px;
-	height: 420px;
-	line-height: 160px;
+	height: 50px;
+	line-height: 40px;
 }
 
 .jcarouseText ul {
@@ -69,10 +69,28 @@ $num-colors: 10;
 .jcarouseText li {
 	float: left;
 	width: 750px;
-	height: 420px;
+	height: 50px;
 }
 
-
+@media (max-width: 730px) {
+	.jcarouseText ul {
+		height: 50px;
+		line-height: 30px;
+	}
+	.Sparkle {
+		font-size:20px;
+	}
+	.jcarouseText {
+	width: 350px;
+	height: 70px;
+	line-height: 40px;
+	}
+	.jcarouseText li {
+	width: 350px;
+	height: 70px;
+	}
+	
+}
 .jcarousel-pagination {
    
 }
@@ -102,8 +120,7 @@ $num-colors: 10;
     opacity: 1;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
 }
-@media (max-width: 730px) {
-}
+
 
 /*
     Description: JCarousel style end
