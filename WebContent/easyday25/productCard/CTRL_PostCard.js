@@ -27,7 +27,7 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    unit: "",  //Optional - "m", "kg", "℃" or whatever you want
 		    titleLabel: 'Quantity',  //Optional
 		    setLabel: 'Update',  //Optional
-		    closeLabel: 'Cancel',  //Optional
+		    closeLabel: 'Remove',  //Optional
 		    setButtonType: 'button-positive',  //Optional
 		    closeButtonType: 'button-stable',  //Optional
 		    callback: function (val) {    //Mandatory
@@ -42,10 +42,11 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 	}
 	
 	$scope.updateCartCallBack = function(val, $scope){
-		if (val != undefined){
-			$scope.numberPickerUpdateObject.inputValue = val;
-			$scope.$emit('updateCart', $scope.productInfo, val);
+		if (val == undefined){
+			val = 0;//Remove from cart
 		}
+		$scope.numberPickerUpdateObject.inputValue = val;
+		$scope.$emit('updateCart', $scope.productInfo, val);
 	}
 
 	}
