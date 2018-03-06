@@ -1,7 +1,7 @@
 APP.SERVICES.service('dataRestore', function($rootScope) {
 	
 	this.saveInCache = function (key, value) {
-		window.localStorage.setItem(key, value)
+		window.localStorage.setItem(key, JSON.stringify(value))
 	}
 	this.getFromCache = function (key, type) {
 		var value = "";
@@ -32,7 +32,7 @@ APP.SERVICES.service('dataRestore', function($rootScope) {
 			if (value){
 				return JSON.parse(value)
 			}else {
-				return {};
+				return null;
 			}
 			
 		}

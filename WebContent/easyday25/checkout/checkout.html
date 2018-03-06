@@ -1,9 +1,49 @@
-<ion-view title="Check Out"  class="backhroundcolor">
+<ion-view title="Check Out"  class="backhroundcolor" ng-controller="CTRL_CheckOut as $ctrl">
 <ion-header-bar class="bar-positive">
       <h1 class="title">check out</h1>
     </ion-header-bar>
  <ion-content class="padding">
  
-Checkout 
+	 <span ng-repeat="address in savedAddress">
+		{{address.address}}
+	</span>
+			
+ <!-- New Address -->
+	 <span class="whitecolor">
+	 <div align="left">
+		   <span>Fields with "*" are mandatory</span>
+	</div>
+	</span>
+	
+		
+ 		<!-- New address -->
+		<div class="list">
+		  <label class="item item-input">
+		    <input type="text" placeholder="First Name *" ng-model="$ctrl.fName">
+		  </label>
+		  <label class="item item-input"> 
+		    <input type="text" placeholder="Last Name *" ng-model="$ctrl.lName">
+		  </label>
+		  <label class="item item-input">
+		    <textarea placeholder="Address *" ng-model="$ctrl.address"></textarea>
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Phone *" ng-model="$ctrl.phone">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Email" ng-model="$ctrl.email">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Delivery instructions" ng-model="$ctrl.instructions">
+		  </label>
+		</div>
+		
+		<hr  style="width: 100%;" color="#577876"/>
+		 <div  align="center">
+			 <button class="button button-balanced order-button" ng-click="submitOrder()"> Deliver Here 
+			 <i class="icon ion-paper-airplane"></i>
+			</button>
+		 </div>
+
  </ion-content>
 </ion-view>
