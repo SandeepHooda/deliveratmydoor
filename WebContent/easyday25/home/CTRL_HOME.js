@@ -23,6 +23,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	var theCtrl = this;
 	$scope.product = { desc: 'Britania brown bread', price: 35, image :'https://i.imgur.com/JZnDv3j.jpg' };
 	$scope.allProducts = [];
+	$scope.filteredProducts = [];
 	theCtrl.searchInput = "";
 	  $rootScope.$on('addToCart',function(event, product, qty){
 		  appData.addToCart(product, qty);
@@ -38,6 +39,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
 		  		.then(function(response){
 					$scope.allProducts = response.data.allproducts;
+					$scope.filteredProducts = $scope.allProducts ;
 					$scope.carouselSetup($scope.allProducts);
 				},
 				function(response){
@@ -48,8 +50,35 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  
 		}
 	  
+	  /**
+	   * This function takes user input 
+	   * split the input by space
+	   * look for all elements of search in product desc in any order -> case insensitive
+	   */
 	  theCtrl.filterProduts = function(){
-		  console.log(theCtrl.searchInput)
+		  
+		  if (theCtrl.searchInput == ""){
+			  $scope.filteredProducts = $scope.allProducts;
+			  return;
+		  }
+		  let searchArray = theCtrl.searchInput.toLowerCase().split(" ");//split the input by space
+		  
+		   $scope.filteredProducts = 
+				  	  _.filter($scope.allProducts, function(o) {//Search in all products in DB
+				  		        let matchingProduct = true;
+				  		      _.forEach(searchArray, function(search){ // look for all words in search string in any order and  case insensitive
+				  		    	if (o.desc.toLowerCase().indexOf(search) < 0 ) {
+				  		    		matchingProduct = false;
+				  				}
+				  		      });
+						  		
+				  		      if (matchingProduct) return o;
+						  });
+			 
+		 
+		  $scope.filteredProducts = _.without($scope.filteredProducts, undefined);
+		  $scope.filteredProducts = _.without($scope.filteredProducts, null);
+		 // console.log( JSON.stringify($scope.filteredProducts));
 	  }
 	  
 	  //carousel 
