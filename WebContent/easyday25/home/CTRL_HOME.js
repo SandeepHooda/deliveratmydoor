@@ -27,21 +27,54 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	theCtrl.searchInput = "";
 	if (!$rootScope.addToCartListner){
 		$rootScope.addToCartListner =
-			  $rootScope.$on('addToCart',function(event, product, qty){
+		$rootScope.$on('addToCart',function(event, product, qty){
 				  appData.addToCart(product, qty);
 				  $scope.$emit('itemAddedToCart');
 				});
 	}
 	
-	  
-	  
+ $scope.getCurrentTime = function(){
+	 let today = new Date();
+ 	let h = today.getHours();
+ 	let m = today.getMinutes();
+ 	let s = today.getSeconds();
+	    m = $scope.checkTime(m);
+	    s = $scope.checkTime(s);
+	    let am_pm = " AM";
+	    if (h>12){
+	    	h -= 12;
+	    	am_pm = " PM";
+	    }
+	 return h + ":" + m + ":" + s+am_pm;
+ }
+    $scope.startWatch = function() {
+        $interval(function() {
+        	
+		    theCtrl.time= $scope.getCurrentTime();
+		   
+        }, 1000);
+    }; 
+    $scope.startWatch();
+	 $scope.checkTime = function(i) {
+	    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+	    return i;
+	}
 	
 	  $scope.lauchBrowser = function(){
 		  window.open('https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home','_system');
 	 }
+	  
+	  if (!$rootScope.refresh){
+			$rootScope.refresh =
+			$rootScope.$on('refreshPage',function(){
+				location.reload();
+			});
+		}
+	 
 	  $scope.getAllProducts = function(){
 		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
 		  		.then(function(response){
+		  			theCtrl.refreshTime= $scope.getCurrentTime();
 					$scope.allProducts = response.data.allproducts;
 					$scope.filteredProducts = $scope.allProducts ;
 					$scope.carouselSetup($scope.allProducts);

@@ -26,5 +26,8 @@ APP.CONTROLLERS.controller ('CTRL_StoreLocation',['$scope','dataRestore','$ionic
 		  $scope.$emit('itemAddedToCart');
 	  }
 	  $scope.onpageLoad();
+	  $scope.refresh = function(){
+		  $scope.$emit('refreshPage');
+	  }
 }
 ])
