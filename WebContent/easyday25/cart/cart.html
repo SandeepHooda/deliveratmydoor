@@ -4,17 +4,31 @@
     </ion-header-bar>
  <ion-content class="padding">
  
+ <!--  Check out button -->
+	 <div style="display: inline;float:right">
+		 <button class="button button-balanced order-button" ng-click="checkOut()"> Check out 
+		 <i class="icon ion-android-checkbox-outline"></i>
+		</button>
+	 </div>
+	<hr  style="width: 100%;" color="#577876"/>
+  
  <!--  List of all products -->
 		<div style="display: block;">
 			<span ng-repeat="cartItem in cartItems">
 			<post-card info="cartItem" from="'cart'"></post-card>
 			</span>
 		</div>
+		
+		
+<!--  Check out button -->
+<hr  style="width: 100%;" color="#577876"/>
+	 <div style="display: inline;float:right">
+		 <button class="button button-balanced order-button" ng-click="checkOut()"> Check out 
+		 <i class="icon ion-android-checkbox-outline"></i>
+		</button>
+	 </div>
+	
 
-
-<button class="button button-balanced order-button" ng-click="checkOut()">
- Check out <i class="icon ion-android-checkbox-outline"></i>
-</button>
  
  
  
