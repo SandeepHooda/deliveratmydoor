@@ -1,4 +1,4 @@
-APP.CONTROLLERS.controller ('CTRL_StoreLocation',['$scope','dataRestore','$ionicPlatform','$state','$ionicPopup','$ionicSideMenuDelegate','appData','$rootScope',
+APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatform','$state','$ionicPopup','$ionicSideMenuDelegate','appData','$rootScope',
     function($scope,dataRestore,$ionicPlatform,$state,$ionicPopup, $ionicSideMenuDelegate, appData, $rootScope){
 	$scope.countOfTotalCartItems =0;
 	$scope.cartTotalRs = 0;

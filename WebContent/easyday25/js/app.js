@@ -44,12 +44,12 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
-				}).state('menu.tab.storeLocation',{
-					url:'/storeLocation',
+				}).state('menu.tab.checkout',{
+					url:'/checkout',
 					views: {
-						 'tab-storeLocation': {
-						 templateUrl: 'storeLocation/storeLocation.html',
-						 controller: 'CTRL_StoreLocation'
+						 'tab-checkout': {
+						 templateUrl: 'checkout/checkout.html',
+						 controller: 'CTRL_CheckOut'
 						 }
 					}	
 					

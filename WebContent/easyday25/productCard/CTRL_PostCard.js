@@ -29,7 +29,7 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    setLabel: 'Update',  //Optional
 		    closeLabel: 'Remove',  //Optional
 		    setButtonType: 'button-positive',  //Optional
-		    closeButtonType: 'button-stable',  //Optional
+		    closeButtonType: 'button-stable icon ion-trash-b',  //Optional
 		    callback: function (val) {    //Mandatory
 		    	$scope.updateCartCallBack(val, $scope);
 		  }
