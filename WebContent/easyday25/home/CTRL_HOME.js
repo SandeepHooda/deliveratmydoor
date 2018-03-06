@@ -25,10 +25,14 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	$scope.allProducts = [];
 	$scope.filteredProducts = [];
 	theCtrl.searchInput = "";
-	  $rootScope.$on('addToCart',function(event, product, qty){
-		  appData.addToCart(product, qty);
-		  $scope.$emit('itemAddedToCart');
-		});
+	if (!$rootScope.addToCartListner){
+		$rootScope.addToCartListner =
+			  $rootScope.$on('addToCart',function(event, product, qty){
+				  appData.addToCart(product, qty);
+				  $scope.$emit('itemAddedToCart');
+				});
+	}
+	
 	  
 	  
 	
