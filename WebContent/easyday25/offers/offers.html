@@ -1,0 +1,17 @@
+<ion-view title="Offeres"  class="backhroundcolor " ng-init="getAllOffers()" ng-controller="CTRL_offers as $ctrl">
+
+<ion-header-bar class="bar-positive">
+      <h1 class="title">Offers</h1>
+     
+</ion-header-bar>
+
+ <ion-content class="padding">
+<!--  List of all products -->
+		<div style="display: block;">
+			<span ng-repeat="offer in offerItems">
+			<post-card info="offer"></post-card>
+			</span>
+		</div>
+		
+</ion-content>
+</ion-view>

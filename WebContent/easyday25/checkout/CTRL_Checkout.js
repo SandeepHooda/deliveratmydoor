@@ -93,6 +93,16 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	  $scope.savedAddress = dataRestore.getFromCache('savedAddress', 'obj');
 	  if ($scope.savedAddress && $scope.savedAddress.length > 0){
 		  theCtrl.defaultAddress = dataRestore.getFromCache('defaultAddressIndex', 'str');
+		  let weHaveDefaultAddressOnFile = false;
+		  for (let i=0;i<$scope.savedAddress.length;i++){
+			  if(theCtrl.defaultAddress == $scope.savedAddress[i].id ){
+				  weHaveDefaultAddressOnFile = true;
+				  break;
+			  }
+		  }
+		  if (!weHaveDefaultAddressOnFile && $scope.savedAddress.length >0 ){
+			  theCtrl.defaultAddress = $scope.savedAddress[0].id
+		  }
 	  }
 	  
 	  //$scope.savedAddress_STR = JSON.stringify($scope.savedAddress);

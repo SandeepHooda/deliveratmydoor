@@ -1,5 +1,5 @@
-APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData','$window','$interval',
-    function($scope, $http, $rootScope,appData,$window,$interval ){
+APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData','$window','$interval','dataRestore','$ionicLoading',
+    function($scope, $http, $rootScope,appData,$window,$interval,dataRestore, $ionicLoading ){
 	//https://github.com/apache/cordova-plugin-geolocation
 	//cordova plugin add phonegap-nfc 
 	//cordova plugin add cordova-plugin-vibration
@@ -33,32 +33,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 				});
 	}
 	
- $scope.getCurrentTime = function(){
-	 let today = new Date();
- 	let h = today.getHours();
- 	let m = today.getMinutes();
- 	let s = today.getSeconds();
-	    m = $scope.checkTime(m);
-	    s = $scope.checkTime(s);
-	    let am_pm = " AM";
-	    if (h>12){
-	    	h -= 12;
-	    	am_pm = " PM";
-	    }
-	 return h + ":" + m + ":" + s+am_pm;
- }
-    $scope.startWatch = function() {
-        $interval(function() {
-        	
-		    theCtrl.time= $scope.getCurrentTime();
-		   
-        }, 1000);
-    }; 
-    $scope.startWatch();
-	 $scope.checkTime = function(i) {
-	    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-	    return i;
-	}
+
 	
 	  $scope.lauchBrowser = function(){
 		  window.open('https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home','_system');
@@ -72,14 +47,17 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		}
 	 
 	  $scope.getAllProducts = function(){
+		  $scope.showBusy();
 		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
 		  		.then(function(response){
-		  			theCtrl.refreshTime= $scope.getCurrentTime();
-					$scope.allProducts = response.data.allproducts;
+		  			 $scope.hideBusy();
+		  			$scope.allProducts = response.data.allproducts;
 					$scope.filteredProducts = $scope.allProducts ;
 					$scope.carouselSetup($scope.allProducts);
+					
 				},
 				function(response){
+					 $scope.hideBusy();
 					$scope.isPhone=true;
 					//alert('Window location '+JSON.stringify($window.location))
 					
@@ -122,20 +100,24 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
 		  targetUrl = "https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home";
-		  var text = "Diwali special offer limted time only. Buy one get 1 Free!";
-		  for (let i=0;i<10;i++){
+		 let offerItems = [];
+		  for (let i=0;i<allProducts.length;i++){
+			 if (allProducts[i].offer){
+				 offerItems.push(allProducts[i]);
+				 $("#jcarouselItems").append('<li><a href="#/menu/tab/offers" target="_self"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');
+				  if ($window.location.host == ""){
+					  $("#jcarouselTextItems").append('<li><div  class="productDesc SparkleAndroid">'+allProducts[i].offer+' </div></li>');
+				  }else {
+					  $("#jcarouselTextItems").append('<li><div  class="productDesc Sparkle">'+allProducts[i].offer+' </div></li>');
+				  }
+			 }
 			 
-			  $("#jcarouselItems").append('<li><a href="' + targetUrl + '" target="_blank"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');
-			  if ($window.location.host == ""){
-				  $("#jcarouselTextItems").append('<li><div  class="productDesc SparkleAndroid">'+(i+1)+". "+text+' </div></li>');
-			  }else {
-				  $("#jcarouselTextItems").append('<li><div  class="productDesc Sparkle">'+(i+1)+". "+text+' </div></li>');
-			  }
 			  
 			
 		  }
 		  
-		  
+		  appData.setOfferItems(offerItems);
+		  dataRestore.saveInCache('offerItems', offerItems);
 		  $('.jcarousel')
 		    .jcarousel({
 		   	 	wrap: 'circular',
@@ -209,6 +191,21 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	            
 		 
 	  	}//carousel
+	  
+	  //Busy icon
+	  $scope.showBusy = function() {
+		    $ionicLoading.show({
+		      template: 'Loading...',
+		      duration: 3000
+		    }).then(function(){
+		       console.log("The loading indicator is now displayed");
+		    });
+		  };
+		  $scope.hideBusy = function(){
+		    $ionicLoading.hide().then(function(){
+		       console.log("The loading indicator is now hidden");
+		    });
+		  };
 	  
 	  
 	  }

@@ -6,6 +6,7 @@ public class Product {
 	private String desc;
 	private String type;
 	private int price;
+	private String offer = null;
 	public String get_id() {
 		return _id;
 	}
@@ -35,6 +36,12 @@ public class Product {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getOffer() {
+		return offer;
+	}
+	public void setOffer(String offer) {
+		this.offer = offer;
 	}
 
 }

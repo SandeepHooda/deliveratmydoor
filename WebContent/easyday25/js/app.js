@@ -71,6 +71,15 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
+				}).state('menu.tab.offers',{
+					url:'/offers',
+					views: {
+						 'tab-offers': {
+						 templateUrl: 'offers/offers.html',
+						 controller: 'CTRL_offers'
+						 }
+					}	
+					
 				})
 				$urlRouterProvider.otherwise('/menu/tab/home');
 			}

@@ -1,6 +1,7 @@
 APP.SERVICES.service ('appData',['$window','dataRestore',
     function( $window,dataRestore){
 	this.cartItems = [];
+	this.offerItems = [];
 	this.getHost = function () {
 		var host = "https://deliveratmydoor.appspot.com";
 		/*if ($window.location.host == ""){
@@ -10,6 +11,12 @@ APP.SERVICES.service ('appData',['$window','dataRestore',
 			host = "";
 		}
 		return host;
+	}
+	this.getOfferItems = function(){
+		return this.offerItems;
+	}
+	this.setOfferItems = function(offerItems){
+		this.offerItems = offerItems;
 	}
 	this.getCartItems = function(){
 		return this.cartItems;

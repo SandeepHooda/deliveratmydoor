@@ -1,4 +1,4 @@
-<ion-view title="Check Out"  class="backhroundcolor" ng-controller="CTRL_CheckOut as $ctrl">
+<ion-view title="Check Out"  class="backhroundcolor" ng-controller="CTRL_CheckOut as $ctrl" cache-view="false">
 <ion-header-bar class="bar-positive">
       <h1 class="title">check out</h1>
     </ion-header-bar>
@@ -13,7 +13,7 @@
 	<ion-list radio-group>
 	  <ion-list-header>
 	  <span class="whitecolor">
-	    Use the below address: 
+	    Saved address: 
 	    </span>
 	  </ion-list-header>
 	  <ion-item ng-repeat="address in savedAddress track by $index">

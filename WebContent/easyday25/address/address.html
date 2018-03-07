@@ -1,46 +1,67 @@
-<ion-view title="Contacts" class="backhroundcolor">
-<ion-header-bar class="bar-positive">
-      <h1 class="title">Contacts</h1>
+<ion-view title="Address" class="backhroundcolor" cache-view="false" ng-controller="CTRL_CheckOut as $ctrl">
+<ion-header-bar class="bar-positive" >
+      <h1 class="title">Address</h1>
     </ion-header-bar>
  <ion-content class="padding">
 <span class="whitecolor">
 
-<br/>
-<b>Inactive &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone no&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Relationship</b>
-<br/>
- &nbsp;&nbsp;<input type="checkbox"  ng-model="mydata.inactive1" style="height:25px;width:30px;display: inline;vertical-align:middle; " ng-change="saveContactDetails()"> &nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="text" phone-number ng-model="mydata.contact1" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />  	 
- 			<input type="text"  ng-model="mydata.relationWithMe1"  style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" /> 
-<br/>		
-
-&nbsp;&nbsp;<input type="checkbox"  ng-model="mydata.inactive2" style="height:25px;width:30px;display: inline;vertical-align:middle; " ng-change="saveContactDetails()"> &nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="text" phone-number  ng-model="mydata.contact2"  style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
- 			<input type="text"  ng-model="mydata.relationWithMe2" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
-<br/>		
-
-&nbsp;&nbsp;<input type="checkbox"  ng-model="mydata.inactive3" style="height:25px;width:30px;display: inline; vertical-align:middle;" ng-change="saveContactDetails()"> &nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="text" phone-number  ng-model="mydata.contact3" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()"/>
- 			<input type="text" ng-model="mydata.relationWithMe3" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
-<br/>
-&nbsp;&nbsp;<input type="checkbox"  ng-model="mydata.inactive4" style="height:25px;width:30px;display: inline;vertical-align:middle; " ng-change="saveContactDetails()"> &nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="text" phone-number  ng-model="mydata.contact4" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
- 			<input type="text"  ng-model="mydata.relationWithMe4" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
-<br/>		
-&nbsp;&nbsp;<input type="checkbox"  ng-model="mydata.inactive5" style="height:25px;width:30px;display: inline;vertical-align:middle; " ng-change="saveContactDetails()"> &nbsp;&nbsp;&nbsp;&nbsp;
- 			<input type="text" phone-number  ng-model="mydata.contact5" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()"/>
- 			<input type="text"  ng-model="mydata.relationWithMe5" style="width:80px;display: inline;color:white;" ng-change="saveContactDetails()" />
- 
+<div ng-if="savedAddress && savedAddress.length > 0">
+	<ion-list radio-group>
+	  <ion-list-header>
+	  <span class="whitecolor">
+	    Swipe left to delete: 
+	    </span>
+	  </ion-list-header>
+	  <ion-item ng-repeat="address in myData.savedAddress track by $index" on-swipe-left="deleteAddress({{$index}})">
+	  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
+	  		 
+	  		
+	  </ion-item>
+	  
+	</ion-list>
+	<hr width="100%" color="white"/>
+	</div>
+	
+	
+	<!-- New Address -->
+	 <span class="whitecolor">
+	 <div align="left">
+	 		<span>Add a new address</span><br/>
+		   <span>Fields with "*" are mandatory</span>
+	</div>
+	</span>
+	
+		
+ 		<!-- New address -->
+		<div class="list">
+		  <label class="item item-input">
+		    <input type="text" placeholder="First Name *" ng-model="newAddress.fName">
+		  </label>
+		  <label class="item item-input"> 
+		    <input type="text" placeholder="Last Name *" ng-model="newAddress.lName">
+		  </label>
+		  <label class="item item-input">
+		    <textarea placeholder="Address *" ng-model="newAddress.address"></textarea>
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Phone *" ng-model="newAddress.phone">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Email" ng-model="newAddress.email">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Delivery instructions" ng-model="newAddress.instructions">
+		  </label>
+		</div>
+		
+		
+		 
+		 <div  align="center">
+			 <button class="button button-positive order-button" ng-click="saveAddress()"> Save Address
+			 <i class="icon ion-android-add-circle"></i>
+			</button>
+		 </div>
 </span>
 
-<span ng-repeat="contact in mydata.otherKnownContacts" >
-<div class="panel show" id="panel{{$index}}">
-<div  class="card" ng-click="deleteContact({{$index}})" >
-  <div class="item item-text-wrap">
-   {{contact.name}} {{contact.number}}	
-  </div>
-</div>
-  
-</div>
-</span>
  </ion-content>
 </ion-view>

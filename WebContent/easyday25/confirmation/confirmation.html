@@ -5,20 +5,25 @@
  <ion-content class="padding">
  
  <!--  Check out button -->
-	 <div style="display: inline;float:right">
-		 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
-		 <i class="icon icon ion-cash"></i>
-		</button>
-	 </div>
-	<hr  style="width: 100%;" color="#577876"/>
+	 
+	
 	
 	<div style="display: block;">
 			
 		<ion-list radio-group>
 			  <ion-list-header>
 			  <span class="whitecolor">
-			    Your order will be delivered to the below address: 
+			  <!-- Review and submit orde -->
+			  <hr  style="width: 100%;" color="white"/>
+			    Please review your order and hit "Submit Order" button 
+			    <div style="display: inline;float:right">
+					 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
+					 <i class="icon icon ion-cash"></i>
+					</button>
+				 </div>
+			    <hr  style="width: 100%;" color="white"/>
 			   </span>
+			   
 			  </ion-list-header>
 			  <ion-item >
 			  	{{deliveryAddressForRecentOrder.fName}} {{deliveryAddressForRecentOrder.lName}} , {{deliveryAddressForRecentOrder.address}}, 
