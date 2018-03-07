@@ -36,7 +36,7 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  console.log(index+" defaultAddress "+theCtrl.defaultAddress);
 		  dataRestore.saveInCache('defaultAddressIndex', theCtrl.defaultAddress);
 	  }
-	  $scope.saveAddress = function(){
+	  $scope.saveAddressAndPlaceOrder = function(){
 		  let address = {};
 		  address.id = new Date().getTime();
 		  address.fName = theCtrl.fName;
@@ -54,7 +54,7 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  if (!address.fName || !address.lName || !address.address || !address.phone) {
 			  var confirmPopup = $ionicPopup.confirm({
 				     title: 'Missing information',
-				     template: 'Please enter all the required fields.'
+				     template: 'Please enter all the required fields of new delivery address.'
 				   });
 
 				   confirmPopup.then(function(res) {
@@ -66,6 +66,8 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 			  dataRestore.saveInCache('defaultAddressIndex', address.id);
 			  $timeout(function(){
 				  theCtrl.defaultAddress = $scope.savedAddress[$scope.savedAddress.length-1].id;
+				  theCtrl.placeOrder($scope.savedAddress[$scope.savedAddress.length-1]); //place order to recentry addred address
+				  
 			  }, 
 					 10);
 			  
@@ -73,6 +75,19 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  }
 		  
 		  
+	  }
+	  
+	  theCtrl.submitOrder = function(){//Find the address that user has selected and place order to that address
+		  for (let i=0;i<$scope.savedAddress.length;i++){
+			  if (theCtrl.defaultAddress == $scope.savedAddress[i].id){
+				  theCtrl.placeOrder($scope.savedAddress[i]);
+				  break;
+			  }
+		  }
+	  }
+	  theCtrl.placeOrder = function(address){
+		  dataRestore.saveInCache('deliveryAddressForRecentOrder', address);
+		  $state.transitionTo('menu.tab.confirmation');
 	  }
       //dataRestore.saveInCache('savedAddress', "");
 	  $scope.savedAddress = dataRestore.getFromCache('savedAddress', 'obj');

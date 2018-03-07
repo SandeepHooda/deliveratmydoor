@@ -62,6 +62,15 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
+				}).state('menu.tab.confirmation',{
+					url:'/confirmation',
+					views: {
+						 'tab-confirmation': {
+						 templateUrl: 'confirmation/confirmation.html',
+						 controller: 'CTRL_confirmation'
+						 }
+					}	
+					
 				})
 				$urlRouterProvider.otherwise('/menu/tab/home');
 			}

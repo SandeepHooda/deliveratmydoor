@@ -1,0 +1,52 @@
+<ion-view title="Confirmation"  class="backhroundcolor"  cache-view="false">
+<ion-header-bar class="bar-positive">
+      <h1 class="title">Confirmation</h1>
+    </ion-header-bar>
+ <ion-content class="padding">
+ 
+ <!--  Check out button -->
+	 <div style="display: inline;float:right">
+		 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
+		 <i class="icon icon ion-cash"></i>
+		</button>
+	 </div>
+	<hr  style="width: 100%;" color="#577876"/>
+	
+	<div style="display: block;">
+			
+		<ion-list radio-group>
+			  <ion-list-header>
+			  <span class="whitecolor">
+			    Your order will be delivered to the below address: 
+			   </span>
+			  </ion-list-header>
+			  <ion-item >
+			  	{{deliveryAddressForRecentOrder.fName}} {{deliveryAddressForRecentOrder.lName}} , {{deliveryAddressForRecentOrder.address}}, 
+			  	{{deliveryAddressForRecentOrder.phone}}, {{deliveryAddressForRecentOrder.instructions}}
+			  </ion-item>
+		</ion-list>
+	</div>
+	<hr  style="width: 99%;" color="white"/>
+   
+ <!--  List of all products -->
+		<div style="display: block;">
+			<span ng-repeat="cartItem in cartItems">
+			<post-card info="cartItem" from="'cart'"></post-card>
+			</span>
+		</div>
+		
+		
+<!--  Check out button -->
+<hr  style="width: 100%;" color="#577876"/>
+	 <div style="display: inline;float:right">
+		 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
+		 <i class="icon icon ion-cash"></i>
+		</button>
+	 </div>
+	
+
+ 
+ 
+ 
+ </ion-content>
+</ion-view>

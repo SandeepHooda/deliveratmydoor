@@ -5,12 +5,12 @@
  <ion-content class="padding">
  
 	<div  align="right">
-			 <button class="button button-balanced order-button" ng-click="submitOrder()"> Deliver 
+			 <button class="button button-balanced order-button" ng-click="$ctrl.submitOrder()"> Deliver to Selected address
 			 <i class="icon ion-paper-airplane"></i>
 			</button>
 		 </div>
 	<div ng-if="savedAddress && savedAddress.length > 0">
-		<ion-list radio-group>
+	<ion-list radio-group>
 	  <ion-list-header>
 	  <span class="whitecolor">
 	    Use the below address: 
@@ -62,7 +62,7 @@
 		
 		 
 		 <div  align="center">
-			 <button class="button button-balanced order-button" ng-click="saveAddress()"> Deliver 
+			 <button class="button button-balanced order-button" ng-click="saveAddressAndPlaceOrder()"> Save Address and Deliver
 			 <i class="icon ion-paper-airplane"></i>
 			</button>
 		 </div>
