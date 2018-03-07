@@ -1,10 +1,11 @@
-APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatform','$state','$ionicPopup','$ionicSideMenuDelegate','appData','$rootScope',
-    function($scope,dataRestore,$ionicPlatform,$state,$ionicPopup, $ionicSideMenuDelegate, appData, $rootScope){
+APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatform','$state','$ionicPopup','$ionicSideMenuDelegate','appData','$rootScope','$timeout',
+    function($scope,dataRestore,$ionicPlatform,$state,$ionicPopup, $ionicSideMenuDelegate, appData, $rootScope,$timeout){
 	var theCtrl = this;
 	$scope.countOfTotalCartItems =0;
 	$scope.cartTotalRs = 0;
 	$scope.mydata = {};
 	$scope.savedAddress = [];
+	
 	$scope.showMenu = function () {
 	    $ionicSideMenuDelegate.toggleLeft();
 	  };
@@ -31,8 +32,13 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	  $scope.refresh = function(){
 		  $scope.$emit('refreshPage');
 	  }
-	  $scope.submitOrder = function(){
+	  theCtrl.updateDefaultAddress = function(index){
+		  console.log(index+" defaultAddress "+theCtrl.defaultAddress);
+		  dataRestore.saveInCache('defaultAddressIndex', theCtrl.defaultAddress);
+	  }
+	  $scope.saveAddress = function(){
 		  let address = {};
+		  address.id = new Date().getTime();
 		  address.fName = theCtrl.fName;
 		  address.lName = theCtrl.lName;
 		  address.address = theCtrl.address;
@@ -57,12 +63,24 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  }else {
 			  $scope.savedAddress.push(address);
 			  dataRestore.saveInCache('savedAddress', $scope.savedAddress);
+			  dataRestore.saveInCache('defaultAddressIndex', address.id);
+			  $timeout(function(){
+				  theCtrl.defaultAddress = $scope.savedAddress[$scope.savedAddress.length-1].id;
+			  }, 
+					 10);
+			  
+			  
 		  }
 		  
 		  
 	  }
-	 
+      //dataRestore.saveInCache('savedAddress', "");
 	  $scope.savedAddress = dataRestore.getFromCache('savedAddress', 'obj');
+	  if ($scope.savedAddress && $scope.savedAddress.length > 0){
+		  theCtrl.defaultAddress = dataRestore.getFromCache('defaultAddressIndex', 'str');
+	  }
+	  
+	  //$scope.savedAddress_STR = JSON.stringify($scope.savedAddress);
 	  if (!$scope.savedAddress){
 		  $scope.savedAddress =[];
 	  }

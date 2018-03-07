@@ -4,13 +4,34 @@
     </ion-header-bar>
  <ion-content class="padding">
  
-	 <span ng-repeat="address in savedAddress">
-		{{address.address}}
-	</span>
-			
+	<div  align="right">
+			 <button class="button button-balanced order-button" ng-click="submitOrder()"> Deliver 
+			 <i class="icon ion-paper-airplane"></i>
+			</button>
+		 </div>
+	<div ng-if="savedAddress && savedAddress.length > 0">
+		<ion-list radio-group>
+	  <ion-list-header>
+	  <span class="whitecolor">
+	    Use the below address: 
+	    </span>
+	  </ion-list-header>
+	  <ion-item ng-repeat="address in savedAddress track by $index">
+	  		<input type="radio" name="{{address.id}}" ng-model="$ctrl.defaultAddress"  
+	  		ng-value="{{address.id}}" ng-change="$ctrl.updateDefaultAddress({{address.id}})" style=" width: 20px; height: 20px;">
+	  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
+	  		 </input>
+	  		
+	  </ion-item>
+	  
+	</ion-list>
+	<hr width="100%" color="white"/>
+	</div>
+	
  <!-- New Address -->
 	 <span class="whitecolor">
 	 <div align="left">
+	 		<span>Add a new address</span><br/>
 		   <span>Fields with "*" are mandatory</span>
 	</div>
 	</span>
@@ -38,9 +59,10 @@
 		  </label>
 		</div>
 		
-		<hr  style="width: 100%;" color="#577876"/>
+		
+		 
 		 <div  align="center">
-			 <button class="button button-balanced order-button" ng-click="submitOrder()"> Deliver Here 
+			 <button class="button button-balanced order-button" ng-click="saveAddress()"> Deliver 
 			 <i class="icon ion-paper-airplane"></i>
 			</button>
 		 </div>
