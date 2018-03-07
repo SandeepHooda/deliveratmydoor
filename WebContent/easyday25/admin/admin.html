@@ -13,6 +13,12 @@
 	    Procucts 
 	    </span>
 	  </ion-list-header>
+	  <ion-item>
+	  <span><b>Product Descriptiion</b></span>
+	  <span style="padding-left:150px"><b>Price</b></span>
+	  <span style="padding-left:80px"><b>Image Url</b></span>
+	  <span style="padding-left:50px"><b>Offer if any</b></span>
+	  </ion-item>
 	  <ion-item ng-repeat="product in myData.allProducts track by $index" on-swipe-left="deleteAddress({{$index}})">
 	  		 <div style="display: inline;">
 	  		 <input style="display: inline" class="admin adminLarge" type="text" placeholder="Product Descriptiion" ng-model="myData.allProducts[$index].desc"> 
