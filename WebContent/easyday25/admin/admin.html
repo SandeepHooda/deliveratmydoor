@@ -1,0 +1,30 @@
+<ion-view title="Admin" cache-view="false"  class="backhroundcolor " ng-init="getAllProducts()" ng-controller="CTRL_admin as $ctrl">
+
+<ion-header-bar class="bar-positive">
+      <h1 class="title">Admin</h1>
+     
+</ion-header-bar>
+
+ <ion-content class="padding">
+ <span class="whitecolor">
+ <ion-list >
+	  <ion-list-header>
+	  <span class="whitecolor">
+	    Procucts 
+	    </span>
+	  </ion-list-header>
+	  <ion-item ng-repeat="product in myData.allProducts track by $index" on-swipe-left="deleteAddress({{$index}})">
+	  		 <div style="display: inline;">
+	  		 <input style="display: inline;background:white;" type="text" placeholder="First Name *" ng-model="myData.allProducts[$index].desc"> 
+	  		 <input style="display: inline;background:white;" type="text" placeholder="Last Name *" ng-model="myData.allProducts[$index].price"> 
+	  		 <input style="display: inline;background:white;" type="text" placeholder="First Name *" ng-model="myData.allProducts[$index].image"> 
+	  		 <input style="display: inline;background:white;" type="text" placeholder="Last Name *" ng-model="myData.allProducts[$index].offer"> 
+	  		 </div>
+	  		
+	  		
+	  </ion-item>
+	  
+	</ion-list>
+ </span>
+  </ion-content>
+</ion-view>

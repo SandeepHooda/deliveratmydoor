@@ -80,6 +80,15 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
+				}).state('menu.tab.admin',{
+					url:'/admin',
+					views: {
+						 'tab-admin': {
+						 templateUrl: 'admin/admin.html',
+						 controller: 'CTRL_admin'
+						 }
+					}	
+					
 				})
 				$urlRouterProvider.otherwise('/menu/tab/home');
 			}
