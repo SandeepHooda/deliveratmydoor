@@ -15,10 +15,11 @@
 	  </ion-list-header>
 	  <ion-item ng-repeat="product in myData.allProducts track by $index" on-swipe-left="deleteAddress({{$index}})">
 	  		 <div style="display: inline;">
-	  		 <input style="display: inline;background:white;" type="text" placeholder="First Name *" ng-model="myData.allProducts[$index].desc"> 
-	  		 <input style="display: inline;background:white;" type="text" placeholder="Last Name *" ng-model="myData.allProducts[$index].price"> 
-	  		 <input style="display: inline;background:white;" type="text" placeholder="First Name *" ng-model="myData.allProducts[$index].image"> 
-	  		 <input style="display: inline;background:white;" type="text" placeholder="Last Name *" ng-model="myData.allProducts[$index].offer"> 
+	  		 <input style="display: inline" class="admin adminLarge" type="text" placeholder="Product Descriptiion" ng-model="myData.allProducts[$index].desc"> 
+	  		 <input style="display: inline" class="admin"  type="text" placeholder="Price" ng-model="myData.allProducts[$index].price"> 
+	  		 <input style="display: inline" class="admin"  type="text" placeholder="Image Url" ng-model="myData.allProducts[$index].image"> 
+	  		 <input style="display: inline" class="admin adminLarge"  type="text" placeholder="Offer if any" ng-model="myData.allProducts[$index].offer"> 
+	  		 <img style="display: inline"  class="admin" src="{{myData.allProducts[$index].image}}"  class="imageSize" BORDER="0"/>
 	  		 </div>
 	  		
 	  		
