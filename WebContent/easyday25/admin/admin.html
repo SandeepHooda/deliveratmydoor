@@ -18,9 +18,9 @@
 			  
 			  <ion-item>
 			  	<div   style="display: inline;float: right;">
-				  	<input style="display: inline" class="admin" type="password" placeholder="Old Password" ng-model="myData.passwordOld">
-				  	<input style="display: inline" class="admin" type="password" placeholder="New Password" ng-model="myData.passwordNew">
-				  	<input style="display: inline" class="admin" type="password" placeholder="Confirm" ng-model="myData.passwordConfirm">
+				  	<input style="display: inline" class="adminDefault" type="password" placeholder="Old Password" ng-model="myData.passwordOld">
+				  	<input style="display: inline" class="adminDefault" type="password" placeholder="New Password" ng-model="myData.passwordNew">
+				  	<input style="display: inline" class="adminDefault" type="password" placeholder="Confirm" ng-model="myData.passwordConfirm">
 					 <button class="button button-balanced order-button" ng-click="$ctrl.updatePassword()"> Change password
 					 <i class="icon ion-thumbsup"></i>
 					</button>
@@ -42,14 +42,14 @@
 			  <ion-item>
 				  <span><b>Page Size </b></span>
 				  <span style="padding-left:15px">
-				  	<input style="display: inline" class="admin" type="text" placeholder="Page Size" ng-model="myData.pageSize">
+				  	<input style="display: inline" class="adminSmall" type="text" placeholder="Page Size" ng-model="myData.pageSize">
 				  </span>
 				  <span style="display: inline;" ng-repeat="page in myData.pageNos track by $index">
 				  	<button class="button button-positive order-button button-icon button-clear" ng-click="$ctrl.showPage({{page}})"><b> {{page}}</b>
 					</button>
 				  </span>
 				  <div   style="display: inline;float: right;">
-				  	<input style="display: inline" class="admin" type="password" placeholder="Password" ng-model="myData.password">
+				  	<input style="display: inline" class="adminSmall" type="password" placeholder="Password" ng-model="myData.password">
 					 <button class="button button-balanced order-button" ng-click="$ctrl.updateProducts()"> Update products
 					 <i class="icon ion-thumbsup"></i>
 					</button>
@@ -57,32 +57,63 @@
 				  
 			  </ion-item>
 			  
-			  <ion-item>
-				  <span><b>Product Descriptiion</b></span>
-				  <span style="padding-left:150px"><b>Price</b></span>
-				  <span style="padding-left:80px"><b>Image Url</b></span>
-				  <span style="padding-left:50px"><b>Offer if any</b></span>
-			  </ion-item>
+			<!-- Products to be displayed on page -->
 			  <ion-item ng-repeat="product in myData.filteredProducts track by $index" >
-			  		 <div style="display: inline;">
-			  		
-			  		 <input style="display: inline" class="admin adminLarge" type="text" placeholder="Product Descriptiion" ng-model="product.desc"> 
-			  		 <input style="display: inline" class="admin"  type="text" placeholder="Price" ng-model="product.price"> 
-			  		 <input style="display: inline" class="admin"  type="text" placeholder="Image Url" ng-model="product.image"> 
-			  		 <input style="display: inline" class="admin adminLarge"  type="text" placeholder="Offer if any" ng-model="product.offer"> 
-			  		 <img style="display: inline"  class="admin" src="{{product.image}}"  class="imageSize" BORDER="0"/>
+			  <!-- Product Desc , price and others -->
+			  <div style="display: inline;float: left">
+				  	
+				  	<span style="display: block;" class="admin">
+				  		Product: 
+				  		<input style="display: inline;" class="admin" type="text" placeholder="Product Descriptiion" ng-model="product.desc">
+				  	</span>
+				  	<span style="display: block;" class="admin">
+				  		Price: 
+				  		<input style="display: inline;" class="admin"  type="text" placeholder="Price" ng-model="product.price">
+				  	 </span>
+				  	<span style="display: block;" class="admin">
+				  		Image path:  
+				  		<input style="display: inline;" class="admin"  type="text" placeholder="Image Url" ng-model="product.image"> 
+				  	</span>
+				  	<span style="display: block;" class="adminList">
+				    	Offer :
+				    	<input  style="display: inline;" class="admin"  type="text" placeholder="Offer if any" ng-model="product.offer">
+				    </span>
+				    
+				    <!-- Product Staus -->
+				    	<div   style="display: inline; " class="adminSmall">
+	  						<div class="list">
+	
+							  <label class="item item-input item-select adminSmall" >
+							    <div class="input-label">
+							      Status
+							    </div>
+							    <select class="adminSmall">
+							      <option selected>Active</option>
+							      <option >Out Of stock</option>
+							      <option>Discontinued</option>
+							    </select>
+							  </label>
+							
+							</div>
+	  					</div><!-- Product Staus -->
+	  					
+				  	
+			  </div>
+			  
+			  <!-- Image Preview and top button -->
+			  	<div class="adminRight">
+			  		<img   style="display: inline"   src="{{product.image}}"  class="imageSize" BORDER="0"/>
 			  		 
-			  		 <div   style="display: inline;float: right;">
+			  		 <div  style="display: inline" >
 						 <button class="button button-balanced order-button" ng-click="$ctrl.scrollTop()"> Top
 						 <i class="icon ion-arrow-up-c"></i>
 						</button>
-					</div>
-			  		 
-			  		 </div>
+				    </div>
+				</div>  <!-- Image Preview -->
 			  		
 			  		
 			  		
-			  </ion-item>
+			  </ion-item> <!-- Products to be displayed on page -->
 			  
 			</ion-list>
 		</span>

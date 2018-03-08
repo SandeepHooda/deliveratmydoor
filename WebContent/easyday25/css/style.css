@@ -3,10 +3,29 @@
 .admin {
 	
 	background:white;
+	height: 25px;
+	width:500px;
 }
-.adminLarge {
-	 width:300px;
+.adminSmall {
+	
+	background:white;
+	height: 50px;
+	width:200px;
 }
+.adminDefault {
+	background:white;
+	height: 50px;
+	width:100px;
+}
+.adminList {
+	height: 50px;
+}
+.adminRight{
+	display: inline;
+	float: right;
+	width: 270px;
+}
+
 
 .box{
   height: 100%;
