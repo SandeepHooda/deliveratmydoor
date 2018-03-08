@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProductList {
 
-	private String _id;
+	private String _id ="productList";
 	private List<Product> data;
 	public String get_id() {
 		return _id;

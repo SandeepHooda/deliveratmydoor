@@ -48,7 +48,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	 
 	  $scope.getAllProducts = function(){
 		  $scope.showBusy();
-		   $http.get(appData.getHost()+'/ws/shopID/1519981368108/allProducts')
+		   $http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/allProducts')
 		  		.then(function(response){
 		  			 $scope.hideBusy();
 		  			$scope.allProducts = response.data.allproducts;
@@ -195,7 +195,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  //Busy icon
 	  $scope.showBusy = function() {
 		    $ionicLoading.show({
-		      template: 'Loading...',
+		      template: 'Please wait...',
 		      duration: 3000
 		    }).then(function(){
 		       console.log("The loading indicator is now displayed");

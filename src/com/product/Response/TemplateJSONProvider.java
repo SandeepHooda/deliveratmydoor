@@ -14,10 +14,10 @@ import javax.ws.rs.ext.Provider;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 /**
- * Every JSON response that goes out of BA will go thorough this file as the
+ * Every JSON response that goes out of system will go thorough this file as the
  * last point. Modification of the response happens in this file as per the requirement
- * If the response extends BATemplateResponse then a series of additional properties 
- * that are defined as part of BATemplateResponse will be injected here.  After that
+ * If the response extends TemplateResponse then a series of additional properties 
+ * that are defined as part of TemplateResponse will be injected here.  After that
  * JACKSON native implementation will be called to marshal the java object to JSON
  * @Ref {@link BATemplateResponse}
  * @author 

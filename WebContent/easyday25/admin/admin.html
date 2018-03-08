@@ -7,31 +7,85 @@
 
  <ion-content class="padding">
  <span class="whitecolor">
- <ion-list >
-	  <ion-list-header>
-	  <span class="whitecolor">
-	    Procucts 
-	    </span>
-	  </ion-list-header>
-	  <ion-item>
-	  <span><b>Product Descriptiion</b></span>
-	  <span style="padding-left:150px"><b>Price</b></span>
-	  <span style="padding-left:80px"><b>Image Url</b></span>
-	  <span style="padding-left:50px"><b>Offer if any</b></span>
-	  </ion-item>
-	  <ion-item ng-repeat="product in myData.allProducts track by $index" on-swipe-left="deleteAddress({{$index}})">
-	  		 <div style="display: inline;">
-	  		 <input style="display: inline" class="admin adminLarge" type="text" placeholder="Product Descriptiion" ng-model="myData.allProducts[$index].desc"> 
-	  		 <input style="display: inline" class="admin"  type="text" placeholder="Price" ng-model="myData.allProducts[$index].price"> 
-	  		 <input style="display: inline" class="admin"  type="text" placeholder="Image Url" ng-model="myData.allProducts[$index].image"> 
-	  		 <input style="display: inline" class="admin adminLarge"  type="text" placeholder="Offer if any" ng-model="myData.allProducts[$index].offer"> 
-	  		 <img style="display: inline"  class="admin" src="{{myData.allProducts[$index].image}}"  class="imageSize" BORDER="0"/>
-	  		 </div>
-	  		
-	  		
-	  </ion-item>
-	  
-	</ion-list>
+ 	<!-- Password update -->
+	 <span ng-if="myData.productUpdatePage">
+	 	 <ion-list >
+			  <ion-list-header>
+			  <span class="whitecolor">
+			    Update pwd  
+			    </span>
+			  </ion-list-header>
+			  
+			  <ion-item>
+			  	<div   style="display: inline;float: right;">
+				  	<input style="display: inline" class="admin" type="password" placeholder="Old Password" ng-model="myData.passwordOld">
+				  	<input style="display: inline" class="admin" type="password" placeholder="New Password" ng-model="myData.passwordNew">
+				  	<input style="display: inline" class="admin" type="password" placeholder="Confirm" ng-model="myData.passwordConfirm">
+					 <button class="button button-balanced order-button" ng-click="$ctrl.updatePassword()"> Change password
+					 <i class="icon ion-thumbsup"></i>
+					</button>
+				</div>
+			  </ion-item>
+		</ion-list>
+	 </span>
+	 
+	 <!-- Products update -->
+	  <span ng-if="myData.productUpdatePage">
+	 
+		 <ion-list >
+			  <ion-list-header>
+			  <span class="whitecolor">
+			    Procucts  
+			    </span>
+			  </ion-list-header>
+			  
+			  <ion-item>
+				  <span><b>Page Size </b></span>
+				  <span style="padding-left:15px">
+				  	<input style="display: inline" class="admin" type="text" placeholder="Page Size" ng-model="myData.pageSize">
+				  </span>
+				  <span style="display: inline;" ng-repeat="page in myData.pageNos track by $index">
+				  	<button class="button button-positive order-button button-icon button-clear" ng-click="$ctrl.showPage({{page}})"><b> {{page}}</b>
+					</button>
+				  </span>
+				  <div   style="display: inline;float: right;">
+				  	<input style="display: inline" class="admin" type="password" placeholder="Password" ng-model="myData.password">
+					 <button class="button button-balanced order-button" ng-click="$ctrl.updateProducts()"> Update products
+					 <i class="icon ion-thumbsup"></i>
+					</button>
+				</div>
+				  
+			  </ion-item>
+			  
+			  <ion-item>
+				  <span><b>Product Descriptiion</b></span>
+				  <span style="padding-left:150px"><b>Price</b></span>
+				  <span style="padding-left:80px"><b>Image Url</b></span>
+				  <span style="padding-left:50px"><b>Offer if any</b></span>
+			  </ion-item>
+			  <ion-item ng-repeat="product in myData.filteredProducts track by $index" >
+			  		 <div style="display: inline;">
+			  		
+			  		 <input style="display: inline" class="admin adminLarge" type="text" placeholder="Product Descriptiion" ng-model="product.desc"> 
+			  		 <input style="display: inline" class="admin"  type="text" placeholder="Price" ng-model="product.price"> 
+			  		 <input style="display: inline" class="admin"  type="text" placeholder="Image Url" ng-model="product.image"> 
+			  		 <input style="display: inline" class="admin adminLarge"  type="text" placeholder="Offer if any" ng-model="product.offer"> 
+			  		 <img style="display: inline"  class="admin" src="{{product.image}}"  class="imageSize" BORDER="0"/>
+			  		 
+			  		 <div   style="display: inline;float: right;">
+						 <button class="button button-balanced order-button" ng-click="$ctrl.scrollTop()"> Top
+						 <i class="icon ion-arrow-up-c"></i>
+						</button>
+					</div>
+			  		 
+			  		 </div>
+			  		
+			  		
+			  		
+			  </ion-item>
+			  
+			</ion-list>
+		</span>
  </span>
   </ion-content>
 </ion-view>

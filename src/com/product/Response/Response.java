@@ -4,7 +4,7 @@ package com.product.Response;
 
 
 /**
- * Every response bean that goes out of BA should extend the base class
+ * Every response bean that goes out of system should extend the base class
  * @author 
  *
  */

@@ -2,6 +2,9 @@ APP.SERVICES.service ('appData',['$window','dataRestore',
     function( $window,dataRestore){
 	this.cartItems = [];
 	this.offerItems = [];
+	this.getShopID = function () {
+		return "1519981368108";
+	}
 	this.getHost = function () {
 		var host = "https://deliveratmydoor.appspot.com";
 		/*if ($window.location.host == ""){

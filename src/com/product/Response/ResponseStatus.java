@@ -2,13 +2,16 @@ package com.product.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ResponseStatus {
+public class ResponseStatus extends Response{
 	
-	private String statusCode = "0";
+
 	private String statusDesc = "";
-	private String bacomsTermId = "0";
+	
 	private int uniqueErrorCode;
 
+	public ResponseStatus(){
+		
+	}
 	/**
 	 * Initializer method to create success response The JSON structure for
 	 * success will be "responseStatus" : { "statusCode" : "0", "statusDesc" :
@@ -26,7 +29,7 @@ public class ResponseStatus {
 	 */
 	private ResponseStatus(String type) {
 		if (type.equals("SUCCESS")) {
-			this.statusCode = "0";
+			
 			this.uniqueErrorCode = 0;
 			// this.statusDesc = type.getDescription();
 		} else {
@@ -48,13 +51,7 @@ public class ResponseStatus {
 		return str;
 	}
 
-	public String getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
-	}
+	
 
 	public String getStatusDesc() {
 		return statusDesc;
@@ -64,13 +61,7 @@ public class ResponseStatus {
 		this.statusDesc = statusDesc;
 	}
 
-	public String getBacomsTermId() {
-		return bacomsTermId;
-	}
-
-	public void setBacomsTermId(String bacomsTermId) {
-		this.bacomsTermId = bacomsTermId;
-	}
+	
 
 	public int getUniqueErrorCode() {
 		return uniqueErrorCode;

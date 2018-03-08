@@ -7,5 +7,8 @@ import com.product.vo.Product;
 public interface ProductService {
 
 	public List<Product> getAllProducts(String shopName);
+	public void updateProducts(String shopID, List<Product> products);
+	public String getPassword(String shopID);
+	public void updatePassword(String shopID,String  password);
 
 }
