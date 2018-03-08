@@ -1,6 +1,7 @@
 package com.product.Facade;
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.product.Response.ResponseStatus;
 import com.product.Service.ProductService;
 import com.product.exception.PasswordMismatch;
 import com.product.vo.Product;
+import com.product.vo.ProductComparator;
 
 public class ProductFacade {
 	
@@ -23,7 +25,11 @@ public class ProductFacade {
 
 	public ProductResponse getAllProducts(String shopID) {
 		ProductResponse response = new ProductResponse();
-		response.setAllproducts(service.getAllProducts(shopRegistration.get(shopID)));
+		List<Product> allProducts = service.getAllProducts(shopRegistration.get(shopID));
+		Collections.sort(allProducts, new ProductComparator());
+		response.setAllproducts(allProducts);
+		
+		response.setMaxProductID(allProducts.get(allProducts.size()-1).getInt_id());
 		return response;
 	}
 	

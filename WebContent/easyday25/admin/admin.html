@@ -12,7 +12,7 @@
 	 	 <ion-list >
 			  <ion-list-header>
 			  <span class="whitecolor">
-			    Update pwd  
+			    Update Password  
 			    </span>
 			  </ion-list-header>
 			  
@@ -35,7 +35,24 @@
 		 <ion-list >
 			  <ion-list-header>
 			  <span class="whitecolor">
-			    Procucts  
+			    Filter products ({{myData.productCountAfterFilter}}) <!-- Filter product -->
+			    	<div   style="display: inline; " class="adminSmall">
+	  						<div class="list">
+	
+							  <label class="item item-input item-select adminSmall" >
+							    <div class="input-label">
+							      Status
+							    </div>
+							    <select class="adminSmall" ng-model="myData.adminProductFilter" ng-change="$ctrl.filterProductsForAdmin()">
+							      <option >All</option>
+							      <option >Active</option>
+							      <option >Out Of stock</option>
+							      <option>Discontinued</option>
+							      <option>Offer items</option>
+							    </select>
+							  </label>
+							 
+							</div>
 			    </span>
 			  </ion-list-header>
 			  
@@ -49,6 +66,9 @@
 					</button>
 				  </span>
 				  <div   style="display: inline;float: right;">
+				  	<button class="button button-positive order-button" ng-click="$ctrl.addProducts(10)">  
+					 <i class="icon ion-plus"></i> 10
+					</button>
 				  	<input style="display: inline" class="adminSmall" type="password" placeholder="Password" ng-model="myData.password">
 					 <button class="button button-balanced order-button" ng-click="$ctrl.updateProducts()"> Update products
 					 <i class="icon ion-thumbsup"></i>
@@ -64,7 +84,7 @@
 				  	
 				  	<span style="display: block;" class="admin">
 				  		Product: 
-				  		<input style="display: inline;" class="admin" type="text" placeholder="Product Descriptiion" ng-model="product.desc">
+				  		{{product._id}}. <input style="display: inline;" class="admin" type="text" placeholder="Product Descriptiion" ng-model="product.desc">
 				  	</span>
 				  	<span style="display: block;" class="admin">
 				  		Price: 
@@ -87,8 +107,8 @@
 							    <div class="input-label">
 							      Status
 							    </div>
-							    <select class="adminSmall">
-							      <option selected>Active</option>
+							    <select class="adminSmall" ng-model="product.productStatus">
+							      <option >Active</option>
 							      <option >Out Of stock</option>
 							      <option>Discontinued</option>
 							    </select>
@@ -102,7 +122,7 @@
 			  
 			  <!-- Image Preview and top button -->
 			  	<div class="adminRight">
-			  		<img   style="display: inline"   src="{{product.image}}"  class="imageSize" BORDER="0"/>
+			  		<img ng-show="product.image"  style="display: inline"   src="{{product.image}}"  class="imageSize" BORDER="0"/>
 			  		 
 			  		 <div  style="display: inline" >
 						 <button class="button button-balanced order-button" ng-click="$ctrl.scrollTop()"> Top

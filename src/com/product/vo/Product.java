@@ -1,12 +1,14 @@
 package com.product.vo;
 
 public class Product {
+	private int int_id;
 	private String _id;
 	private String image;
 	private String desc;
 	private String type;
 	private int price;
 	private String offer = null;
+	private String productStatus = "Active";//Active //Out of stock // discontinued
 	public String get_id() {
 		return _id;
 	}
@@ -42,6 +44,19 @@ public class Product {
 	}
 	public void setOffer(String offer) {
 		this.offer = offer;
+	}
+	public String getProductStatus() {
+		return productStatus;
+	}
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
+	}
+	public int getInt_id() {
+		this.int_id = Integer.parseInt(_id);
+		return int_id;
+	}
+	public void setInt_id(int int_id) {
+		this.int_id = int_id;
 	}
 
 }

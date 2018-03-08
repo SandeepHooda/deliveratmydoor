@@ -45,6 +45,7 @@ APP.SERVICES.service ('appData',['$window','dataRestore',
 			if (this.cartItems[i]._id == product._id){
 				this.cartItems[i].qty = qty;
 				if (qty <=0){
+					//splice is safe here as at a time only one item removed in whole iteration 
 					this.cartItems.splice(i,1);
 				}
 			}

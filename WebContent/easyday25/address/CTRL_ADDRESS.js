@@ -16,6 +16,7 @@ APP.CONTROLLERS.controller ('CTRL_ADDRESS',['$scope','dataRestore','$ionicPopup'
 			   if (res){
 				   for (let i=0;i<$scope.myData.savedAddress.length;i++){
 					   if (i==$scope.deleteIndex){
+						 //splice is safe here as at a time only one item removed in whole iteration
 						   $scope.myData.savedAddress.splice(i,1);
 						   dataRestore.saveInCache('savedAddress', $scope.myData.savedAddress);
 					   }

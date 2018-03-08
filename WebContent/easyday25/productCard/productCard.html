@@ -2,9 +2,11 @@
 
  <ion-card >
   	<ion-item >
+  	<div style="min-height: 200px;">
+  	
 	    <div class="inline" ><img class="imageSize" src="{{productInfo.image}}" /> </div>
-		<div class="productDesc">{{productInfo.desc}}</div> <div  class="productDesc" >&#8377; {{productInfo.price}}</div>
-		
+		<div class="productDesc">{{productInfo._id}}  {{productInfo.desc}}</div> <div  class="productDesc" >&#8377; {{productInfo.price}}</div>
+		<span ng-show="productInfo.productStatus && productInfo.productStatus != 'Active'" style="color: red"><s>{{productInfo.productStatus}} </s></span>
 		<div ng-switch="landingPage">
 			<!--  comming to see cart items show qty -->
 			<div ng-switch-when="cart">
@@ -31,7 +33,7 @@
 			</div>
 			
 		</div>
-		
+	</div>	
 	</ion-item>
 	
   	

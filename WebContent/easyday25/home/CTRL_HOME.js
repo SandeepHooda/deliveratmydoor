@@ -52,6 +52,15 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  		.then(function(response){
 		  			 $scope.hideBusy();
 		  			$scope.allProducts = response.data.allproducts;
+		  			$scope.allActiveProducts = [];
+		  			for (let i=0;i<$scope.allProducts.length;i++){
+		  				if ($scope.allProducts[i].productStatus == "Active"){
+		  				//splice is "Not" safe here as when it removed a element the array repositions itself
+		  					$scope.allActiveProducts.push($scope.allProducts[i]);
+		  				}
+		  			}
+		  		
+		  			$scope.allProducts = $scope.allActiveProducts;
 					$scope.filteredProducts = $scope.allProducts ;
 					$scope.carouselSetup($scope.allProducts);
 					
