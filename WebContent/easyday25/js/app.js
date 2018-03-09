@@ -89,6 +89,15 @@ angular.module('starter', APP.DEPENDENCIES.concat(APP.OTHERDEPENDENCIES))
 						 }
 					}	
 					
+				}).state('menu.tab.add',{
+					url:'/add',
+					views: {
+						 'tab-add': {
+						 templateUrl: 'add/add.html',
+						 controller: 'CTRL_add'
+						 }
+					}	
+					
 				})
 				$urlRouterProvider.otherwise('/menu/tab/home');
 			}
