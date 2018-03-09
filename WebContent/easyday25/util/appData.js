@@ -1,5 +1,5 @@
-APP.SERVICES.service ('appData',['$window','dataRestore',
-    function( $window,dataRestore){
+APP.SERVICES.service ('appData',['$window','dataRestore','$ionicPopup',
+    function( $window,dataRestore, $ionicPopup){
 	this.cartItems = [];
 	this.offerItems = [];
 	this.getShopID = function () {
@@ -15,6 +15,26 @@ APP.SERVICES.service ('appData',['$window','dataRestore',
 		}
 		return host;
 	}
+	
+	this.showErrorMessage = function(httpCode){
+		if ( httpCode == 403){
+			var confirmPopup = $ionicPopup.confirm({
+			     title: 'Password mimatch',
+			     template: 'Your password donot match our records.'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+		}else {
+			var confirmPopup = $ionicPopup.confirm({
+			     title: 'Internal Server Error',
+			     template: 'Something unusual happened at server.'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+				
+		}
+	}
+	
 	this.getOfferItems = function(){
 		return this.offerItems;
 	}

@@ -1,6 +1,7 @@
 package com.product.EndPoint;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -10,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.product.vo.Customer;
 import com.product.vo.Product;
 
 @Path("")
@@ -35,5 +37,15 @@ public interface ProductEndpoint {
 	@Path("/shopID/{shopID}/customers")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getAllCustomers(@PathParam("shopID") String shopID);
+	
+	@PUT
+	@Path("/shopID/{shopID}/customers")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response addCustomer(@PathParam("shopID") String shopID, Customer customer);
+	
+	@DELETE
+	@Path("/shopID/{shopID}/customers/id/{id}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response deleteCustomer(@PathParam("shopID") String shopID, @PathParam("id") int id);
 
 }

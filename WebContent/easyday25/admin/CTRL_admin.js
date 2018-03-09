@@ -28,8 +28,12 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 	}
 	theCtrl.addProducts = function(count){
 		$scope.myData.adminProductFilter = "All";
+		if (!$scope.myData.allProducts || $scope.myData.allProducts.length == 0){
+			$scope.myData.allProducts = [];
+		}
+		$scope.myData.maxProductID +=count;
 		for (let i=0;i<count;i++){
-			$scope.myData.maxProductID++;
+			
 			let product = {};
 			product._id = $scope.myData.maxProductID;
 			product.image ="";
@@ -39,6 +43,7 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 			product.offer = "";
 			product.productStatus = "Active";
 			$scope.myData.allProducts.unshift(product);
+			$scope.myData.maxProductID--;
 		}
 		theCtrl.filterProductsForAdmin();
 		
@@ -123,28 +128,11 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 	  		},
 			function(response){
 	  			$scope.hideBusy();
-	  			theCtrl.showErrorMessage(response.status);
+	  			appData.showErrorMessage(response.status);
 				
 			});
 	}
-	theCtrl.showErrorMessage = function(httpCode){
-		if ( httpCode == 403){
-			var confirmPopup = $ionicPopup.confirm({
-			     title: 'Password mimatch',
-			     template: 'Your password donot match our records.'
-			   });
-			 confirmPopup.then(function(res) {
-			  });
-		}else {
-			var confirmPopup = $ionicPopup.confirm({
-			     title: 'Internal Server Error',
-			     template: 'Something unusual happened at server.'
-			   });
-			 confirmPopup.then(function(res) {
-			  });
-				
-		}
-	}
+	
 	theCtrl.updateProducts =function(){
 		//console.log(JSON.stringify($scope.myData.allProducts));
 		let productsToBeSaved = [];
@@ -161,6 +149,7 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 		  		.then(function(response){
 		  			 $scope.hideBusy();
 		  			$scope.myData.allProducts = response.data.allproducts;
+		  			$scope.myData.maxProductID = response.data.maxProductID;
 		  			theCtrl.filterProductsForAdmin();
 		  			var confirmPopup = $ionicPopup.confirm({
 					     title: 'Success',
@@ -174,7 +163,7 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 			},
 				function(response){
 					 $scope.hideBusy();
-					 theCtrl.showErrorMessage(response.status);
+					 appData.showErrorMessage(response.status);
 				});
 	}
 	theCtrl.scrollTop = function(){

@@ -1,5 +1,6 @@
 package com.product.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -29,6 +30,39 @@ public class ProductServiceImpl implements ProductService {
 		Gson  json = new Gson();
 		CustomersList customersList = json.fromJson(customersStr, new TypeToken<CustomersList>() {}.getType());
 		return customersList.getData();
+	}
+	@Override
+	public void addCustomer(String shopName, Customer customer){
+		String customersStr = MangoDB.getADocument(shopName, shopName,"customersList", MangoDB.mlabKeySonu );
+		Gson  json = new Gson();
+		CustomersList customersList = json.fromJson(customersStr, new TypeToken<CustomersList>() {}.getType());
+		int maxID = 0; 
+		for (Customer cus: customersList.getData()){
+			if (maxID < cus.getCusID()){
+				maxID = cus.getCusID();
+			}
+		}
+		maxID++;
+		customer.setCusID(maxID);
+		customersList.getData().add(customer);
+		String updateData = json.toJson(customersList, new TypeToken<CustomersList>() {}.getType());
+		MangoDB.insertOrUpdateData(shopName, shopName,updateData, MangoDB.mlabKeySonu, customersList.get_id() );
+		
+	}
+	@Override
+	public void deleteCustomer(String shopName, int customerID){
+		String customersStr = MangoDB.getADocument(shopName, shopName,"customersList", MangoDB.mlabKeySonu );
+		Gson  json = new Gson();
+		CustomersList customersList = json.fromJson(customersStr, new TypeToken<CustomersList>() {}.getType());
+		Iterator<Customer> itr = customersList.getData().iterator();
+		while(itr.hasNext()){
+			Customer cus =itr.next();
+			if (cus.getCusID() == customerID){
+				itr.remove();
+			}
+		}
+		String updateData = json.toJson(customersList, new TypeToken<CustomersList>() {}.getType());
+		MangoDB.insertOrUpdateData(shopName, shopName,updateData, MangoDB.mlabKeySonu, customersList.get_id() );
 	}
 	@Override
 	public String getPassword(String shopName){

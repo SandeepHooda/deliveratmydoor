@@ -31,7 +31,10 @@ public class ProductFacade {
 		Collections.sort(allProducts, new ProductComparator());
 		response.setAllproducts(allProducts);
 		
-		response.setMaxProductID(allProducts.get(allProducts.size()-1).getInt_id());
+		if (allProducts.size() > 0){
+			response.setMaxProductID(allProducts.get(allProducts.size()-1).getInt_id());
+		}
+		
 		return response;
 	}
 	public CustomerResponse getAllCustomers(String shopID) {
@@ -41,6 +44,16 @@ public class ProductFacade {
 		response.setCustomerList(customerList);
 		
 		return response;
+	}
+	
+	public CustomerResponse addCustomer(String shopID, Customer customer){
+		service.addCustomer(shopRegistration.get(shopID), customer);
+		return getAllCustomers(shopID);
+	}
+	
+	public CustomerResponse deleteCustomer(String shopID, int  customerID){
+		service.deleteCustomer(shopRegistration.get(shopID), customerID);
+		return getAllCustomers(shopID);
 	}
 	
 	

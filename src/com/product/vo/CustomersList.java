@@ -1,5 +1,6 @@
 package com.product.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomersList {
@@ -13,6 +14,9 @@ public class CustomersList {
 		this._id = _id;
 	}
 	public List<Customer> getData() {
+		if (null == data){
+			data = new ArrayList<Customer>();
+		}
 		return data;
 	}
 	public void setData(List<Customer> data) {

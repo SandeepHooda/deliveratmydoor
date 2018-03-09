@@ -1,6 +1,7 @@
 package com.product.vo;
 
 public class Customer {
+	private int cusID;
 	private String fName;
 	private String lName;
 	private String address;
@@ -42,6 +43,12 @@ public class Customer {
 	}
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
+	}
+	public int getCusID() {
+		return cusID;
+	}
+	public void setCusID(int cusID) {
+		this.cusID = cusID;
 	}
 
 }

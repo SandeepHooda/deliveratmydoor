@@ -1,8 +1,13 @@
-APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading','$http','appData', 
-    function($scope, dataRestore, $ionicLoading,$http,appData ){
+APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading','$http','appData', '$ionicPopup',
+    function($scope, dataRestore, $ionicLoading,$http,appData,$ionicPopup ){
 	var theCtrl = this;
 	$scope.myData = {}
-	
+	$scope.newCustomer = {};
+	var config = {
+            headers : {
+                'Content-Type': 'application/json;'
+            }
+        }
 	 $scope.getAllCustomers = function(){
 		  $scope.showBusy();
 		   $http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/customers')
@@ -20,6 +25,67 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 		  
 		}
 	
+	$scope.addNewCustomer = function(){
+		 
+		if(!$scope.newCustomer.fName || !$scope.newCustomer.lName  || !$scope.newCustomer.address || !$scope.newCustomer.phone){
+			var confirmPopup = $ionicPopup.confirm({
+			     title: 'Missing Required fields',
+			     template: 'Please enter First name, Last name, Address and Phone number before proceeding.'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+			return;
+		}
+		$scope.showBusy();
+		$http.put(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/customers/', $scope.newCustomer, config)
+  		.then(function(response){
+  			 $scope.hideBusy();
+  			$scope.myData.customerList = response.data.customerList;
+  			var confirmPopup = $ionicPopup.confirm({
+			     title: 'Details saved successfully',
+			     template: 'New customer details added.'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+			 
+  		},
+		function(response){
+  			$scope.hideBusy();
+  			appData.showErrorMessage(response.status);
+			
+		});
+	}
+	$scope.deleteCustomer = function(index){
+		let cusID = $scope.myData.customerList[index].cusID;
+		var confirmPopup = $ionicPopup.confirm({
+		     title: 'Delete Customer ID '+cusID,
+		     template: 'Are you sure you want to remove customer from records?'
+		   });
+		 confirmPopup.then(function(res) {
+			 if (res){
+				 $scope.showBusy();
+				 $http.delete(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/customers/id/'+cusID, )
+			  		.then(function(response){
+			  			 $scope.hideBusy();
+			  			$scope.myData.customerList = response.data.customerList;
+			  			var confirmPopup = $ionicPopup.confirm({
+						     title: 'Details deleted successfully',
+						     template: 'Customer removed from records.'
+						   });
+						 confirmPopup.then(function(res) {
+						  });
+						 
+			  		},
+					function(response){
+			  			$scope.hideBusy();
+			  			appData.showErrorMessage(response.status);
+						
+					});
+			 }//Confirmation for delete
+			 
+		  });
+		
+	}
 	
 	//Busy icon
 	  $scope.showBusy = function() {

@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 
 import com.product.Facade.ProductFacade;
 import com.product.exception.PasswordMismatch;
+import com.product.vo.Customer;
 import com.product.vo.Product;
 
 
@@ -68,6 +69,22 @@ public class ProductEndpointImpl implements ProductEndpoint {
 		
 	}
 	
+	@Override
+	public Response addCustomer(String shopID, Customer customer){
+		try{
+			return Response.ok().entity(facade.addCustomer(shopID, customer)).build();
+		}catch(Exception e){
+			return Response.serverError().entity("Internal Server error").build();
+		}
+	}
+	@Override
+	public Response deleteCustomer(String shopID,  int customerID){
+		try{
+			return Response.ok().entity(facade.deleteCustomer(shopID, customerID)).build();
+		}catch(Exception e){
+			return Response.serverError().entity("Internal Server error").build();
+		}
+	}
 
 	public ProductFacade getFacade() {
 		return facade;
