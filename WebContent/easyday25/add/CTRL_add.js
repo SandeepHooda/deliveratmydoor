@@ -55,6 +55,36 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 			
 		});
 	}
+	$scope.sendSMS =  function(){
+		 
+		if(!$scope.myData.MessageToCustomers){
+			var confirmPopup = $ionicPopup.confirm({
+			     title: 'Nothing to send',
+			     template: 'Please enter the message that you wnat to send.'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+			return;
+		}
+		$scope.showBusy();
+		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/message/'+$scope.myData.MessageToCustomers)
+  		.then(function(response){
+  			 $scope.hideBusy();
+  			
+  			var confirmPopup = $ionicPopup.confirm({
+			     title: 'SMS Sent ',
+			     template: 'Your message is on its way to customers!'
+			   });
+			 confirmPopup.then(function(res) {
+			  });
+			 
+  		},
+		function(response){
+  			$scope.hideBusy();
+  			appData.showErrorMessage(response.status);
+			
+		});
+	}
 	$scope.deleteCustomer = function(index){
 		let cusID = $scope.myData.customerList[index].cusID;
 		var confirmPopup = $ionicPopup.confirm({

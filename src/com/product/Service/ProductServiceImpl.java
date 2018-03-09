@@ -44,6 +44,17 @@ public class ProductServiceImpl implements ProductService {
 		}
 		maxID++;
 		customer.setCusID(maxID);
+		String phone = customer.getPhone();
+		if (null != phone){
+			phone = phone.replaceAll("[^\\d.]", "");
+			if (phone.length()> 10){
+				int trimExcess = phone.length() -10;
+				phone = phone.substring(trimExcess);
+			}
+			customer.setPhone(phone);
+		}
+		
+		
 		customersList.getData().add(customer);
 		String updateData = json.toJson(customersList, new TypeToken<CustomersList>() {}.getType());
 		MangoDB.insertOrUpdateData(shopName, shopName,updateData, MangoDB.mlabKeySonu, customersList.get_id() );

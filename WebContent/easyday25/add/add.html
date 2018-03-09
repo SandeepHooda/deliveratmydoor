@@ -7,7 +7,17 @@
 
  <ion-content class="padding">
  <span class="whitecolor">
-
+		 <div class="list">
+			<label class="item item-input">
+				<textarea placeholder="Message *" ng-model="myData.MessageToCustomers"></textarea>
+			</label>
+		 </div>	
+		 <div  align="center">
+			 <button class="button button-positive order-button" ng-click="sendSMS()"> Send SMS
+			 <i class="icon ion-android-textsms"></i>
+			</button>
+		 </div>  
+		 <hr color="white" width="99%"/>
 <!-- New Customer -->
 		<div class="list">
 		  <label class="item item-input">
