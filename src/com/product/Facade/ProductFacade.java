@@ -27,7 +27,7 @@ public class ProductFacade {
 	private static Map<String, Registration> shopRegistration = new HashMap<String, Registration>();
 	static {
 		
-		shopRegistration.put("1519981368108", new Registration("easy-day-products", "EasyDay25Pkl", "sonu.hooda@gmail.com", "9216411835"));
+		shopRegistration.put("1519981368108", new Registration("easy-day-products", "EasyDay25", "sonu.hooda@gmail.com", "9216411835"));
 	}
 
 	public ProductResponse getAllProducts(String shopID) {

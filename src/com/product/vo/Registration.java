@@ -8,6 +8,9 @@ public class Registration {
 	private String shopPhoneNo;
 	public Registration(String shopName, String smsSenderID, String shopEmail, String shopPhoneNo){
 		this.shopName = shopName;
+		if (smsSenderID.length() > 11){
+			smsSenderID = smsSenderID.substring(0, 11);
+		}
 		this.smsSenderID = smsSenderID;
 		this.shopEmail = shopEmail;
 		this.shopPhoneNo = shopPhoneNo;
