@@ -29,5 +29,11 @@ public interface ProductEndpoint {
 	@Path("/shopID/{shopID}/oldpassword/{oldpassword}/password/{password}/pwd")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response updatePassword(@PathParam("shopID") String shopID, @PathParam("oldpassword") String oldpassword, @PathParam("password") String password);
+	
+	
+	@GET
+	@Path("/shopID/{shopID}/customers")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getAllCustomers(@PathParam("shopID") String shopID);
 
 }

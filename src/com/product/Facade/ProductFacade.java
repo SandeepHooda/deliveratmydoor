@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.product.Response.CustomerResponse;
 import com.product.Response.PlainResponse;
 import com.product.Response.ProductResponse;
 import com.product.Response.ResponseStatus;
 import com.product.Service.ProductService;
 import com.product.exception.PasswordMismatch;
+import com.product.vo.Customer;
 import com.product.vo.Product;
 import com.product.vo.ProductComparator;
 
@@ -32,6 +34,15 @@ public class ProductFacade {
 		response.setMaxProductID(allProducts.get(allProducts.size()-1).getInt_id());
 		return response;
 	}
+	public CustomerResponse getAllCustomers(String shopID) {
+		CustomerResponse response = new CustomerResponse();
+		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID));
+		
+		response.setCustomerList(customerList);
+		
+		return response;
+	}
+	
 	
 	public ProductResponse updatePassword(String shopID,String passwordOld, String password) throws PasswordMismatch{
 		ProductResponse response = new ProductResponse();

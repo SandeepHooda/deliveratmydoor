@@ -7,16 +7,15 @@
 
 <div ng-if="savedAddress && savedAddress.length > 0">
 
-<ion-list >
+	<ion-list >
 	  <ion-list-header>
-	  <span class="whitecolor">
-	    Swipe left to delete: 
+	  	<span class="whitecolor">
+	    	Swipe left to delete: 
 	    </span>
 	  </ion-list-header>
+	  
 	  <ion-item ng-repeat="address in myData.savedAddress track by $index" on-swipe-left="deleteAddress({{$index}})">
 	  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
-	  		 
-	  		
 	  </ion-item>
 	  
 	</ion-list>

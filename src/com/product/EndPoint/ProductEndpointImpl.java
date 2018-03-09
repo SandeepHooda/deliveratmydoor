@@ -56,6 +56,18 @@ public class ProductEndpointImpl implements ProductEndpoint {
 		}
 		
 	}
+	
+	@Override
+	public Response getAllCustomers(String shopID) {
+		
+		try{
+			return Response.ok().entity(facade.getAllCustomers(shopID)).build();
+		}catch(Exception e){
+			return Response.serverError().entity("Internal Server error").build();
+		}
+		
+	}
+	
 
 	public ProductFacade getFacade() {
 		return facade;

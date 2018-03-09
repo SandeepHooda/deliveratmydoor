@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.product.vo.Customer;
+import com.product.vo.CustomersList;
 import com.product.vo.Password;
 import com.product.vo.Product;
 import com.product.vo.ProductList;
@@ -19,6 +21,14 @@ public class ProductServiceImpl implements ProductService {
 		Gson  json = new Gson();
 		ProductList productList = json.fromJson(productsStr, new TypeToken<ProductList>() {}.getType());
 		return productList.getData();
+	}
+	
+	@Override
+	public List<Customer> getAllCustomers(String shopName){
+		String customersStr = MangoDB.getADocument(shopName, shopName,"customersList", MangoDB.mlabKeySonu );
+		Gson  json = new Gson();
+		CustomersList customersList = json.fromJson(customersStr, new TypeToken<CustomersList>() {}.getType());
+		return customersList.getData();
 	}
 	@Override
 	public String getPassword(String shopName){

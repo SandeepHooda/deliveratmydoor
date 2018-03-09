@@ -1,4 +1,4 @@
-<ion-view title="Add"  class="backhroundcolor " ng-init="getAllOffers()" ng-controller="CTRL_add as $ctrl">
+<ion-view title="Add"  class="backhroundcolor" cache-view="false"  ng-init="getAllCustomers()" ng-controller="CTRL_add as $ctrl">
 
 <ion-header-bar class="bar-positive">
       <h1 class="title">Add</h1>
@@ -6,7 +6,51 @@
 </ion-header-bar>
 
  <ion-content class="padding">
-Advertisement
+ <span class="whitecolor">
+
+<!-- New Customer -->
+		<div class="list">
+		  <label class="item item-input">
+		    <input type="text" placeholder="First Name *" ng-model="newCustomer.fName">
+		  </label>
+		  <label class="item item-input"> 
+		    <input type="text" placeholder="Last Name *" ng-model="newCustomer.lName">
+		  </label>
+		  <label class="item item-input">
+		    <textarea placeholder="Address *" ng-model="newCustomer.address"></textarea>
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Phone *" ng-model="newCustomer.phone">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Email" ng-model="newCustomer.email">
+		  </label>
+		  <label class="item item-input">
+		    <input type="text" placeholder="Delivery instructions" ng-model="newCustomer.instructions">
+		  </label>
+		 
+		</div>
 		
+		<div  align="center">
+			 <button class="button button-positive order-button" ng-click="addNewCustomer()"> Add customer
+			 <i class="icon ion-android-add-circle"></i>
+			</button>
+		 </div>
+		
+		<hr color="white" width="99%"/>
+		<!-- Existing customers -->
+		<ion-list >
+		  <ion-list-header>
+		  	<span class="whitecolor">
+		    	My Customers List (Swipe left to delete:)
+		    </span>
+		  </ion-list-header>
+		  
+		  <ion-item ng-repeat="customer in myData.customerList track by $index" on-swipe-left="deleteCustomer({{$index}})">
+		  		 {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}}
+		  </ion-item>
+	  
+		</ion-list>
+</span>	
 </ion-content>
 </ion-view>
