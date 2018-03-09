@@ -25,7 +25,7 @@ public class Sms {
 		String receivers = sb.toString();
 		receivers = receivers.substring(1);
 		LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
-        parameters.put("src", sender); // Alphanumeric Sender ID
+        parameters.put("src", "9216411835"); // Alphanumeric Sender ID
         parameters.put("dst", receivers); // Receiver's phone number with country code
         parameters.put("text", text); // Your SMS text message
         try {
@@ -34,6 +34,8 @@ public class Sms {
             if (msgResponse.serverCode == 202){
             	log.info(" SMS Sent");
             	return 200;
+            }else {
+            	 log.warning("Error while sending SMS : "+msgResponse.toString());
             }
            
         } catch (PlivoException e) {
