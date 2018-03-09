@@ -47,7 +47,7 @@
 		  </ion-list-header>
 		  
 		  <ion-item ng-repeat="customer in myData.customerList track by $index" on-swipe-left="deleteCustomer({{$index}})">
-		  		 {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}}
+		  		 {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}},{{customer.email}}
 		  </ion-item>
 	  
 		</ion-list>
