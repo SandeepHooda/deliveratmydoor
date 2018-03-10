@@ -32,9 +32,9 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 			$scope.myData.allProducts = [];
 		}
 		$scope.myData.maxProductID +=count;
-		for (let i=0;i<count;i++){
+		for (var i=0;i<count;i++){
 			
-			let product = {};
+			var product = {};
 			product._id = $scope.myData.maxProductID;
 			product.image ="";
 			product.desc ="";
@@ -55,10 +55,10 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 		    });
 	}
 	theCtrl.filterProductsForAdmin = function(){
-		let filteredProductsForAdmin = [];
+		var filteredProductsForAdmin = [];
 		if ($scope.myData.adminProductFilter != "All"){
-			for (let i=0;i< $scope.myData.allProducts.length;i++){
-				let product = $scope.myData.allProducts[i];
+			for (var i=0;i< $scope.myData.allProducts.length;i++){
+				var product = $scope.myData.allProducts[i];
 				if ($scope.myData.adminProductFilter == "Offer items"){
 					if (product.offer && product.offer.length > 1){
 						filteredProductsForAdmin.push(product);
@@ -71,7 +71,7 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 			}
 			
 		}else {
-			for (let i=0;i< $scope.myData.allProducts.length;i++){
+			for (var i=0;i< $scope.myData.allProducts.length;i++){
 				filteredProductsForAdmin.push($scope.myData.allProducts[i]);
 			}
 		}
@@ -82,8 +82,8 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 	$scope.createPageNos = function(allProducts){
 		$scope.myData.productCountAfterFilter = allProducts.length;
 		$scope.myData.pageNos = [];
-		let totalPages = Math.ceil(allProducts.length/$scope.myData.pageSize);
-		for (let i=0;i<totalPages ;i++){
+		var totalPages = Math.ceil(allProducts.length/$scope.myData.pageSize);
+		for (var i=0;i<totalPages ;i++){
 			$scope.myData.pageNos.push(i+1);
 		}
 	}
@@ -92,9 +92,9 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 			allProducts = $scope.myData.allProducts;
 		}
 		$scope.myData.filteredProducts = [];
-		let currentProductStart = (page -1) * $scope.myData.pageSize ;
-		let currentProductEnd = currentProductStart + $scope.myData.pageSize -1 ;
-		 for (let i=0;i<allProducts.length;i++){
+		var currentProductStart = (page -1) * $scope.myData.pageSize ;
+		var currentProductEnd = currentProductStart + $scope.myData.pageSize -1 ;
+		 for (var i=0;i<allProducts.length;i++){
 			 if (i>=currentProductStart && i<= currentProductEnd){
 				 $scope.myData.filteredProducts.push(allProducts[i]);
 			 }
@@ -135,9 +135,9 @@ APP.CONTROLLERS.controller ('CTRL_admin',['$scope','appData','$rootScope','$stat
 	
 	theCtrl.updateProducts =function(){
 		//console.log(JSON.stringify($scope.myData.allProducts));
-		let productsToBeSaved = [];
-		for (let i=0; i<$scope.myData.allProducts.length;i++) {
-			let product = $scope.myData.allProducts[i];
+		var productsToBeSaved = [];
+		for (var i=0; i<$scope.myData.allProducts.length;i++) {
+			var product = $scope.myData.allProducts[i];
 			if (product.desc && product.price && product.image){
 				productsToBeSaved.push(product);
 			}

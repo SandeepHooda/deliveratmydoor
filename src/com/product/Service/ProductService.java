@@ -3,6 +3,7 @@ package com.product.Service;
 import java.util.List;
 
 import com.product.vo.Customer;
+import com.product.vo.Order;
 import com.product.vo.Product;
 
 public interface ProductService {
@@ -14,5 +15,6 @@ public interface ProductService {
 	public void updateProducts(String shopID, List<Product> products);
 	public String getPassword(String shopID);
 	public void updatePassword(String shopID,String  password);
+	public void saveOrder(String shopName, Order order);
 
 }

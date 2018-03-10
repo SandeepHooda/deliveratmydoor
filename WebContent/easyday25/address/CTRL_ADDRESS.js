@@ -14,7 +14,7 @@ APP.CONTROLLERS.controller ('CTRL_ADDRESS',['$scope','dataRestore','$ionicPopup'
 
 		   confirmPopup.then(function(res) {
 			   if (res){
-				   for (let i=0;i<$scope.myData.savedAddress.length;i++){
+				   for (var i=0; i <$scope.myData.savedAddress.length;i++){
 					   if (i==$scope.deleteIndex){
 						 //splice is safe here as at a time only one item removed in whole iteration
 						   $scope.myData.savedAddress.splice(i,1);
@@ -30,7 +30,7 @@ APP.CONTROLLERS.controller ('CTRL_ADDRESS',['$scope','dataRestore','$ionicPopup'
 	}
 	$scope.fName = null;
 	$scope.saveAddress = function(){
-		  let address = {};
+		  var address = {};
 		  address.id = new Date().getTime();
 		  address.fName = $scope.newAddress.fName;
 		  address.lName = $scope.newAddress.lName;

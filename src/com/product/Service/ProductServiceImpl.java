@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.product.vo.Customer;
 import com.product.vo.CustomersList;
+import com.product.vo.Order;
 import com.product.vo.Password;
 import com.product.vo.Product;
 import com.product.vo.ProductList;
@@ -59,6 +60,12 @@ public class ProductServiceImpl implements ProductService {
 		String updateData = json.toJson(customersList, new TypeToken<CustomersList>() {}.getType());
 		MangoDB.insertOrUpdateData(shopName, shopName,updateData, MangoDB.mlabKeySonu, customersList.get_id() );
 		
+	}
+	@Override
+	public void saveOrder(String shopName, Order order){
+		Gson  json = new Gson();
+		String updateData = json.toJson(order, new TypeToken<Order>() {}.getType());
+		MangoDB.createNewDocument(shopName, shopName,updateData, MangoDB.mlabKeySonu);
 	}
 	@Override
 	public void deleteCustomer(String shopName, int customerID){

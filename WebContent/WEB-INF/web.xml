@@ -30,4 +30,14 @@
     <servlet-name>cxf</servlet-name>
     <url-pattern>/ws/*</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>OrderDetails</servlet-name>
+  <servlet-class>com.product.OrderDetails</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>OrderDetails</servlet-name>
+    <url-pattern>/OrderDetails</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

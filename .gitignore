@@ -1,1 +1,2 @@
 /build/classes/**/*
+/WebContent/easyday25/node_modules/**/*

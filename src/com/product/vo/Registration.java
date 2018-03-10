@@ -5,17 +5,19 @@ public class Registration {
 	private String shopName;
 	private String smsSenderID;
 	private String shopEmail;
-	private String shopEmailFrom;
+	private String shopEmailLabel;
 	private String shopPhoneNo;
-	public Registration(String shopName, String smsSenderID, String shopEmail, String shopEmailFrom,  String shopPhoneNo){
+	private boolean smsEnabled;
+	public Registration(String shopName, String smsSenderID,  String shopEmailLabel, String shopEmail,  String shopPhoneNo, boolean smsEnabled){
 		this.shopName = shopName;
 		if (smsSenderID.length() > 11){
 			smsSenderID = smsSenderID.substring(0, 11);
 		}
 		this.smsSenderID = smsSenderID;
 		this.shopEmail = shopEmail;
-		this.shopEmailFrom = shopEmailFrom;
+		this.shopEmailLabel = shopEmailLabel;
 		this.shopPhoneNo = shopPhoneNo;
+		this.smsEnabled = smsEnabled;
 	}
 	public String getShopName() {
 		return shopName;
@@ -41,10 +43,17 @@ public class Registration {
 	public void setShopPhoneNo(String shopPhoneNo) {
 		this.shopPhoneNo = shopPhoneNo;
 	}
-	public String getShopEmailFrom() {
-		return shopEmailFrom;
+	public String getShopEmailLabel() {
+		return shopEmailLabel;
 	}
-	public void setShopEmailFrom(String shopEmailFrom) {
-		this.shopEmailFrom = shopEmailFrom;
+	public void setShopEmailLabel(String shopEmailLabel) {
+		this.shopEmailLabel = shopEmailLabel;
 	}
+	public boolean isSmsEnabled() {
+		return smsEnabled;
+	}
+	public void setSmsEnabled(boolean smsEnabled) {
+		this.smsEnabled = smsEnabled;
+	}
+	
 }

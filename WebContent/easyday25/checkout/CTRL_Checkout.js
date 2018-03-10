@@ -11,8 +11,8 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	  };
 	  $rootScope.$on('itemAddedToCart',function(event){
 		  $scope.cartTotalRs = 0;
-		  let countOfTotalCartItems = 0;
-		  for (let i=0;i<appData.getCartItems().length;i++){
+		  var countOfTotalCartItems = 0;
+		  for (var i=0;i<appData.getCartItems().length;i++){
 			  countOfTotalCartItems += appData.cartItems[i].qty
 			  $scope.cartTotalRs += appData.cartItems[i].qty * appData.cartItems[i].price
 			}
@@ -37,7 +37,7 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  dataRestore.saveInCache('defaultAddressIndex', theCtrl.defaultAddress);
 	  }
 	  $scope.saveAddressAndPlaceOrder = function(){
-		  let address = {};
+		  var address = {};
 		  address.id = new Date().getTime();
 		  address.fName = theCtrl.fName;
 		  address.lName = theCtrl.lName;
@@ -78,7 +78,7 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	  }
 	  
 	  theCtrl.submitOrder = function(){//Find the address that user has selected and place order to that address
-		  for (let i=0;i<$scope.savedAddress.length;i++){
+		  for (var i=0;i<$scope.savedAddress.length;i++){
 			  if (theCtrl.defaultAddress == $scope.savedAddress[i].id){
 				  theCtrl.placeOrder($scope.savedAddress[i]);
 				  break;
@@ -93,8 +93,8 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	  $scope.savedAddress = dataRestore.getFromCache('savedAddress', 'obj');
 	  if ($scope.savedAddress && $scope.savedAddress.length > 0){
 		  theCtrl.defaultAddress = dataRestore.getFromCache('defaultAddressIndex', 'str');
-		  let weHaveDefaultAddressOnFile = false;
-		  for (let i=0;i<$scope.savedAddress.length;i++){
+		  var weHaveDefaultAddressOnFile = false;
+		  for (var i=0;i<$scope.savedAddress.length;i++){
 			  if(theCtrl.defaultAddress == $scope.savedAddress[i].id ){
 				  weHaveDefaultAddressOnFile = true;
 				  break;

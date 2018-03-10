@@ -22,6 +22,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	
 	var theCtrl = this;
 	$scope.product = { desc: 'Britania brown bread', price: 35, image :'https://i.imgur.com/JZnDv3j.jpg' };
+	$scope.shopHasOffers = true;
 	$scope.allProducts = [];
 	$scope.filteredProducts = [];
 	theCtrl.searchInput = "";
@@ -53,7 +54,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		  			 $scope.hideBusy();
 		  			$scope.allProducts = response.data.allproducts;
 		  			$scope.allActiveProducts = [];
-		  			for (let i=0;i<$scope.allProducts.length;i++){
+		  			for (var i=0;i<$scope.allProducts.length;i++){
 		  				if ($scope.allProducts[i].productStatus == "Active"){
 		  				//splice is "Not" safe here as when it removed a element the array repositions itself
 		  					$scope.allActiveProducts.push($scope.allProducts[i]);
@@ -85,11 +86,11 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 			  $scope.filteredProducts = $scope.allProducts;
 			  return;
 		  }
-		  let searchArray = theCtrl.searchInput.toLowerCase().split(" ");//split the input by space
+		  var searchArray = theCtrl.searchInput.toLowerCase().split(" ");//split the input by space
 		  
 		   $scope.filteredProducts = 
 				  	  _.filter($scope.allProducts, function(o) {//Search in all products in DB
-				  		        let matchingProduct = true;
+				  		        var matchingProduct = true;
 				  		      _.forEach(searchArray, function(search){ // look for all words in search string in any order and  case insensitive
 				  		    	if (o.desc.toLowerCase().indexOf(search) < 0 ) {
 				  		    		matchingProduct = false;
@@ -109,9 +110,12 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
 		  targetUrl = "https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home";
-		 let offerItems = [];
-		  for (let i=0;i<allProducts.length;i++){
+		 var offerItems = [];
+		 $scope.shopHasOffers = false;
+		  for (var i=0;i<allProducts.length;i++){
+			  
 			 if (allProducts[i].offer){
+				 $scope.shopHasOffers = true;
 				 offerItems.push(allProducts[i]);
 				 $("#jcarouselItems").append('<li><a href="#/menu/tab/offers" target="_self"><img src="'+allProducts[i].image+'"  class="imageSize" BORDER="0"/></a></li>');
 				  if ($window.location.host == ""){

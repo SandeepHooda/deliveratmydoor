@@ -45,8 +45,8 @@ APP.SERVICES.service ('appData',['$window','dataRestore','$ionicPopup',
 		return this.cartItems;
 	}
 	this.addToCart = function (product, qty){
-		let newItem = true;
-		for (let i=0;i<this.cartItems.length;i++){
+		var newItem = true;
+		for (var i=0;i<this.cartItems.length;i++){
 			if (this.cartItems[i]._id == product._id){
 				this.cartItems[i].qty += qty;
 				newItem = false;
@@ -61,7 +61,7 @@ APP.SERVICES.service ('appData',['$window','dataRestore','$ionicPopup',
 	
 	this.updateCart = function (product, qty){
 		
-		for (let i=0;i<this.cartItems.length;i++){
+		for (var i=0;i<this.cartItems.length;i++){
 			if (this.cartItems[i]._id == product._id){
 				this.cartItems[i].qty = qty;
 				if (qty <=0){

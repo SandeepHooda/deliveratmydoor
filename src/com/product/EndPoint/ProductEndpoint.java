@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.product.vo.Customer;
+import com.product.vo.Order;
 import com.product.vo.Product;
 
 @Path("")
@@ -52,6 +53,11 @@ public interface ProductEndpoint {
 	@Path("/shopID/{shopID}/mode/{mode}/message/{text}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response sendSMS(@PathParam("shopID") String shopID, @PathParam("mode") String mode, @PathParam("text") String text);
+	
+	@POST
+	@Path("/shopID/{shopID}/order")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response submitCartOrder(@PathParam("shopID") String shopID, Order order);
 	
 	
 

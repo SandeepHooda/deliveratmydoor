@@ -24,16 +24,21 @@ public class MangoDB {
 	private static FetchOptions lFetchOptions = FetchOptions.Builder.doNotValidateCertificate().setDeadline(300d);
 	private static URLFetchService fetcher = URLFetchServiceFactory.getURLFetchService();
 	
-	public static String getDocumentWithQuery(String dbName, String collection,  String documentKey,String mlabApiKey, String query){
+	public static String getDocumentWithQuery(String dbName, String collection,  String documentKey, boolean isKeyString, String mlabApiKey, String query){
 		String httpsURL  = "https://api.mlab.com/api/1/databases/"+dbName+"/collections/"+collection+"?apiKey="+mlabApiKey;
 		if (null != documentKey){
-			httpsURL += "&q=%7B%22_id%22:%22"+documentKey+"%22%7D";
+			if (isKeyString){
+				httpsURL += "&q=%7B%22_id%22:%22"+documentKey+"%22%7D";
+			}else {
+				httpsURL += "&q=%7B%22_id%22:"+documentKey+"%7D";
+			}
+			
 		}
 		
 		if (null != query ){
 			httpsURL +=  query;
 		}
-		
+		System.out.println(httpsURL);
 		String responseStr = "";
 		 try {
 			
@@ -57,9 +62,12 @@ public class MangoDB {
 		
 		 return responseStr;
 	}
+	public static String getADocument(String dbName, String collection, String documentKey, boolean isKeyString, String mlabApiKey){
+		return getDocumentWithQuery(dbName,  collection,  documentKey, isKeyString, mlabApiKey, null);
+	}
 	public static String getADocument(String dbName, String collection,  String documentKey,String mlabApiKey){
 		
-		return getDocumentWithQuery(dbName,  collection,  documentKey, mlabApiKey, null);
+		return getDocumentWithQuery(dbName,  collection,  documentKey, true, mlabApiKey, null);
 		
 	}
 	public static String getData(String db, String collection,  String apiKey ){
@@ -69,7 +77,7 @@ public class MangoDB {
 	
 	
 	
-public static void createNewCollectionWithData(String dbName,String collectionToCreate,  String data, String key){
+public static void createNewDocument(String dbName,String collectionToCreate,  String data, String key){
 		
 		String httpsURL = "https://api.mlab.com/api/1/databases/"+dbName+"/collections/"+collectionToCreate+"?apiKey="+key;
 		

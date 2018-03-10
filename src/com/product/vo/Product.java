@@ -8,6 +8,7 @@ public class Product {
 	private String type;
 	private int price;
 	private String offer = null;
+	private int qty;
 	private String productStatus = "Active";//Active //Out of stock // discontinued
 	public String get_id() {
 		return _id;
@@ -57,6 +58,12 @@ public class Product {
 	}
 	public void setInt_id(int int_id) {
 		this.int_id = int_id;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 
 }

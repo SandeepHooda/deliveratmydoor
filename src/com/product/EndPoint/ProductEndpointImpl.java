@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import com.product.Facade.ProductFacade;
 import com.product.exception.PasswordMismatch;
 import com.product.vo.Customer;
+import com.product.vo.Order;
 import com.product.vo.Product;
 
 
@@ -15,6 +16,15 @@ import com.product.vo.Product;
 public class ProductEndpointImpl implements ProductEndpoint {
 	private ProductFacade facade;
 
+	@Override
+	public Response submitCartOrder( String shopID, Order order){
+		try{
+			
+			return Response.ok().entity(facade.processOrder(shopID, order)).build();
+		}catch(Exception e){
+			return Response.serverError().entity("Internal Server error").build();
+		}
+	}
 	@Override
 	public Response getAllProducts(String shopID) {
 		

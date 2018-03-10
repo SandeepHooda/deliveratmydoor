@@ -89,15 +89,15 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 		});
 	}
 	$scope.deleteCustomer = function(index){
-		let cusID = $scope.myData.customerList[index].cusID;
+	var customerID = $scope.myData.customerList[index].cusID;
 		var confirmPopup = $ionicPopup.confirm({
-		     title: 'Delete Customer ID '+cusID,
+		     title: 'Delete Customer ID '+customerID,
 		     template: 'Are you sure you want to remove customer from records?'
 		   });
 		 confirmPopup.then(function(res) {
 			 if (res){
 				 $scope.showBusy();
-				 $http.delete(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/customers/id/'+cusID, )
+				 $http.delete(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/customers/id/'+customerID )
 			  		.then(function(response){
 			  			 $scope.hideBusy();
 			  			$scope.myData.customerList = response.data.customerList;
