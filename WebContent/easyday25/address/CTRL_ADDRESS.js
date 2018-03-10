@@ -22,8 +22,6 @@ APP.CONTROLLERS.controller ('CTRL_ADDRESS',['$scope','dataRestore','$ionicPopup'
 					   }
 				   }
 				  
-			   }else {
-				   console.log(" ignore "+$scope.deleteIndex)
 			   }
 		     
 		   });
