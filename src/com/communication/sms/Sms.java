@@ -32,7 +32,7 @@ public class Sms {
 	private static FetchOptions lFetchOptions = FetchOptions.Builder.doNotValidateCertificate().setDeadline(300d);
 	private static URLFetchService fetcher = URLFetchServiceFactory.getURLFetchService();
 	
-	public static String sendSMS(String sender, String text, List<String> phoneNos) throws UnsupportedEncodingException{
+	public static String sendSMSbulksmsgateway(String sender, String text, List<String> phoneNos) throws UnsupportedEncodingException{
 		StringBuilder sb = new StringBuilder();
 		for (String phone: phoneNos){
 			sb.append(","+phone);
@@ -63,40 +63,9 @@ public class Sms {
 			
 	}
 	
-	public static String sendSMSOld(String sender, String text, List<String> phoneNos){
-		log.info(" Sending SMS");
-		RestAPI api = new RestAPI(auth_id, auth_token, "v1");
-		StringBuilder sb = new StringBuilder();
-		for (String phone: phoneNos){
-			sb.append("<91"+phone);
-		}
-		String receivers = sb.toString();
-		receivers = receivers.substring(1);
-		LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
-        parameters.put("src", "9216411835"); // Alphanumeric Sender ID
-        parameters.put("dst", receivers); // Receiver's phone number with country code
-        parameters.put("text", text); // Your SMS text message
-        try {
-            // Send the messages
-            MessageResponse msgResponse = api.sendMessage(parameters);
-            if (msgResponse.serverCode == 202){
-            	log.info(" SMS Sent");
-            	return "200";
-            }else {
-            	 log.warning("Error while sending SMS : "+msgResponse.toString());
-            	 return msgResponse.toString();
-            }
-           
-        } catch (PlivoException e) {
-        	e.printStackTrace();
-            System.out.println(e.getLocalizedMessage());
-            log.warning("Error while sending SMS : "+e.getLocalizedMessage());
-            return e.getLocalizedMessage();
-        }
-        
-	}
 	
-	public static String sendSMSplivo(String sender, String text, List<String> phoneNos){
+	
+	public static String sendSMS(String sender, String text, List<String> phoneNos){
 		StringBuilder sb = new StringBuilder();
 		for (String phone: phoneNos){
 			sb.append("<91"+phone);
