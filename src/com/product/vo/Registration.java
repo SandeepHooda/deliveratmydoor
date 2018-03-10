@@ -5,14 +5,16 @@ public class Registration {
 	private String shopName;
 	private String smsSenderID;
 	private String shopEmail;
+	private String shopEmailFrom;
 	private String shopPhoneNo;
-	public Registration(String shopName, String smsSenderID, String shopEmail, String shopPhoneNo){
+	public Registration(String shopName, String smsSenderID, String shopEmail, String shopEmailFrom,  String shopPhoneNo){
 		this.shopName = shopName;
 		if (smsSenderID.length() > 11){
 			smsSenderID = smsSenderID.substring(0, 11);
 		}
 		this.smsSenderID = smsSenderID;
 		this.shopEmail = shopEmail;
+		this.shopEmailFrom = shopEmailFrom;
 		this.shopPhoneNo = shopPhoneNo;
 	}
 	public String getShopName() {
@@ -38,5 +40,11 @@ public class Registration {
 	}
 	public void setShopPhoneNo(String shopPhoneNo) {
 		this.shopPhoneNo = shopPhoneNo;
+	}
+	public String getShopEmailFrom() {
+		return shopEmailFrom;
+	}
+	public void setShopEmailFrom(String shopEmailFrom) {
+		this.shopEmailFrom = shopEmailFrom;
 	}
 }

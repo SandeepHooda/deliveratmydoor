@@ -55,7 +55,10 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 			
 		});
 	}
-	$scope.sendSMS =  function(){
+	$scope.whatsApp = function(phoneNo){
+		window.open("https://api.whatsapp.com/send?phone=91"+phoneNo+"&text="+encodeURIComponent($scope.myData.MessageToCustomers),"_blank");
+	}
+	$scope.sendMessage =  function(mode){
 		 
 		if(!$scope.myData.MessageToCustomers){
 			var confirmPopup = $ionicPopup.confirm({
@@ -67,12 +70,12 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 			return;
 		}
 		$scope.showBusy();
-		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/message/'+$scope.myData.MessageToCustomers)
+		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/mode/'+mode+'/message/'+$scope.myData.MessageToCustomers)
   		.then(function(response){
   			 $scope.hideBusy();
   			
   			var confirmPopup = $ionicPopup.confirm({
-			     title: 'SMS Sent ',
+			     title: 'Message Sent ',
 			     template: 'Your message is on its way to customers!'
 			   });
 			 confirmPopup.then(function(res) {

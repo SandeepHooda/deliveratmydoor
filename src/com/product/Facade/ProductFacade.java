@@ -1,12 +1,15 @@
 package com.product.Facade;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import com.communication.email.MailService;
 import com.communication.sms.Sms;
 import com.product.Response.CommunicationResponse;
 import com.product.Response.CustomerResponse;
@@ -22,12 +25,12 @@ import com.product.vo.ProductComparator;
 import com.product.vo.Registration;
 
 public class ProductFacade {
-	
+	private static final Logger log = Logger.getLogger(ProductFacade.class.getName());
 	private ProductService service;
 	private static Map<String, Registration> shopRegistration = new HashMap<String, Registration>();
 	static {
 		
-		shopRegistration.put("1519981368108", new Registration("easy-day-products", "EasyDay25", "sonu.hooda@gmail.com", "9216411835"));
+		shopRegistration.put("1519981368108", new Registration("easy-day-products", "EasyDay25@gmail.com" , "EasyDay25", "sonu.hooda@gmail.com", "9216411835"));
 	}
 
 	public ProductResponse getAllProducts(String shopID) {
@@ -80,18 +83,47 @@ public class ProductFacade {
 		return response;
 	}
 	
-	public CommunicationResponse sendSMS(String shopID, String text) throws SMSNotSent{
+	public CommunicationResponse sendSMS(String shopID, String text) throws SMSNotSent, UnsupportedEncodingException{
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID).getShopName());
 		List<String> phoneNos = new ArrayList<String>();
 		for (Customer cust: customerList){
 			phoneNos.add(cust.getPhone());
 		}
-		if (200 == Sms.sendSMS(shopRegistration.get(shopID).getSmsSenderID(), text, phoneNos)){
+		String response = Sms.sendSMS(shopRegistration.get(shopID).getSmsSenderID(), text, phoneNos);
+		if ("202".equals(response)){
 			communicationResponse.setMessage("SUCCESS");
 		}else {
-			throw new SMSNotSent("");
+			throw new SMSNotSent(response);
 		}
+			
+		
+		return communicationResponse;
+		
+	}
+	
+	public CommunicationResponse sendEmail(String shopID, String text) throws SMSNotSent, UnsupportedEncodingException{
+		log.info("Sending email to registered customers");
+		
+		CommunicationResponse communicationResponse = new CommunicationResponse();
+		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID).getShopName());
+		List<String> emails = new ArrayList<String>();
+		for (Customer cust: customerList){
+			if (null != cust.getEmail() && cust.getEmail().length()> 10){
+				emails.add(cust.getEmail());
+			}
+			
+		}
+		String from = shopRegistration.get(shopID).getShopEmail();
+		for (String toAddress: emails){
+			new  MailService().sendSimpleMail(toAddress,from , from,text);
+		}
+		
+		
+		communicationResponse.setMessage("SUCCESS");
+		
+			
+		
 		return communicationResponse;
 		
 	}

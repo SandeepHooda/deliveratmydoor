@@ -85,12 +85,18 @@ public class ProductEndpointImpl implements ProductEndpoint {
 			return Response.serverError().entity("Internal Server error").build();
 		}
 	}
+	
 
-	public Response sendSMS( String shopID, String text){
+	public Response sendSMS( String shopID, String mode ,String text){
 		try{
-			return Response.ok().entity(facade.sendSMS(shopID, text)).build();
+			if ("SMS".equalsIgnoreCase(mode)){
+				return Response.ok().entity(facade.sendSMS(shopID, text)).build();
+			}else {
+				return Response.ok().entity(facade.sendEmail(shopID, text)).build();
+			}
+			
 		}catch(Exception e){
-			return Response.serverError().entity("Internal Server error").build();
+			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
 	public ProductFacade getFacade() {

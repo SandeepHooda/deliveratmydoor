@@ -49,8 +49,10 @@ public interface ProductEndpoint {
 	public Response deleteCustomer(@PathParam("shopID") String shopID, @PathParam("id") int id);
 	
 	@GET
-	@Path("/shopID/{shopID}/message/{text}")
+	@Path("/shopID/{shopID}/mode/{mode}/message/{text}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response sendSMS(@PathParam("shopID") String shopID, @PathParam("text") String text);
+	public Response sendSMS(@PathParam("shopID") String shopID, @PathParam("mode") String mode, @PathParam("text") String text);
+	
+	
 
 }
