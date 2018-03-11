@@ -94,50 +94,7 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 		  };
 	  
 	  
-		  paypal.Button.render({
-		      env: 'production', // 'production' Or 'sandbox',
-		      client: {
-		            sandbox:    'AZpyQraYf3wFO-NRH3PEUAnbPdGFk_n-7xfXdg82blTjVxuemvq_HHpMcCFRBX9iiKCk1IffbQZDlKBt',
-		            production: 'ATVlvcSOypsBkfgfPWbPaWgkqUYVBXvz5Qn1LLOT1oudXHGootEX-8Z4j9QzRWYljtMLCxTL04yRtZkq'
-		        },
-		      commit: true, // Show a 'Pay Now' button
-
-		      style: {
-		        color: 'gold',
-		        size: 'small'
-		      },
-
-		      payment: function(data, actions) {
-		            return actions.payment.create({
-		                payment: {
-		                    transactions: [
-		                        {
-		                            amount: { total: '1.00', currency: 'INR' }
-		                        }
-		                    ]
-		                }
-		            });
-		        },
-
-		      onAuthorize: function(data, actions) {
-		    	  return actions.payment.execute().then(function(payment) {
-
-		                alert('Payment done');
-		            });
-		      },
-
-		      onCancel: function(data, actions) {
-		        /* 
-		         * Buyer cancelled the payment 
-		         */
-		      },
-
-		      onError: function(err) {
-		        /* 
-		         * An error occurred during the transaction 
-		         */
-		      }
-		    }, '#paypal-button');
+		 
 	  
 	
 }])
