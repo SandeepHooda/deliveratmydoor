@@ -9,13 +9,17 @@
 
 	<ion-list >
 	  <ion-list-header>
+	  <h3>
 	  	<span class="whitecolor">
 	    	Swipe left to delete: 
 	    </span>
+	    </h3>
 	  </ion-list-header>
 	  
 	  <ion-item ng-repeat="address in myData.savedAddress track by $index" on-swipe-left="deleteAddress({{$index}})">
+	  <div class="productDesc">
 	  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
+	   </div>
 	  </ion-item>
 	  
 	</ion-list>
@@ -27,12 +31,14 @@
 	
 	
 	<!-- New Address -->
+	<h3>
 	 <span class="whitecolor">
 	 <div align="left">
 	 		<span>Add a new address</span><br/>
 		   <span>Fields with "*" are mandatory</span>
 	</div>
 	</span>
+	</h3>
 	
 		
  		<!-- New address -->
@@ -60,7 +66,7 @@
 		
 		 
 		 <div  align="center">
-			 <button class="button button-positive order-button" ng-click="saveAddress()"> Save Address
+			 <button class="button button-balanced order-button" ng-click="saveAddress()"> Save Address
 			 <i class="icon ion-android-add-circle"></i>
 			</button>
 		 </div>

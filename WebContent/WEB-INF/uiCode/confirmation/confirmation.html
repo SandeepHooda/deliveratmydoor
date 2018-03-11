@@ -15,10 +15,14 @@
 			  <span class="whitecolor">
 			  <!-- Review and submit orde -->
 			  <hr  style="width: 100%;" color="white"/>
-			    Please review your order and hit "Submit Order" button 
+			  	<h3>
+			  		<span class="whitecolor">
+			    	Please review your order and hit "Submit Order" button 
+			    	</span>
+			    </h3>
 			    <div style="display: inline;float:right">
 					 <button class="button button-balanced order-button" ng-click="submitOrder()"> Submit Order 
-					 <i class="icon icon ion-cash"></i>
+					 <i class="icon ion-paper-airplane"></i>
 					</button>
 				 </div>
 			    <hr  style="width: 100%;" color="white"/>
@@ -26,8 +30,10 @@
 			   
 			  </ion-list-header>
 			  <ion-item >
+			  	<div class="productDesc">
 			  	{{deliveryAddressForRecentOrder.fName}} {{deliveryAddressForRecentOrder.lName}} , {{deliveryAddressForRecentOrder.address}}, 
 			  	{{deliveryAddressForRecentOrder.phone}}, {{deliveryAddressForRecentOrder.instructions}}
+			  	</div>
 			  </ion-item>
 		</ion-list>
 	</div>
@@ -45,7 +51,7 @@
 <hr  style="width: 100%;" color="#577876"/>
 	 <div style="display: inline;float:right">
 		 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
-		 <i class="icon icon ion-cash"></i>
+		 <i class="icon ion-paper-airplane"></i>
 		</button>
 	 </div>
 	

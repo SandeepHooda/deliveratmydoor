@@ -75,7 +75,7 @@ public class ProductFacade {
 		String encodedBody = new String(bytesEncoded);
 		log.info("Creating HTML body "  );
 		String orderLink = "https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"&orderNO="+order.get_id();
-		String orderWhataApp = "https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"%26orderNO="+order.get_id();
+		String orderWhataApp = "https://deliveratmydoor.appspot.com/OrderDetails?shopID%3D"+shopID+"%26orderNO%3D"+order.get_id();
 		//1. Send email to shop
 		log.info("Sending email "  );
 			boolean emailSent = new  MailService().sendSimpleMail(shopEmail,fromLabel, "Customer order" ,"Please work on this order \n "+orderLink, "Order.html", encodedBody);

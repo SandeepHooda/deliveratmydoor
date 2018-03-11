@@ -3,69 +3,90 @@
       <h1 class="title">check out</h1>
     </ion-header-bar>
  <ion-content class="padding">
- 
-	<div  align="right">
-			 <button class="button button-balanced order-button" ng-click="$ctrl.submitOrder()"> Deliver to Selected address
-			 <i class="icon ion-paper-airplane"></i>
-			</button>
-	</div>
-	<div ng-if="savedAddress && savedAddress.length > 0">
-	<ion-list radio-group>
-	  <ion-list-header>
-	  <span class="whitecolor">
-	    Saved address: 
-	    </span>
-	  </ion-list-header>
-	  <ion-item ng-repeat="address in savedAddress track by $index">
-	  		<input type="radio" name="{{address.id}}" ng-model="$ctrl.defaultAddress"  
-	  		ng-value="{{address.id}}" ng-change="$ctrl.updateDefaultAddress({{address.id}})" style=" width: 20px; height: 20px;">
-	  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
-	  		 </input>
-	  		
-	  </ion-item>
-	  
-	</ion-list>
-	<hr width="100%" color="white"/>
-	</div>
-	
- <!-- New Address -->
-	 <span class="whitecolor">
-	 <div align="left">
-	 		<span>Add a new address</span><br/>
-		   <span>Fields with "*" are mandatory</span>
-	</div>
-	</span>
-	
+
+	<div ng-if="mydata.useExistingAddress">
+		<div ng-show="savedAddress && savedAddress.length > 0">
 		
- 		<!-- New address -->
-		<div class="list">
-		  <label class="item item-input">
-		    <input type="text" placeholder="First Name *" ng-model="$ctrl.fName">
-		  </label>
-		  <label class="item item-input"> 
-		    <input type="text" placeholder="Last Name *" ng-model="$ctrl.lName">
-		  </label>
-		  <label class="item item-input">
-		    <textarea placeholder="Address *" ng-model="$ctrl.address"></textarea>
-		  </label>
-		  <label class="item item-input">
-		    <input type="text" placeholder="Phone *" ng-model="$ctrl.phone">
-		  </label>
-		  <label class="item item-input">
-		    <input type="text" placeholder="Email" ng-model="$ctrl.email">
-		  </label>
-		  <label class="item item-input">
-		    <input type="text" placeholder="Delivery instructions" ng-model="$ctrl.instructions">
-		  </label>
+		<ion-list radio-group>
+		  <ion-list-header>
+		  	<h3>
+			  <span class="whitecolor">
+			  	 Saved address: 
+			    </span>
+		    </h3>
+		  </ion-list-header>
+		  <ion-item ng-repeat="address in savedAddress track by $index">
+		  <div class="productDesc">
+		  
+		  		<input type="radio" name="{{address.id}}" ng-model="$ctrl.defaultAddress"  
+		  		ng-value="{{address.id}}" ng-change="$ctrl.updateDefaultAddress({{address.id}})" style=" width: 20px; height: 20px;">
+		  		 {{address.fName}} {{address.lName}}, {{address.address}}, {{address.phone}}
+		  		 </input>
+		  	</div>	
+		  </ion-item>
+		  
+		</ion-list>
+		<div  class="smartAlign" style="padding-top: 10px; padding-bottom: 10px;">
+				 <button class="button button-balanced order-button" ng-click="$ctrl.submitOrder()"> Use the selected address
+				 <i class="icon ion-checkmark-round"></i>
+				</button>
+		</div>
+		<hr width="100%" color="white"/>
 		</div>
 		
+		<div  class="smartAlign" style="padding-top: 10px; padding-bottom: 10px;">
+				 <button class="button button-stable" ng-click="$ctrl.useNewAddress()"> Use new address
+				 <i class="icon ion-plus"></i>
+				</button>
+		</div>
+	</div>
+ 
+	
 		
-		 
-		 <div  align="center">
-			 <button class="button button-balanced order-button" ng-click="saveAddressAndPlaceOrder()"> Save Address and Deliver
-			 <i class="icon ion-paper-airplane"></i>
-			</button>
-		 </div>
-
+		<div ng-if="!mydata.useExistingAddress">
+		
+				<!-- New Address -->
+				<h3>
+					 <span class="whitecolor">
+					 <div align="left">
+					 	   <span>Fields with "*" are mandatory</span>
+					</div>
+					</span>
+				</h3>
+	 		<!-- New address -->
+			<div class="list">
+			  <label class="item item-input">
+			    <input type="text" placeholder="First Name *" ng-model="$ctrl.fName">
+			  </label>
+			  <label class="item item-input"> 
+			    <input type="text" placeholder="Last Name *" ng-model="$ctrl.lName">
+			  </label>
+			  <label class="item item-input">
+			    <textarea placeholder="Address *" ng-model="$ctrl.address"></textarea>
+			  </label>
+			  <label class="item item-input">
+			    <input type="text" placeholder="Phone *" ng-model="$ctrl.phone">
+			  </label>
+			  <label class="item item-input">
+			    <input type="text" placeholder="Email" ng-model="$ctrl.email">
+			  </label>
+			  <label class="item item-input">
+			    <input type="text" placeholder="Delivery instructions" ng-model="$ctrl.instructions">
+			  </label>
+			</div>
+			
+			
+			 
+			 <div  align="center">
+			 	<div ng-show="savedAddress && savedAddress.length > 0" style="display: inline;padding-right: 10px;">
+				 	<button class="button button-stable" ng-click="$ctrl.useNewAddress()"> Go Back
+					 <i class="icon ion-backspace-outline"></i>
+					</button>
+				</div>
+				 <button class="button button-balanced order-button" ng-click="saveAddressAndPlaceOrder()"> Use this address
+				 <i class="icon ion-checkmark-round"></i>
+				</button>
+			 </div>
+		</div>
  </ion-content>
 </ion-view>

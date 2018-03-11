@@ -1,5 +1,5 @@
-APP.CONTROLLERS.controller ('PostCard',['$scope',
-    function($scope ){
+APP.CONTROLLERS.controller ('PostCard',['$scope', '$ionicLoading',
+    function($scope, $ionicLoading ){
 	$scope.numberPickerObject = {
 		    inputValue: 1, //Optional
 		    minValue: 1,
@@ -8,10 +8,10 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    decimalStep: 0.25,  //Optional
 		    format: "WHOLE",  //Optional - "WHOLE" or "DECIMAL"
 		    unit: "",  //Optional - "m", "kg", "℃" or whatever you want
-		    titleLabel: 'Quantity',  //Optional
+		    titleLabel: 'Select Quantity',  //Optional
 		    setLabel: 'Add',  //Optional
 		    closeLabel: 'Cancel',  //Optional
-		    setButtonType: 'button-positive',  //Optional
+		    setButtonType: 'button-balanced',  //Optional
 		    closeButtonType: 'button-stable',  //Optional
 		    callback: function (val) {    //Mandatory
 		    	$scope.addCartCallback(val, $scope);
@@ -25,10 +25,10 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 		    decimalStep: 0.25,  //Optional
 		    format: "WHOLE",  //Optional - "WHOLE" or "DECIMAL"
 		    unit: "",  //Optional - "m", "kg", "℃" or whatever you want
-		    titleLabel: 'Quantity',  //Optional
+		    titleLabel: 'Update Quantity',  //Optional
 		    setLabel: 'Update',  //Optional
 		    closeLabel: 'Remove',  //Optional
-		    setButtonType: 'button-positive',  //Optional
+		    setButtonType: 'button-balanced',  //Optional
 		    closeButtonType: 'button-stable icon ion-trash-b',  //Optional
 		    callback: function (val) {    //Mandatory
 		    	$scope.updateCartCallBack(val, $scope);
@@ -38,6 +38,10 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 	$scope.addCartCallback = function(val, $scope){
 		if (val && val > 0){
 			$scope.$emit('addToCart', $scope.productInfo, val);
+			$ionicLoading.show({
+			      template: 'Item added to cart',
+			      duration: 2000
+			    })
 		}
 	}
 	
@@ -46,6 +50,10 @@ APP.CONTROLLERS.controller ('PostCard',['$scope',
 			val = 0;//Remove from cart
 		}
 		$scope.numberPickerUpdateObject.inputValue = val;
+		 $ionicLoading.show({
+		      template: 'Cart updated',
+		      duration: 2000
+		    })
 		$scope.$emit('updateCart', $scope.productInfo, val);
 	}
 

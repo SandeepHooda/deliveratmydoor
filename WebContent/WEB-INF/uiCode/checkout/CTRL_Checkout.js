@@ -5,6 +5,7 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 	$scope.cartTotalRs = 0;
 	$scope.mydata = {};
 	$scope.savedAddress = [];
+	$scope.mydata.useExistingAddress = true;
 	
 	$scope.showMenu = function () {
 	    $ionicSideMenuDelegate.toggleLeft();
@@ -19,7 +20,9 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  $scope.countOfTotalCartItems =  countOfTotalCartItems;
 	  });
 	  
-	  
+	  theCtrl.useNewAddress = function(){
+		 $scope.mydata.useExistingAddress = !$scope.mydata.useExistingAddress; 
+	  }
 	  
 	  $scope.showCartItems = function(){
 		  $state.transitionTo('menu.tab.cart');
@@ -103,6 +106,8 @@ APP.CONTROLLERS.controller ('CTRL_CheckOut',['$scope','dataRestore','$ionicPlatf
 		  if (!weHaveDefaultAddressOnFile && $scope.savedAddress.length >0 ){
 			  theCtrl.defaultAddress = $scope.savedAddress[0].id
 		  }
+	  }else {
+		  $scope.mydata.useExistingAddress = false;
 	  }
 	  
 	  //$scope.savedAddress_STR = JSON.stringify($scope.savedAddress);

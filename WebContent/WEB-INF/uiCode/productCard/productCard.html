@@ -13,7 +13,7 @@
 				<div class="cartButton" >
 					<span class="cartButton">Qty: {{productInfo.qty}} Update </span>
 			    	<ionic-numberpicker input-obj="numberPickerUpdateObject">
-			     		<button class="button button-positive order-button">
+			     		<button class="button button-balanced order-button"> Edit
 			        	<i class="icon ion-edit"></i>
 			      		</button>
 			    	</ionic-numberpicker>&nbsp;
@@ -23,9 +23,10 @@
 			<!--  Show add to cart button -->
 			<div ng-switch-default>
 				<div class="cartButton" >
-					<span class="cartButton">Add to cart</span>
+					<span class="cartButton"></span>
 			    	<ionic-numberpicker input-obj="numberPickerObject">
-			     		<button class="button button-positive order-button">
+			     		<button class="button button-balanced order-button">
+			     		Add to cart
 			        	<i class="ion-android-add-circle"></i>
 			      		</button>
 			    	</ionic-numberpicker>&nbsp;

@@ -357,8 +357,23 @@ div.cartIcon { float:right; padding-bottom: 10px; }
 div.productContainer {  width: 33%;float:left;padding-left: 0px;}
 div.cartButton { padding-top: 30px;}
 span.cartButton { padding-right: 25px;}
+
+div.smartAlign {
+	display: inline;
+	float : right;
+}
 @media (max-width: 730px) {
+div.smartAlign {
+	display: inline;
+	float : left;
+	padding-left: 20%;
+}
+
 span.cartButton {  display: none;}
-div.cartButton { padding-top: 10px;padding-left: 190px;}
+div.cartButton { 
+	padding-top: 10px;
+	padding-right: 10px;
+   float: right
+   }
 div.productContainer { width: 100%;}
  }
