@@ -74,7 +74,7 @@ public class ProductFacade {
 			boolean emailSent = new  MailService().sendMultipartMail(shopEmail,null,fromLabel,null, "Customer order" ,body);
 			communicationResponse.setEmailSent(emailSent);
 			String customerEmail = order.getCustomer().getEmail();
-			log.info("Email sent to shop "  );
+			log.info("Email sent to shop " + emailSent);
 		//2. Send confirmation email to customer
 			try{
 				if (null != customerEmail && customerEmail.length()> 10){

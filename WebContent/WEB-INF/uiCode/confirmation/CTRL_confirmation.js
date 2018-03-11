@@ -53,7 +53,14 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 				  		.then(function(response){
 				  			 $scope.hideBusy();
 				  			if (!response.data.emailSent){
-				  				window.open(response.data.message, "_blank");
+				  				var confirmPopup = $ionicPopup.confirm({
+								     title: 'Please send whats app message to shop.',
+								     template: 'Do you wish you send whats app message detailing your order to shop?'
+								   });
+								 confirmPopup.then(function(res) {
+									  window.open(response.data.message, "_blank");
+									 $scope.clearCart();
+								  });
 				  			}else {
 				  				var confirmPopup = $ionicPopup.confirm({
 								     title: 'We are working on your order right now.',
