@@ -84,7 +84,10 @@ module.exports = function (grunt) {
                     from: /js\/templates.js/g,
                     to: 'js/<%= curretDate %>templates.js'
                 },
-				
+				{  // replacing ba.css with main minified file
+                    from: /style.css/g,
+                    to: 'style<%= curretDate %>.min.css'
+                },
 				{  // replacing print.css with main minified file
                     from: /print.css/g,
                     to: 'print<%= curretDate %>.min.css'
@@ -98,7 +101,7 @@ module.exports = function (grunt) {
                            // retunStr = '' ;
                         //}
 						
-						if(matchedWord.indexOf("checkout.js") == -1 && matchedWord.indexOf("shake.js") == -1 && matchedWord.indexOf('js/prod') == -1 && matchedWord.indexOf("cordova.js") == -1  && matchedWord.indexOf("lib/") == -1 && matchedWord.indexOf("templates.js") == -1 && matchedWord.indexOf("style.css") == -1 ){
+						if(matchedWord.indexOf("checkout.js") == -1 && matchedWord.indexOf("shake.js") == -1 && matchedWord.indexOf('js/prod') == -1 && matchedWord.indexOf("cordova.js") == -1  && matchedWord.indexOf("lib/") == -1 && matchedWord.indexOf("templates.js") == -1){
                             retunStr = '' ;
                         }
                         return retunStr;
@@ -133,8 +136,7 @@ module.exports = function (grunt) {
                     {expand: true,  cwd: '<%= js_src_path %>',src: "lib/**/*", dest: '<%= js_build_path %>/', filter: 'isFile'},
                     {expand: true,  cwd: '<%= js_src_path %>',src: "img/Easy-Day.jpg", dest: '<%= js_build_path %>/', filter: 'isFile'},
                     {expand: true,  cwd: '<%= js_src_path %>',src: "img/red.gif", dest: '<%= js_build_path %>/', filter: 'isFile'},
-                    {expand: true,  cwd: '<%= js_src_path %>',src: "lib/ionic/css/ionic.css", dest: '<%= js_build_path %>/', filter: 'isFile'},
-					{expand: true,  cwd: '<%= js_src_path %>',src: "css/style.css", dest: '<%= js_build_path %>/', filter: 'isFile'}
+                    {expand: true,  cwd: '<%= js_src_path %>',src: "lib/ionic/css/ionic.css", dest: '<%= js_build_path %>/', filter: 'isFile'}
                     
                 ]
             }
@@ -178,10 +180,10 @@ module.exports = function (grunt) {
 	
 	
 	//grunt.registerTask('default', ['sass','ngtemplates']); 'uglify',
-	grunt.registerTask('default', ['clean:cleanBefore','ngtemplates','concat', 'removelogging',  'copy','replace:replaceLocal','replace:debug', 'clean:cleanAfter']);
+	grunt.registerTask('default', ['clean:cleanBefore','ngtemplates','concat', 'removelogging', 'uglify','cssmin', 'copy','replace:replaceLocal','replace:debug', 'clean:cleanAfter']);
 	grunt.registerTask('ci', 'Run the CI build', function () {
 	       
-        grunt.task.run(['clean:cleanBefore','ngtemplates','concat' , 'removelogging',  'copy','replace:replaceLocal','replace:debug', 'clean:cleanAfter']);
+        grunt.task.run(['clean:cleanBefore','ngtemplates','concat' , 'removelogging', 'uglify', 'cssmin', 'copy','replace:replaceLocal','replace:debug', 'clean:cleanAfter']);
     });
 	  
 };

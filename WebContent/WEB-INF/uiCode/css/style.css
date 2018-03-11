@@ -55,7 +55,7 @@ $num-colors: 10;
 	
  -webkit-text-fill-color: transparent;
  background: -webkit-linear-gradient(transparent, transparent),
-             url(/easyday25/img/red.gif) repeat;
+             url(../img/red.gif) repeat;
  background: -o-linear-gradient(transparent, transparent);
  -webkit-background-clip: text;
 }
