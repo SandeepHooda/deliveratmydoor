@@ -3,12 +3,15 @@ package com.product.Facade;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import org.apache.commons.codec.binary.Base64;
 
 import com.communication.email.MailService;
 import com.communication.sms.Sms;
@@ -67,18 +70,23 @@ public class ProductFacade {
 		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
 		order.set_id(new Date().getTime());
 		String body = createOderHtml( order);
+		
+		byte[] bytesEncoded = Base64.encodeBase64(body.getBytes());
+		String encodedBody = new String(bytesEncoded);
 		log.info("Creating HTML body "  );
-		System.out.println(body);
+		String orderLink = "https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"&orderNO="+order.get_id();
+		String orderWhataApp = "https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"%26orderNO="+order.get_id();
 		//1. Send email to shop
 		log.info("Sending email "  );
-			boolean emailSent = new  MailService().sendMultipartMail(shopEmail,null,fromLabel,null, "Customer order" ,body);
+			boolean emailSent = new  MailService().sendSimpleMail(shopEmail,fromLabel, "Customer order" ,"Please work on this order \n "+orderLink, "Order.html", encodedBody);
 			communicationResponse.setEmailSent(emailSent);
 			String customerEmail = order.getCustomer().getEmail();
 			log.info("Email sent to shop " + emailSent);
 		//2. Send confirmation email to customer
 			try{
 				if (null != customerEmail && customerEmail.length()> 10){
-					new  MailService().sendMultipartMail(customerEmail,null,fromLabel,null, "Order Confirmation " ,body);
+					new  MailService().sendSimpleMail(customerEmail,fromLabel, "Order Confirmation " ,"Thanks for choosing us to serve you. We are working on your order. "
+							+ "Here is the copy of your order. \n\n  "+orderLink +" \n\n Kind Regards","Order.html", encodedBody);
 				}
 			}catch(Exception e){
 				log.warning("Could not send order confirmation to customer "+e.getLocalizedMessage());
@@ -104,7 +112,7 @@ public class ProductFacade {
 			log.info("Saving order in db "  );
 		service.saveOrder(shopRegistration.get(shopID).getShopName()+"-orders", order);
 		log.info("Saving order in db "  );
-		communicationResponse.setMessage("https://api.whatsapp.com/send?phone=917837025599&text=https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"%26orderNO="+order.get_id());
+		communicationResponse.setMessage("https://api.whatsapp.com/send?phone=917837025599&text="+orderWhataApp);
 		return communicationResponse;
 	}
 	public ProductResponse getAllProducts(String shopID) {
@@ -190,7 +198,7 @@ public class ProductFacade {
 		}
 		String from = shopRegistration.get(shopID).getShopEmailLabel();
 		for (String toAddress: emails){
-			new  MailService().sendSimpleMail(toAddress,from , from,text);
+			new  MailService().sendSimpleMail(toAddress,from , from,text, null, null);
 		}
 		
 		
