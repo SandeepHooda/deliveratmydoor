@@ -37,7 +37,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 
 	
 	  $scope.lauchBrowser = function(){
-		  window.open('https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home','_system');
+		  window.open('https://deliveratmydoor.appspot.com/easyday/index.html#/menu/tab/home','_system');
 	 }
 	  
 	  if (!$rootScope.refresh){
