@@ -6,6 +6,8 @@ package com.communication.email;
 // [START simple_includes]
 
 import java.util.Properties;
+import java.util.logging.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -25,11 +27,13 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 // [END multipart_includes]
 
+import com.product.Facade.ProductFacade;
+
 
 
 public class MailService {
-	
-	public void sendSimpleMail(String toAddress,  String from, String subject, String body) {
+	private static final Logger log = Logger.getLogger(ProductFacade.class.getName());
+	public boolean sendSimpleMail(String toAddress,  String from, String subject, String body) {
 	    
 	    Properties props = new Properties();
 	    Session session = Session.getDefaultInstance(props, null);
@@ -42,6 +46,7 @@ public class MailService {
 	      msg.setSubject(subject);
 	      msg.setText(body);
 	      Transport.send(msg);
+	      return true;
 	    } catch (AddressException e) {
 	      // ...
 	    } catch (MessagingException e) {
@@ -49,10 +54,13 @@ public class MailService {
 	    } catch (UnsupportedEncodingException e) {
 	      // ...
 	    }
+	    return false;
 	    // [END simple_example]
 	  }
 
-	  public void sendMultipartMail(String toAddress, String ccAddress,  String from, byte[] attachmentData, String subject, String body) {
+	  public boolean sendMultipartMail(String toAddress, String ccAddress,  String from, byte[] attachmentData, String subject, String body) {
+		  log.info("toAddress " +toAddress +" ccAddress "+" from "+from +" subject "+subject  );
+		  log.info(" body "+body  );
 	    Properties props = new Properties();
 	    Session session = Session.getDefaultInstance(props, null);
 
@@ -93,14 +101,22 @@ public class MailService {
 	      // [END multipart_example]
 
 	      Transport.send(msg);
-
+	      return true;
 	    } catch (AddressException e) {
-	      // ...
+	    	e.printStackTrace();
+		     log.warning(" Error "+e.getLocalizedMessage());
 	    } catch (MessagingException e) {
-	      // ...
+	    	e.printStackTrace();
+		     log.warning(" Error "+e.getLocalizedMessage());
 	    } catch (UnsupportedEncodingException e) {
-	      // ...
-	    }
+	    	e.printStackTrace();
+		     log.warning(" Error "+e.getLocalizedMessage());
+	    }catch (Exception e) {
+	    	e.printStackTrace();
+		     log.warning(" Error "+e.getLocalizedMessage());
+		    }
+	    
+	    return false;
 	  }
 	
 

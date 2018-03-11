@@ -61,15 +61,20 @@ public class ProductFacade {
 		return sb.toString();
 	}
 	public CommunicationResponse processOrder(String shopID ,  Order order) {
+		log.info("processOrder "  );
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		String shopEmail = shopRegistration.get(shopID).getShopEmail();
 		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
 		order.set_id(new Date().getTime());
 		String body = createOderHtml( order);
+		log.info("Creating HTML body "  );
 		System.out.println(body);
 		//1. Send email to shop
-			new  MailService().sendMultipartMail(shopEmail,null,fromLabel,null, "Customer order" ,body);
+		log.info("Sending email "  );
+			boolean emailSent = new  MailService().sendMultipartMail(shopEmail,null,fromLabel,null, "Customer order" ,body);
+			communicationResponse.setEmailSent(emailSent);
 			String customerEmail = order.getCustomer().getEmail();
+			log.info("Email sent to shop "  );
 		//2. Send confirmation email to customer
 			try{
 				if (null != customerEmail && customerEmail.length()> 10){
@@ -96,8 +101,9 @@ public class ProductFacade {
 			}
 		
 		// Save order in DB	
+			log.info("Saving order in db "  );
 		service.saveOrder(shopRegistration.get(shopID).getShopName()+"-orders", order);
-		
+		log.info("Saving order in db "  );
 		communicationResponse.setMessage("https://api.whatsapp.com/send?phone=917837025599&text=https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"%26orderNO="+order.get_id());
 		return communicationResponse;
 	}

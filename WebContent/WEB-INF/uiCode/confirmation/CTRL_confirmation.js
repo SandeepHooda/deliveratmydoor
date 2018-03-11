@@ -52,16 +52,21 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 				   $http.post(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/order',order , config)
 				  		.then(function(response){
 				  			 $scope.hideBusy();
-				  			var confirmPopup = $ionicPopup.confirm({
-							     title: 'We are working on your order right now.',
-							     template: 'Do you wish you send whats app message of your order to shop?'
-							   });
-							 confirmPopup.then(function(res) {
-								 if (res){
-									 window.open(response.data.message, "_blank");
-								 }
-								 $scope.clearCart();
-							  });
+				  			if (!response.data.emailSent){
+				  				window.open(response.data.message, "_blank");
+				  			}else {
+				  				var confirmPopup = $ionicPopup.confirm({
+								     title: 'We are working on your order right now.',
+								     template: 'Do you wish you send whats app message of your order to shop?'
+								   });
+								 confirmPopup.then(function(res) {
+									 if (res){
+										 window.open(response.data.message, "_blank");
+									 }
+									 $scope.clearCart();
+								  });
+				  			}
+				  			
 							
 						},
 						function(response){
