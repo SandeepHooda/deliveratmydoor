@@ -7,17 +7,23 @@
 
  <ion-content class="padding">
  <span class="whitecolor">
+ 
+ <div class="passwordButtonGroup">
+ 	<input  class="adminSmall" type="password" placeholder="Admin Password*" ng-model="myData.password">
+	
+ </div>
+ <hr width="99%"/>
 		 <div class="list">
 			<label class="item item-input">
 				<textarea placeholder="Message *" ng-model="myData.MessageToCustomers"></textarea>
 			</label>
 		 </div>	
 		 <div  align="center">
-			 <button class="button button-positive order-button" ng-click="sendMessage('SMS')"> Send SMS
+			 <button class="button button-positive order-button" ng-click="sendMessage('SMS')" ng-disabled="!myData.MessageToCustomers || !myData.password"> Send SMS
 			 <i class="icon ion-android-textsms"></i>
 			</button>
 			<div  style="padding-left: 20px;display: inline">
-			 <button class="button button-positive order-button" ng-click="sendMessage('Email')"> Send Email
+			 <button class="button button-positive order-button" ng-click="sendMessage('Email')" ng-disabled="!myData.MessageToCustomers || !myData.password"> Send Email
 			 <i class="icon ion-email"></i>
 			</button>
 			</div>
@@ -66,7 +72,7 @@
 		  <ion-item ng-repeat="customer in myData.customerList track by $index" on-swipe-left="deleteCustomer({{$index}})">
 		  		{{customer.cusID}}. {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}},{{customer.email}}
 		  		<div  style="float: right;display: inline" >
-					 <button ng-disabled="!myData.MessageToCustomers" class="button button-balanced order-button" ng-click="whatsApp({{customer.phone}})">
+					 <button ng-disabled="!myData.MessageToCustomers || !myData.password" class="button button-balanced order-button" ng-click="whatsApp({{customer.phone}})">
 					 <i class="icon ion-social-whatsapp"></i>
 					</button>
 				</div>

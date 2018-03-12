@@ -362,7 +362,17 @@ div.smartAlign {
 	display: inline;
 	float : right;
 }
+div.passwordButtonGroup {
+	display: inline;
+	float : left;
+	
+}
 @media (max-width: 730px) {
+div.passwordButtonGroup {
+	display: inline;
+	float : left;
+	padding-right: 20%;
+}
 div.smartAlign {
 	display: inline;
 	float : left;

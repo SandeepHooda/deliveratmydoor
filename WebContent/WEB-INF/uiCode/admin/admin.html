@@ -17,14 +17,22 @@
 			  </ion-list-header>
 			  
 			  <ion-item>
-			  	<div   style="display: inline;float: right;">
-				  	<input style="display: inline" class="adminDefault" type="password" placeholder="Old Password" ng-model="myData.passwordOld">
-				  	<input style="display: inline" class="adminDefault" type="password" placeholder="New Password" ng-model="myData.passwordNew">
-				  	<input style="display: inline" class="adminDefault" type="password" placeholder="Confirm" ng-model="myData.passwordConfirm">
-					 <button class="button button-balanced order-button" ng-click="$ctrl.updatePassword()"> Change password
+			  	<div   class="passwordButtonGroup">
+				  	<input  class="adminDefault" type="password" placeholder="Old Password" ng-model="myData.passwordOld">
+				 </div>
+				 <div   class="passwordButtonGroup">
+				  	<input  class="adminDefault" type="password" placeholder="New Password" ng-model="myData.passwordNew">
+				  </div>
+				  <div   class="passwordButtonGroup">
+				  	<input  class="adminDefault" type="password" placeholder="Confirm" ng-model="myData.passwordConfirm">
+				  </div>
+				  <div   class="passwordButtonGroup">
+				  	 <button class="button button-balanced order-button" ng-click="$ctrl.updatePassword()" 
+				  	      ng-disabled="!myData.passwordOld || !myData.passwordNew || !myData.passwordConfirm"> Change password
 					 <i class="icon ion-thumbsup"></i>
 					</button>
-				</div>
+				  </div>
+				
 			  </ion-item>
 		</ion-list>
 	 </span>
@@ -66,13 +74,20 @@
 					</button>
 				  </span>
 				  <div   style="display: inline;float: right;">
-				  	<button class="button button-positive order-button" ng-click="$ctrl.addProducts(10)">  
-					 <i class="icon ion-plus"></i> 10
+				  <span style="padding-left: 5px;">
+				   <button class="button button-positive order-button" ng-click="$ctrl.addProducts(10)">  
+					 <i class="icon ion-plus"></i> Add 10 new products
 					</button>
-				  	<input style="display: inline" class="adminSmall" type="password" placeholder="Password" ng-model="myData.password">
-					 <button class="button button-balanced order-button" ng-click="$ctrl.updateProducts()"> Update products
-					 <i class="icon ion-thumbsup"></i>
-					</button>
+				  </span>
+				  	
+					<div   class="passwordButtonGroup">
+				  		<input  class="adminSmall" type="password" placeholder="Password" ng-model="myData.password">
+				  	</div>
+				  	<div   class="passwordButtonGroup">
+						 <button class="button button-balanced order-button" ng-click="$ctrl.updateProducts()" ng-disabled="!myData.password"> Update products
+						 <i class="icon ion-thumbsup"></i>
+						</button>
+					</div>
 				</div>
 				  
 			  </ion-item>
@@ -124,7 +139,7 @@
 			  	<div class="adminRight">
 			  		<img ng-show="product.image"  style="display: inline"   src="{{product.image}}"  class="imageSize" BORDER="0"/>
 			  		 
-			  		 <div  style="display: inline" >
+			  		 <div  class="smartAlign">
 						 <button class="button button-balanced order-button" ng-click="$ctrl.scrollTop()"> Top
 						 <i class="icon ion-arrow-up-c"></i>
 						</button>

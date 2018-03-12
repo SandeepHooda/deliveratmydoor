@@ -21,7 +21,7 @@
 			    	</span>
 			    </h3>
 			    <div style="display: inline;float:right">
-					 <button class="button button-balanced order-button" ng-click="submitOrder()"> Submit Order 
+					 <button class="button button-balanced order-button" ng-click="submitOrder()" ng-disabled="myData.orderSubmitted"> Submit Order 
 					 <i class="icon ion-paper-airplane"></i>
 					</button>
 				 </div>
@@ -50,7 +50,7 @@
 <!--  Check out button -->
 <hr  style="width: 100%;" color="#577876"/>
 	 <div style="display: inline;float:right">
-		 <button class="button button-balanced order-button" ng-click="submit()"> Submit Order 
+		 <button class="button button-balanced order-button" ng-click="submitOrder()" ng-disabled="myData.orderSubmitted"> Submit Order 
 		 <i class="icon ion-paper-airplane"></i>
 		</button>
 	 </div>

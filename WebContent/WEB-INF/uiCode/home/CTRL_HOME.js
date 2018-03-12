@@ -209,7 +209,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  $scope.showBusy = function() {
 		    $ionicLoading.show({
 		      template: 'Please wait...',
-		      duration: 3000
+		      duration: 60000
 		    }).then(function(){
 		       console.log("The loading indicator is now displayed");
 		    });

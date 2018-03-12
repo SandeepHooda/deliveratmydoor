@@ -70,7 +70,7 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 			return;
 		}
 		$scope.showBusy();
-		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/mode/'+mode+'/message/'+$scope.myData.MessageToCustomers)
+		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/password/'+$scope.myData.password+'/mode/'+mode+'/message/'+$scope.myData.MessageToCustomers)
   		.then(function(response){
   			 $scope.hideBusy();
   			

@@ -40,7 +40,7 @@ APP.CONTROLLERS.controller ('PostCard',['$scope', '$ionicLoading',
 			$scope.$emit('addToCart', $scope.productInfo, val);
 			$ionicLoading.show({
 			      template: 'Item added to cart',
-			      duration: 2000
+			      duration: 1100
 			    })
 		}
 	}
@@ -52,7 +52,7 @@ APP.CONTROLLERS.controller ('PostCard',['$scope', '$ionicLoading',
 		$scope.numberPickerUpdateObject.inputValue = val;
 		 $ionicLoading.show({
 		      template: 'Cart updated',
-		      duration: 2000
+		      duration: 1100
 		    })
 		$scope.$emit('updateCart', $scope.productInfo, val);
 	}

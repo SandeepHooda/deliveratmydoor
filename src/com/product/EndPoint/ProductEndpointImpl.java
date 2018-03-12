@@ -96,16 +96,20 @@ public class ProductEndpointImpl implements ProductEndpoint {
 		}
 	}
 	
-
-	public Response sendSMS( String shopID, String mode ,String text){
+	@Override
+	public Response sendMessage( String shopID, String password,String mode ,String text){
 		try{
 			if ("SMS".equalsIgnoreCase(mode)){
-				return Response.ok().entity(facade.sendSMS(shopID, text)).build();
+				return Response.ok().entity(facade.sendSMS(shopID,password, text)).build();
 			}else {
-				return Response.ok().entity(facade.sendEmail(shopID, text)).build();
+				return Response.ok().entity(facade.sendEmail(shopID,password, text)).build();
 			}
 			
-		}catch(Exception e){
+		}catch(PasswordMismatch e){
+			return Response.status(Response.Status.FORBIDDEN).entity("{\"Invalid Password\":\"\"}").build();
+			
+		}
+		catch(Exception e){
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}

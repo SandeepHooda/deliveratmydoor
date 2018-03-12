@@ -165,7 +165,10 @@ public class ProductFacade {
 		return response;
 	}
 	
-	public CommunicationResponse sendSMS(String shopID, String text) throws SMSNotSent, UnsupportedEncodingException{
+	public CommunicationResponse sendSMS(String shopID, String password, String text) throws SMSNotSent, UnsupportedEncodingException, PasswordMismatch{
+		if (!service.getPassword(shopRegistration.get(shopID).getShopName()).equals(password)){
+			throw new PasswordMismatch("Please enter a valid password");
+		}
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID).getShopName());
 		List<String> phoneNos = new ArrayList<String>();
@@ -184,8 +187,11 @@ public class ProductFacade {
 		
 	}
 	
-	public CommunicationResponse sendEmail(String shopID, String text) throws SMSNotSent, UnsupportedEncodingException{
+	public CommunicationResponse sendEmail(String shopID,String password, String text) throws  UnsupportedEncodingException, PasswordMismatch{
 		log.info("Sending email to registered customers");
+		if (!service.getPassword(shopRegistration.get(shopID).getShopName()).equals(password)){
+			throw new PasswordMismatch("Please enter a valid password");
+		}
 		
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID).getShopName());

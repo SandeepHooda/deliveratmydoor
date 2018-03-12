@@ -2,7 +2,8 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
     function($scope, appData,dataRestore,$ionicLoading, $http,$ionicPopup,$state){
 	$scope.cartItems = appData.getCartItems();
 	$scope.deliveryAddressForRecentOrder =  dataRestore.getFromCache('deliveryAddressForRecentOrder', 'obj');
-	
+	$scope.myData = {}
+	$scope.myData.orderSubmitted = false;
 	 $scope.getAllProducts = function(){
 		 
 	 
@@ -45,12 +46,14 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 		            }
 		        }
 		 if ($scope.cartItems && $scope.cartItems.length > 0){
+			 $scope.myData.orderSubmitted = true;
 				$scope.showBusy();
 				var order = {};
 				order.orderItems = $scope.cartItems;
 				order.customer = $scope.deliveryAddressForRecentOrder;
 				   $http.post(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/order',order , config)
 				  		.then(function(response){
+				  			$scope.myData.orderSubmitted = false;
 				  			 $scope.hideBusy();
 				  			if (!response.data.emailSent){
 				  				var confirmPopup = $ionicPopup.confirm({
@@ -77,6 +80,7 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 							
 						},
 						function(response){
+							$scope.myData.orderSubmitted = false;
 							 $scope.hideBusy();
 						});
 			} 
@@ -94,7 +98,7 @@ APP.CONTROLLERS.controller ('CTRL_confirmation',['$scope','appData', 'dataRestor
 	  $scope.showBusy = function() {
 		    $ionicLoading.show({
 		      template: 'Please wait...',
-		      duration: 3000
+		      duration: 60000
 		    }).then(function(){
 		       console.log("The loading indicator is now displayed");
 		    });
