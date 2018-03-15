@@ -215,6 +215,21 @@ public class ProductFacade {
 		return communicationResponse;
 		
 	}
+	public CommunicationResponse  productNotFoundInformation(String shopID, String productNotFound){
+		log.info("Sending email for productNotFound "+productNotFound);
+		
+		
+		CommunicationResponse communicationResponse = new CommunicationResponse();
+		String shopEmail = shopRegistration.get(shopID).getShopEmail();
+		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
+		boolean emailSent = new  MailService().sendSimpleMail(shopEmail,fromLabel, "Product not found" ,"Customer was looking for a product that he didn't find on shop \n "
+		+" \n Product : "+productNotFound, null, null);
+		communicationResponse.setEmailSent(emailSent);
+		communicationResponse.setMessage("SUCCESS");
+		
+		return communicationResponse;
+		
+	}
 
 	public ProductService getService() {
 		return service;

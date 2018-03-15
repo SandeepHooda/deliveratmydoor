@@ -59,6 +59,11 @@ public interface ProductEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response submitCartOrder(@PathParam("shopID") String shopID, Order order);
 	
+	@GET
+	@Path("/shopID/{shopID}/productNotFound/{productNotFound}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response productNotFoundInformation(@PathParam("shopID") String shopID, @PathParam("productNotFound") String productNotFound);
+	
 	
 
 }

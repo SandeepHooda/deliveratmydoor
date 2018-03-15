@@ -113,6 +113,18 @@ public class ProductEndpointImpl implements ProductEndpoint {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
+	@Override
+	public Response productNotFoundInformation(String shopID, String productNotFound){
+		try{
+			
+				return Response.ok().entity(facade.productNotFoundInformation(shopID,productNotFound)).build();
+			
+			
+		}
+		catch(Exception e){
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
 	public ProductFacade getFacade() {
 		return facade;
 	}

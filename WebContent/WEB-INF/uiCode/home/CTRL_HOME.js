@@ -21,6 +21,8 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	//cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications de.appplant.cordova.plugin.local-notification
 	
 	var theCtrl = this;
+	theCtrl.notFoundProduct = "";
+	theCtrl.notFoundProductList = [];
 	$scope.product = { desc: 'Britania brown bread', price: 35, image :'https://i.imgur.com/JZnDv3j.jpg' };
 	$scope.shopHasOffers = true;
 	$scope.allProducts = [];
@@ -103,9 +105,46 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 		 
 		  $scope.filteredProducts = _.without($scope.filteredProducts, undefined);
 		  $scope.filteredProducts = _.without($scope.filteredProducts, null);
-		 // console.log( JSON.stringify($scope.filteredProducts));
+		  if ($scope.filteredProducts.length == 0){
+			  theCtrl.notFoundProductTyping = theCtrl.searchInput;
+			 if (theCtrl.notFoundProduct.indexOf(theCtrl.searchInput) >=0){
+				 $scope.productNotFoundInformation(theCtrl.notFoundProduct);
+			 }else {
+				 //Still typing
+				 theCtrl.notFoundProduct = theCtrl.notFoundProductTyping;
+				 
+			 }
+			 
+			  console.log( "customer is looking for "+theCtrl.searchInput);
+		  }else {
+			  theCtrl.notFoundProduct = "";
+		  }
+		  
 	  }
 	  
+	  $scope.productNotFoundInformation = function(product){
+		 
+		  var informationSent = false;
+		  for (var i=0;i<theCtrl.notFoundProductList.length;i++){
+			  if (theCtrl.notFoundProductList[i] == product){
+				  informationSent = true;
+			  }
+		  }
+		  if (!informationSent){
+			  theCtrl.notFoundProductList.push(product);
+			
+			  
+			  $http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/productNotFound/'+product)
+		  		.then(function(response){
+		  			
+				},
+				function(response){
+					
+					
+				});
+		  }
+		  
+	  }
 	  //carousel 
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
