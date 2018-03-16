@@ -8,7 +8,8 @@
    
   <display-name>IWS_Apache_POC</display-name>
   <welcome-file-list>
-    <welcome-file>Welcome</welcome-file>
+    
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>
