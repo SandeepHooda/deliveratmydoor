@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 		grunt.initConfig({
 			
 			js_src_path:".",
-			js_build_path:"../../easyday",
+			js_build_path:"../../MyShop",
 			curretDate: "<%= grunt.template.today('yyyymmddhh') %>"+Math.random(),
 			js_main_app: "js/prod<%= curretDate %>.js",
 			

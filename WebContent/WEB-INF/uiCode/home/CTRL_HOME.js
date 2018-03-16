@@ -38,10 +38,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	
 
 	
-	  $scope.lauchBrowser = function(){
-		  window.open('https://deliveratmydoor.appspot.com/easyday/index.html#/menu/tab/home','_system');
-	 }
-	  
+	 
 	  if (!$rootScope.refresh){
 			$rootScope.refresh =
 			$rootScope.$on('refreshPage',function(){
@@ -148,7 +145,7 @@ APP.CONTROLLERS.controller ('CTRL_HOME',['$scope','$http','$rootScope','appData'
 	  //carousel 
 	  $scope.carouselSetup = function (allProducts){
 		  var carouselEleFocus=false;
-		  targetUrl = "https://deliveratmydoor.appspot.com/easyday25/index.html#/menu/tab/home";
+		 
 		 var offerItems = [];
 		 $scope.shopHasOffers = false;
 		  for (var i=0;i<allProducts.length;i++){
