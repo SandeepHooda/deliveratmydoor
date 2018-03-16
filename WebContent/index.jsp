@@ -8,6 +8,6 @@
 <title>My Shop</title>
 </head>
 <body>
-<c:redirect url = "http://localhost:8080/MyShop/index.html"/>
+<c:redirect url = "https://deliveratmydoor.appspot.com/MyShop/index.html"/>
 </body>
 </html>
