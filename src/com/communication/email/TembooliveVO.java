@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TembooliveVO {
-	private String preset = "MyShop";
+	
 	private List<TembooliveInputs> inputs = new ArrayList<TembooliveInputs>();
 	
 	public TembooliveVO(){
@@ -20,24 +20,14 @@ public class TembooliveVO {
 		
 		input = new TembooliveInputs();
 		input.setName("Password");
-		input.setValue("zvnefzvjmfropmig");
+		input.setValue("qjbhsxospzlclngc");
 		inputs.add(input);
 		
 		
-		input = new TembooliveInputs();
-		input.setName("Password");
-		input.setValue("zvnefzvjmfropmig");
-		inputs.add(input);
+		
 		
 	}
 
-	public String getPreset() {
-		return preset;
-	}
-
-	public void setPreset(String preset) {
-		this.preset = preset;
-	}
 
 	public List<TembooliveInputs> getInputs() {
 		return inputs;

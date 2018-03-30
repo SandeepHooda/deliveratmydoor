@@ -38,7 +38,7 @@ public class MangoDB {
 		if (null != query ){
 			httpsURL +=  query;
 		}
-		System.out.println(httpsURL);
+		//System.out.println("This is the url "+httpsURL);
 		String responseStr = "";
 		 try {
 			

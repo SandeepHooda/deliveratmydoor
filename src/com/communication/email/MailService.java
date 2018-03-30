@@ -50,9 +50,11 @@ public class MailService {
 	private static URLFetchService fetcher = URLFetchServiceFactory.getURLFetchService();
 	
 	
-	public boolean sendSimpleMail(String toAddress,  String from, String subject, String body, String attachmentName, String attachment) {
-	    
-		String httpsURL  = "https://myshop.temboolive.com/temboo-api/1.0/choreos/Library/Google/Gmail/SendEmail";
+	public boolean sendSimpleMail(String toAddress,  String subject, String body, String attachmentName, String attachment) {
+		
+		
+		String httpsURL  = "https://myshopemailnotification.temboolive.com/temboo-api/1.0/choreos/Library/Google/Gmail/SendEmail";
+		
 		 try {
 			
 		        URL url = new URL(httpsURL);
@@ -93,13 +95,13 @@ public class MailService {
 	            HTTPHeader header = new HTTPHeader("Content-type", "application/json");
 	            req.setHeader(header);
 	            
-	            header = new HTTPHeader("x-temboo-domain", "/myshop/master");
+	            header = new HTTPHeader("x-temboo-domain", "/myshopemailnotification/master");
 	            req.setHeader(header);
 	            
 	            header = new HTTPHeader("Accept", "application/json");
 	            req.setHeader(header);
 	           
-	            String encoding = Base64.getEncoder().encodeToString("myFirstApp:wGxu7fOTeYRij4DdMrB7TLjAyXbqKfC0".getBytes("UTF-8"));
+	            String encoding = Base64.getEncoder().encodeToString("myFirstApp:b3GmShOh2haJB2Gdz9x3Z9Slk3ZGZBJr".getBytes("UTF-8"));
 	            header = new HTTPHeader("Authorization", "Basic " + encoding);
 	            req.setHeader(header);
 	            

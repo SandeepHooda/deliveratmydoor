@@ -35,7 +35,7 @@ public class ProductFacade {
 	public static Map<String, Registration> shopRegistration = new HashMap<String, Registration>();
 	static {
 		
-		shopRegistration.put("1519981368108", new Registration("easy-day-products", "EasyDay25@gmail.com" , "EasyDay25", "sonu.hooda@gmail.com", "9216411835", false));
+		shopRegistration.put("1519981368108", new Registration("easy-day-products", "myshopemailnotification@gmail.com" , "myshopemailnotification", "myshopemailnotification@gmail.com", "9216411835", false));
 	}
 
 	public static String createOderHtml(Order order) {
@@ -78,14 +78,14 @@ public class ProductFacade {
 		String orderWhataApp = "https://deliveratmydoor.appspot.com/OrderDetails?shopID%3D"+shopID+"%26orderNO%3D"+order.get_id();
 		//1. Send email to shop
 		log.info("Sending email "  );
-			boolean emailSent = new  MailService().sendSimpleMail(shopEmail,fromLabel, "Customer order" ,"Please work on this order \n "+orderLink, "Order.html", encodedBody);
+			boolean emailSent = new  MailService().sendSimpleMail(shopEmail, "Customer order" ,"Please work on this order \n "+orderLink, "Order.html", encodedBody);
 			communicationResponse.setEmailSent(emailSent);
 			String customerEmail = order.getCustomer().getEmail();
 			log.info("Email sent to shop " + emailSent);
 		//2. Send confirmation email to customer
 			try{
 				if (null != customerEmail && customerEmail.length()> 10){
-					new  MailService().sendSimpleMail(customerEmail,fromLabel, "Order Confirmation " ,"Thanks for choosing us to serve you. We are working on your order. "
+					new  MailService().sendSimpleMail(customerEmail, "Order Confirmation " ,"Thanks for choosing us to serve you. We are working on your order. "
 							+ "Here is the copy of your order. \n\n  "+orderLink +" \n\n Kind Regards","Order.html", encodedBody);
 				}
 			}catch(Exception e){
@@ -204,7 +204,7 @@ public class ProductFacade {
 		}
 		String from = shopRegistration.get(shopID).getShopEmailLabel();
 		for (String toAddress: emails){
-			new  MailService().sendSimpleMail(toAddress,from , from,text, null, null);
+			new  MailService().sendSimpleMail(toAddress , from,text, null, null);
 		}
 		
 		
@@ -222,7 +222,7 @@ public class ProductFacade {
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		String shopEmail = shopRegistration.get(shopID).getShopEmail();
 		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
-		boolean emailSent = new  MailService().sendSimpleMail(shopEmail,fromLabel, "Product not found" ,"Customer was looking for a product that he didn't find on shop \n "
+		boolean emailSent = new  MailService().sendSimpleMail(shopEmail, "Product not found" ,"Customer was looking for a product that he didn't find on shop \n "
 		+" \n Product : "+productNotFound, null, null);
 		communicationResponse.setEmailSent(emailSent);
 		communicationResponse.setMessage("SUCCESS");
