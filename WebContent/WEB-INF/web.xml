@@ -47,4 +47,13 @@
     <url-pattern>/OrderDetails</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+  <servlet-name>Welcome</servlet-name>
+  <servlet-class>Welcome</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Welcome</servlet-name>
+    <url-pattern>/Welcome</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

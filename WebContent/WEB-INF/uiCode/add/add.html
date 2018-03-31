@@ -70,7 +70,9 @@
 		  </ion-list-header>
 		  
 		  <ion-item ng-repeat="customer in myData.customerList track by $index" on-swipe-left="deleteCustomer({{$index}})">
-		  		{{customer.cusID}}. {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}},{{customer.email}}
+		  		<div class="productDesc">
+		  			{{customer.cusID}}. {{customer.fName}} {{customer.lName}}, {{customer.address}}, {{customer.phone}},{{customer.email}}
+		  		</div>
 		  		<div  style="float: right;display: inline" >
 					 <button ng-disabled="!myData.MessageToCustomers || !myData.password" class="button button-balanced order-button" ng-click="whatsApp({{customer.phone}})">
 					 <i class="icon ion-social-whatsapp"></i>
