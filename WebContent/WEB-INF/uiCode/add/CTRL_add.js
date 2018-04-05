@@ -73,10 +73,14 @@ APP.CONTROLLERS.controller ('CTRL_add',['$scope','dataRestore', '$ionicLoading',
 		$http.get(appData.getHost()+'/ws/shopID/'+appData.getShopID()+'/password/'+$scope.myData.password+'/mode/'+mode+'/subject/'+$scope.myData.EmailSubject+'/message/'+$scope.myData.MessageToCustomers)
   		.then(function(response){
   			 $scope.hideBusy();
-  			
+  			var responseStatus = JSON.parse(response.data.message);
+  			var infoBody = 'Message sent to '+responseStatus.customerCount+' customers out of '+responseStatus.successCount;
+  			if (responseStatus.customerCount == responseStatus.successCount && responseStatus.customerCount > 0){
+  				infoBody = 'Message sent to all '+responseStatus.successCount+' customers.';
+  			}
   			var confirmPopup = $ionicPopup.confirm({
-			     title: 'Message Sent ',
-			     template: 'Your message is on its way to customers!'
+			     title: 'Your message is on its way to customers!',
+			     template: infoBody
 			   });
 			 confirmPopup.then(function(res) {
 			  });

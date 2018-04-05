@@ -183,12 +183,17 @@ public class ProductFacade {
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		List<Customer> customerList = service.getAllCustomers(shopRegistration.get(shopID).getShopName());
 		List<String> phoneNos = new ArrayList<String>();
+		int customerCount = 0;
+		int successCount = 0;
 		for (Customer cust: customerList){
+			customerCount++;
+			
 			phoneNos.add(cust.getPhone());
+			successCount++;
 		}
 		String response = Sms.sendSMS( text, phoneNos);
 		if ("202".equals(response)){
-			communicationResponse.setMessage("SUCCESS");
+			communicationResponse.setMessage("{\"successCount\":"+successCount+",\"customerCount\":"+customerCount+"}");
 		}else {
 			throw new SMSNotSent(response);
 		}
@@ -213,18 +218,23 @@ public class ProductFacade {
 			}
 			
 		}
-		String from = shopRegistration.get(shopID).getShopEmailLabel();
+		int customerCount = 0;
+		int successCount = 0;
 		for (String address: emails){
+			customerCount++;
 			EmailAddess toAddress = new EmailAddess();
 			toAddress.setAddress(address);
 			toAddress.setLabel(address);
-			new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, subject, 	text, null, null));
+			if (new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, subject, 	text, null, null))) {
+				successCount ++;
+			}
+			
 			
 			
 		}
 		
 		
-		communicationResponse.setMessage("SUCCESS");
+		communicationResponse.setMessage("{\"successCount\":"+successCount+",\"customerCount\":"+customerCount+"}");
 		
 			
 		
