@@ -3,7 +3,11 @@ package com.communication.email;
 
 
 
-import java.util.Base64;
+import java.io.ByteArrayInputStream;
+// [START multipart_includes]
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 
 // [START simple_includes]
 
@@ -12,21 +16,14 @@ import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 // [END simple_includes]
-
-// [START multipart_includes]
-import java.io.InputStream;
-import java.io.ByteArrayInputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-
-import javax.mail.Multipart;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 // [END multipart_includes]
 
@@ -39,7 +36,6 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.product.Facade.ProductFacade;
-import com.product.vo.CustomersList;
 
 
 
@@ -50,66 +46,28 @@ public class MailService {
 	private static URLFetchService fetcher = URLFetchServiceFactory.getURLFetchService();
 	
 	
-	public boolean sendSimpleMail(String toAddress,  String subject, String body, String attachmentName, String attachment) {
+	public boolean sendSimpleMail(EmailVO emailVO ) {
 		
 		
-		String httpsURL  = "https://myshopemailnotification.temboolive.com/temboo-api/1.0/choreos/Library/Google/Gmail/SendEmail";
+		String httpsURL  = "https://post-master.herokuapp.com/SendEmail";
 		
 		 try {
 			
 		        URL url = new URL(httpsURL);
 		        
-		        TembooliveVO emailVO = new TembooliveVO();
-		        
-		        TembooliveInputs input = new TembooliveInputs();
-				input.setName("ToAddress");
-				input.setValue(toAddress);
-				emailVO.getInputs().add(input);
-				
-				input = new TembooliveInputs();
-				input.setName("Subject");
-				input.setValue(subject);
-				emailVO.getInputs().add(input);
-				
-				input = new TembooliveInputs();
-				input.setName("MessageBody");
-				input.setValue(body);
-				emailVO.getInputs().add(input);
-				
-				if (null != attachmentName){
-					
-					input = new TembooliveInputs();
-					input.setName("AttachmentName");
-					input.setValue(attachmentName);
-					emailVO.getInputs().add(input);
-					
-					input = new TembooliveInputs();
-					input.setName("Attachment");
-					input.setValue(attachment);
-					emailVO.getInputs().add(input);
-					
-				}
-				
-		       
-	            HTTPRequest req = new HTTPRequest(url, HTTPMethod.POST, lFetchOptions);
+		        HTTPRequest req = new HTTPRequest(url, HTTPMethod.POST, lFetchOptions);
 	            HTTPHeader header = new HTTPHeader("Content-type", "application/json");
 	            req.setHeader(header);
-	            
-	            header = new HTTPHeader("x-temboo-domain", "/myshopemailnotification/master");
-	            req.setHeader(header);
-	            
+	           
 	            header = new HTTPHeader("Accept", "application/json");
 	            req.setHeader(header);
 	           
-	            String encoding = Base64.getEncoder().encodeToString("myFirstApp:b3GmShOh2haJB2Gdz9x3Z9Slk3ZGZBJr".getBytes("UTF-8"));
-	            header = new HTTPHeader("Authorization", "Basic " + encoding);
-	            req.setHeader(header);
-	            
+	         
 	            Gson  json = new Gson();
-	            String data = json.toJson(emailVO, new TypeToken<TembooliveVO>() {}.getType());
+	            String data = json.toJson(emailVO, new TypeToken<EmailVO>() {}.getType());
 	            req.setPayload(data.getBytes());
 	            com.google.appengine.api.urlfetch.HTTPResponse res = fetcher.fetch(req);
-	            if (res.getResponseCode() == 200){
+	            if (res.getResponseCode() == 200 && "Done".equals(new String(res.getContent()))){
 	            	return true;
 	            }else {
 	            	log.warning("Email sending failed "+(new String(res.getContent())));

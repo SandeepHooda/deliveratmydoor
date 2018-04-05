@@ -13,6 +13,11 @@
 	
  </div>
  <hr width="99%"/>
+ 		<div class="list">
+			<label class="item item-input">
+				<textarea placeholder="Subject *" ng-model="myData.EmailSubject"></textarea>
+			</label>
+		 </div>	
 		 <div class="list">
 			<label class="item item-input">
 				<textarea placeholder="Message *" ng-model="myData.MessageToCustomers"></textarea>
@@ -23,7 +28,7 @@
 			 <i class="icon ion-android-textsms"></i>
 			</button>
 			<div  style="padding-left: 20px;display: inline">
-			 <button class="button button-positive order-button" ng-click="sendMessage('Email')" ng-disabled="!myData.MessageToCustomers || !myData.password"> Send Email
+			 <button class="button button-positive order-button" ng-click="sendMessage('Email')" ng-disabled="!myData.EmailSubject || !myData.MessageToCustomers || !myData.password"> Send Email
 			 <i class="icon ion-email"></i>
 			</button>
 			</div>

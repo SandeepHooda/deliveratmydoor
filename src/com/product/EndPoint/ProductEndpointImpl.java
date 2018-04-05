@@ -97,12 +97,12 @@ public class ProductEndpointImpl implements ProductEndpoint {
 	}
 	
 	@Override
-	public Response sendMessage( String shopID, String password,String mode ,String text){
+	public Response sendMessage( String shopID, String password,String mode , String subject, String text){
 		try{
 			if ("SMS".equalsIgnoreCase(mode)){
 				return Response.ok().entity(facade.sendSMS(shopID,password, text)).build();
 			}else {
-				return Response.ok().entity(facade.sendEmail(shopID,password, text)).build();
+				return Response.ok().entity(facade.sendEmail(shopID,password, subject,text)).build();
 			}
 			
 		}catch(PasswordMismatch e){

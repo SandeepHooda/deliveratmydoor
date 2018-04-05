@@ -65,7 +65,7 @@ public class Sms {
 	
 	
 	
-	public static String sendSMS(String sender, String text, List<String> phoneNos){
+	public static String sendSMS(String text, List<String> phoneNos){
 		StringBuilder sb = new StringBuilder();
 		for (String phone: phoneNos){
 			sb.append("<91"+phone);

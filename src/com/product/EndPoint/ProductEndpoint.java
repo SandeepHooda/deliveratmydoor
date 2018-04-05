@@ -50,9 +50,9 @@ public interface ProductEndpoint {
 	public Response deleteCustomer(@PathParam("shopID") String shopID, @PathParam("id") int id);
 	
 	@GET
-	@Path("/shopID/{shopID}/password/{password}/mode/{mode}/message/{text}")
+	@Path("/shopID/{shopID}/password/{password}/mode/{mode}/subject/{subject}/message/{text}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response sendMessage(@PathParam("shopID") String shopID, @PathParam("password") String password,@PathParam("mode") String mode, @PathParam("text") String text);
+	public Response sendMessage(@PathParam("shopID") String shopID, @PathParam("password") String password,@PathParam("mode") String mode, @PathParam("subject") String subject,  @PathParam("text") String text);
 	
 	@POST
 	@Path("/shopID/{shopID}/order")

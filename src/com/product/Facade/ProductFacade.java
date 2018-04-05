@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.communication.email.EmailAddess;
+import com.communication.email.EmailVO;
 import com.communication.email.MailService;
 import com.communication.sms.Sms;
 import com.product.Response.CommunicationResponse;
@@ -35,7 +37,7 @@ public class ProductFacade {
 	public static Map<String, Registration> shopRegistration = new HashMap<String, Registration>();
 	static {
 		
-		shopRegistration.put("1519981368108", new Registration("easy-day-products", "myshopemailnotification@gmail.com" , "myshopemailnotification", "myshopemailnotification@gmail.com", "9216411835", false));
+		shopRegistration.put("1519981368108", new Registration("easy-day-products",  "MyShop", "myshopemailnotification@gmail.com", "gizmtcibqjnqhqtz", "9216411835", false));
 	}
 
 	public static String createOderHtml(Order order) {
@@ -63,30 +65,39 @@ public class ProductFacade {
 		
 		return sb.toString();
 	}
+	
 	public CommunicationResponse processOrder(String shopID ,  Order order) {
 		log.info("processOrder "  );
 		CommunicationResponse communicationResponse = new CommunicationResponse();
-		String shopEmail = shopRegistration.get(shopID).getShopEmail();
-		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
+		
+		
 		order.set_id(new Date().getTime());
 		String body = createOderHtml( order);
 		
 		byte[] bytesEncoded = Base64.encodeBase64(body.getBytes());
-		String encodedBody = new String(bytesEncoded);
+		String base64attachment = new String(bytesEncoded);
 		log.info("Creating HTML body "  );
 		String orderLink = "https://deliveratmydoor.appspot.com/OrderDetails?shopID="+shopID+"&orderNO="+order.get_id();
 		String orderWhataApp = "https://deliveratmydoor.appspot.com/OrderDetails?shopID%3D"+shopID+"%26orderNO%3D"+order.get_id();
 		//1. Send email to shop
 		log.info("Sending email "  );
-			boolean emailSent = new  MailService().sendSimpleMail(shopEmail, "Customer order" ,"Please work on this order \n "+orderLink, "Order.html", encodedBody);
+		
+			EmailAddess toAddress = new EmailAddess();
+			toAddress.setAddress(shopRegistration.get(shopID).getShopEmail());
+			toAddress.setLabel(shopRegistration.get(shopID).getShopEmailLabel());
+			boolean emailSent = new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, "Customer order", "Please work on this order <a href=\""+orderLink+"\">Order details</a>", base64attachment, "Order.html"));
 			communicationResponse.setEmailSent(emailSent);
 			String customerEmail = order.getCustomer().getEmail();
 			log.info("Email sent to shop " + emailSent);
 		//2. Send confirmation email to customer
 			try{
 				if (null != customerEmail && customerEmail.length()> 10){
-					new  MailService().sendSimpleMail(customerEmail, "Order Confirmation " ,"Thanks for choosing us to serve you. We are working on your order. "
-							+ "Here is the copy of your order. \n\n  "+orderLink +" \n\n Kind Regards","Order.html", encodedBody);
+					toAddress = new EmailAddess();
+					toAddress.setAddress(customerEmail);
+					toAddress.setLabel("");
+					 new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, "Order Confirmation ", 
+							 "Thanks for choosing us to serve you. We are working on your order. Here is the copy of your <a href=\""+orderLink+"\"> order </a> ", base64attachment, "Order.html"));
+				
 				}
 			}catch(Exception e){
 				log.warning("Could not send order confirmation to customer "+e.getLocalizedMessage());
@@ -102,7 +113,7 @@ public class ProductFacade {
 				}
 				List<String> phoneNos = new ArrayList<String>();
 				phoneNos.add(order.getCustomer().getPhone());
-				Sms.sendSMS(shopRegistration.get(shopID).getSmsSenderID(), " We have received your order totaling Rs: "+orderTotal, phoneNos);
+				Sms.sendSMS( " We have received your order totaling Rs: "+orderTotal, phoneNos);
 			}
 			}catch(Exception e){
 				log.warning("Could not send SMS to customer "+e.getLocalizedMessage());
@@ -175,7 +186,7 @@ public class ProductFacade {
 		for (Customer cust: customerList){
 			phoneNos.add(cust.getPhone());
 		}
-		String response = Sms.sendSMS(shopRegistration.get(shopID).getSmsSenderID(), text, phoneNos);
+		String response = Sms.sendSMS( text, phoneNos);
 		if ("202".equals(response)){
 			communicationResponse.setMessage("SUCCESS");
 		}else {
@@ -187,7 +198,7 @@ public class ProductFacade {
 		
 	}
 	
-	public CommunicationResponse sendEmail(String shopID,String password, String text) throws  UnsupportedEncodingException, PasswordMismatch{
+	public CommunicationResponse sendEmail(String shopID,String password, String subject, String text) throws  UnsupportedEncodingException, PasswordMismatch{
 		log.info("Sending email to registered customers");
 		if (!service.getPassword(shopRegistration.get(shopID).getShopName()).equals(password)){
 			throw new PasswordMismatch("Please enter a valid password");
@@ -203,8 +214,13 @@ public class ProductFacade {
 			
 		}
 		String from = shopRegistration.get(shopID).getShopEmailLabel();
-		for (String toAddress: emails){
-			new  MailService().sendSimpleMail(toAddress , from,text, null, null);
+		for (String address: emails){
+			EmailAddess toAddress = new EmailAddess();
+			toAddress.setAddress(address);
+			toAddress.setLabel(address);
+			new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, subject, 	text, null, null));
+			
+			
 		}
 		
 		
@@ -222,9 +238,13 @@ public class ProductFacade {
 		CommunicationResponse communicationResponse = new CommunicationResponse();
 		String shopEmail = shopRegistration.get(shopID).getShopEmail();
 		String fromLabel = shopRegistration.get(shopID).getShopEmailLabel();
-		boolean emailSent = new  MailService().sendSimpleMail(shopEmail, "Product not found" ,"Customer was looking for a product that he didn't find on shop \n "
-		+" \n Product : "+productNotFound, null, null);
-		communicationResponse.setEmailSent(emailSent);
+		EmailAddess toAddress = new EmailAddess();
+		toAddress.setAddress(shopRegistration.get(shopID).getShopEmail());
+		toAddress.setLabel(shopRegistration.get(shopID).getShopEmailLabel());
+		boolean result = new  MailService().sendSimpleMail(prepareEmailVO(shopRegistration, shopID,toAddress, "Product not found", 	"Customer was looking for a product that he didn't find on shop <br/> <br/> Product : "+productNotFound, null, null));
+		
+		
+		communicationResponse.setEmailSent(result);
 		communicationResponse.setMessage("SUCCESS");
 		
 		return communicationResponse;
@@ -237,6 +257,27 @@ public class ProductFacade {
 
 	public void setService(ProductService service) {
 		this.service = service;
+	}
+	private static EmailVO prepareEmailVO(Map<String, Registration> shopRegistration, String shopID ,   EmailAddess toAddress, String subject , String htmlBody, String base64attachment, String attachmentName ) {
+		EmailVO emailVO = new EmailVO();
+		Registration  registration = shopRegistration.get(shopID);
+		emailVO.setUserName( registration.getShopEmail());
+		emailVO.setPassword( registration.getEmailAppPassword());
+		EmailAddess fromAddress = new EmailAddess();
+		fromAddress.setAddress(emailVO.getUserName());
+		fromAddress.setLabel(registration.getShopEmailLabel());
+		emailVO.setFromAddress( fromAddress);
+		
+		
+		List<EmailAddess> toAddressList = new ArrayList<EmailAddess>();
+		
+		toAddressList.add(toAddress);
+		emailVO.setToAddress(toAddressList);
+		emailVO.setSubject(subject);
+		emailVO.setHtmlContent(htmlBody);
+		emailVO.setBase64Attachment(base64attachment);
+		emailVO.setAttachmentName(attachmentName);
+		return emailVO;
 	}
 
 }

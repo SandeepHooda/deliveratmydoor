@@ -48,12 +48,12 @@
   </servlet-mapping>
   
     <servlet>
-  <servlet-name>Welcome</servlet-name>
-  <servlet-class>Welcome</servlet-class>
+  <servlet-name>SendEmail</servlet-name>
+  <servlet-class>SendEmail</servlet-class>
 </servlet>
 <servlet-mapping>
-    <servlet-name>Welcome</servlet-name>
-    <url-pattern>/Welcome</url-pattern>
+    <servlet-name>SendEmail</servlet-name>
+    <url-pattern>/SendEmail</url-pattern>
   </servlet-mapping>
   
 </web-app>
